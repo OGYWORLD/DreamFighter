@@ -10,8 +10,6 @@ using UnityEngine;
 /// </summary>
 public class CLazerSetActive : MonoBehaviour
 {
-    private float movingTime = 4f; // 레이저가 움직이는 시간
-
     private void OnEnable()
     {
         StartCoroutine(LazerSetHide());
@@ -19,7 +17,7 @@ public class CLazerSetActive : MonoBehaviour
 
     IEnumerator LazerSetHide()
     {
-        yield return new WaitForSeconds(movingTime);
+        yield return new WaitForSeconds(StageManager.instance.noteMoveSpeed);
 
         gameObject.SetActive(false);
     }

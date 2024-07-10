@@ -12,7 +12,6 @@ public class CCircleControl : MonoBehaviour
 {
     public Transform circle; // 원 아이콘
 
-    private float appearTime = 4f; // 원 아이콘이 줄어드는 시간
     public Vector3 targetSize; // 줄어들었을 때의 사이즈
     public Vector3 initialSize; // 원의 초기 사이즈
 
@@ -25,9 +24,9 @@ public class CCircleControl : MonoBehaviour
     {
         float sumTime = 0f;
 
-        while (sumTime <= appearTime)
+        while (sumTime <= StageManager.instance.noteMoveSpeed)
         {
-            float t = sumTime / appearTime;
+            float t = sumTime / StageManager.instance.noteMoveSpeed;
             circle.localScale = Vector3.Lerp(initialSize, targetSize, t);
 
             sumTime += Time.deltaTime;

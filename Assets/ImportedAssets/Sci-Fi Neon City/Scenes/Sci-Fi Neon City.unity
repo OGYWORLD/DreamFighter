@@ -15622,6 +15622,7 @@ MonoBehaviour:
   mainMusic: {fileID: 1537748600}
   shortNotePrefab: {fileID: 6989631996198652295, guid: 2c6de3ae3a50162458d85810184fadfa, type: 3}
   longNotePrefab: {fileID: 2636474150613465443, guid: 56ee48492a618814291a55e438f59a7a, type: 3}
+  doubleNotePrefab: {fileID: 8790738653606079532, guid: 05cfcdc9cba8c104696caefc1014abe5, type: 3}
   shortNoteTrans:
   - {fileID: 102088185}
   - {fileID: 1610678994}

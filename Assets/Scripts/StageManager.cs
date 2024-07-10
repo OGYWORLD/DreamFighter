@@ -15,6 +15,8 @@ public class StageManager : MonoBehaviour
 
     public List<Note> notes { get; set; } = new List<Note>(); // 노트 정보 리스트
 
+    public float noteMoveSpeed { get; set; } = 4f; // 노트 이동 속도
+
     private void Awake()
     {
         if(instance == null)
