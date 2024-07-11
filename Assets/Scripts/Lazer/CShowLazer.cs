@@ -20,8 +20,6 @@ public class CShowLazer : MonoBehaviour
         DoubleNote
     }
 
-    public AudioSource mainMusic;
-
     private float speed = 10f; // 레이저 이동 속도
 
     // 오브젝트 풀링
@@ -37,11 +35,13 @@ public class CShowLazer : MonoBehaviour
     private List<GameObject> longPool = new List<GameObject>(); // 롱 노트 풀
     private List<GameObject> doublePool = new List<GameObject>(); // 더블 노트 풀
 
-    private int shorIdx; // 숏 노트 풀 인덱스
+    private int shortIdx; // 숏 노트 풀 인덱스
     private int longIdx; // 롱 노트 풀 인덱스
     private int doubleIdx; // 더블 노트 풀 인덱스
 
     private int noteIdx; // 노트 리스트 인덱스
+
+    private CLazerSetActive lazerSet; // 노트 레이저 세팅 인덱스
 
     /// <summary>
     /// 인스펙터 창에서 리스폰 베리어에서의 리스폰 오브젝트의 위치를 받습니다.
@@ -54,11 +54,12 @@ public class CShowLazer : MonoBehaviour
         // 풀 생성
         MakePool();
 
-        mainMusic.Play();
+        StageManager.instance.mainMusic.Play();
     }
 
     private void Update()
     {
+        SetDistance();
         RespawnLazer();
     }
 
@@ -89,28 +90,46 @@ public class CShowLazer : MonoBehaviour
         }
     }
 
+    void SetDistance()
+    {
+        StageManager.instance.noteSize = StageManager.instance.notes[noteIdx].endTime - StageManager.instance.notes[noteIdx].srtTime;
+        StageManager.instance.betweenDis = 58f - (StageManager.instance.notes[noteIdx].endTime - StageManager.instance.notes[noteIdx].srtTime);
+    }
+
     void RespawnLazer()
     {
         // 노트 시간 보다 StageManager.instance.noteMoveSpeed초 전에 레이저를 생성한다.
-        if (mainMusic.time >= StageManager.instance.notes[noteIdx].srtTime - StageManager.instance.noteMoveSpeed)
+        if (StageManager.instance.mainMusic.time >= StageManager.instance.notes[noteIdx].srtTime - StageManager.instance.noteMoveSpeed)
         {
             switch (StageManager.instance.notes[noteIdx].noteCategory)
             {
                 case (int)NoteCategory.ShortNote:
+                    lazerSet = shortPool[shortIdx].GetComponent<CLazerSetActive>();
+                    lazerSet.noteIdx = noteIdx;
+                    lazerSet.isLong = false;
 
-                    shortPool[shorIdx].transform.position = shortNoteTrans[shorIdx % shortNoteTrans.Count].position;
-                    shortPool[shorIdx].SetActive(true);
-                    shorIdx++;
+                    shortPool[shortIdx].transform.position = shortNoteTrans[shortIdx % shortNoteTrans.Count].position;
+                    shortPool[shortIdx].SetActive(true);
+                    shortIdx++;
 
-                    if (shorIdx == shortPool.Count)
+                    if (shortIdx == shortPool.Count)
                     {
-                        shorIdx = 0;
+                        shortIdx = 0;
                     }
 
                     noteIdx++;
                     break;
 
                 case (int)NoteCategory.LongNote:
+                    lazerSet = longPool[longIdx].GetComponent<CLazerSetActive>();
+                    lazerSet.noteIdx = noteIdx;
+                    lazerSet.isLong = true;
+
+                    longPool[longIdx].transform.localScale = new Vector3(
+                        StageManager.instance.noteSize * (StageManager.instance.betweenDis / StageManager.instance.noteMoveSpeed),
+                        longPool[longIdx].transform.localScale.y,
+                        longPool[longIdx].transform.localScale.z
+                        );
 
                     longPool[longIdx].transform.position = longNoteTrans.position;
                     longPool[longIdx].SetActive(true);
@@ -125,6 +144,9 @@ public class CShowLazer : MonoBehaviour
                     break;
 
                 case (int)NoteCategory.DoubleNote:
+                    lazerSet = doublePool[doubleIdx].GetComponent<CLazerSetActive>();
+                    lazerSet.noteIdx = noteIdx;
+                    lazerSet.isLong = false;
 
                     doublePool[doubleIdx].transform.position = longNoteTrans.position;
                     doublePool[doubleIdx].SetActive(true);
