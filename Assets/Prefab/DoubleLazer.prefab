@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 8790738653606079533}
   - component: {fileID: 6526106459709276223}
   - component: {fileID: 2777300211174035503}
-  - component: {fileID: 6828948462324758367}
   m_Layer: 0
   m_Name: DoubleLazer
   m_TagString: Untagged
@@ -129,18 +128,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ca5d6e6a51c5754f8545b600f3aeef1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &6828948462324758367
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8790738653606079532}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7efdb7a6e96072045b9d7c980c76ff9b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1728534498958126332
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -223,7 +210,7 @@ PrefabInstance:
     - target: {fileID: 21204300, guid: abd7df1f756577f4bba76933969e9445, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: f743ae65363a58b4bb63d471b4978b1a, type: 3}
+      objectReference: {fileID: 21300000, guid: eef18d33c7eb7c64cb92f40f54a334b0, type: 3}
     - target: {fileID: 21204300, guid: abd7df1f756577f4bba76933969e9445, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
@@ -317,7 +304,19 @@ PrefabInstance:
     - target: {fileID: 21204300, guid: abd7df1f756577f4bba76933969e9445, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: f743ae65363a58b4bb63d471b4978b1a, type: 3}
+      objectReference: {fileID: 21300000, guid: cecc82721aa42764ba897bc296fabbe3, type: 3}
+    - target: {fileID: 21204300, guid: abd7df1f756577f4bba76933969e9445, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 21204300, guid: abd7df1f756577f4bba76933969e9445, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 21204300, guid: abd7df1f756577f4bba76933969e9445, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 21204300, guid: abd7df1f756577f4bba76933969e9445, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1

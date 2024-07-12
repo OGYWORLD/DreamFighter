@@ -7,17 +7,15 @@ using UnityEngine;
 
 public class CCameraMove : MonoBehaviour
 {
-    private float betweenDis = 58f; // 레이저 생성 위치와 카메라 사이의 거리
-
     private float speed; // 초속
 
     private void Start()
     {
-        speed = (betweenDis / StageManager.instance.noteMoveSpeed);
+        speed = (StageManager.instance.betweenDis / StageManager.instance.noteMoveSpeed);
     }
 
     private void Update()
     {
-        transform.Translate(0f, 0f, speed * Time.deltaTime);    
+        transform.Translate(speed * Time.deltaTime, 0f, 0f);    
     }
 }
