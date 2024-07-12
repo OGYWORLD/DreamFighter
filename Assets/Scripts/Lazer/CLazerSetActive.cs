@@ -13,45 +13,85 @@ public class CLazerSetActive : MonoBehaviour
     public int noteIdx { get; set; }
     public bool isLong { get; set; }
 
-    private float noteDisaprPadding = 0.3f;
+    private float perSecBPM;
+
+    private void Start()
+    {
+        perSecBPM = StageManager.instance.bpm / 60f;
+    }
 
     private void OnEnable()
     {
-       StartCoroutine(LazerSetHide()); // 판정 범위에서 벗어나면 레이저를 비활성화 시킵니다.
-       StartCoroutine(WaitUntilCondition()); // 플레이어로 부터 스페이스바를 입력받으면 레이저를 비활성화 시킵니다.
+        StartCoroutine(WaitUntilCondition()); // 플레이어로 부터 스페이스바를 입력받으면 레이저를 비활성화 시킵니다.
+        StartCoroutine(LazerSetHide()); // 판정 시간에서 벗어나면 레이저를 비활성화 시킵니다.
     }
 
-    void CheckNoteScore(float curMusicTime)
+    void CheckNoteScore(float curMusicTime, float endTime)
     {
-        if (Mathf.Abs(curMusicTime - StageManager.instance.notes[noteIdx].endTime) < 0.2f)
+        if (Mathf.Abs(curMusicTime - endTime) < 0.2f)
         {
-            print("Perfect!");
+            StageManager.instance.combo++;
+            print($"{StageManager.instance.inputNoteIdx} Perfect! combo: {StageManager.instance.combo}");
         }
-        else if (Mathf.Abs(curMusicTime - StageManager.instance.notes[noteIdx].endTime) < 0.3f)
+        else if (Mathf.Abs(curMusicTime - endTime) < 0.3f)
         {
-            print("Good!");
+            StageManager.instance.combo++;
+            print($"{StageManager.instance.inputNoteIdx} Good! combo: {StageManager.instance.combo}");
         }
-        else if(Mathf.Abs(curMusicTime - StageManager.instance.notes[noteIdx].endTime) <= 1f)
+        else if(Mathf.Abs(curMusicTime - endTime) <= 1f)
         {
-            print("Miss!");
+            print($"{StageManager.instance.inputNoteIdx} Early Miss!");
+            StageManager.instance.combo = 0;
         }
     }
 
     IEnumerator LazerSetHide()
     {
-        yield return new WaitForSeconds(StageManager.instance.noteMoveSpeed + StageManager.instance.noteSize + noteDisaprPadding);
-        print("Miss!");
+        yield return new WaitForSeconds(StageManager.instance.noteMoveSpeed + StageManager.instance.noteSize);
+        print($"{StageManager.instance.inputNoteIdx} Late Miss!");
+        StageManager.instance.combo = 0;
         StageManager.instance.inputNoteIdx++;
         gameObject.SetActive(false);
     }
 
     IEnumerator WaitUntilCondition()
     {
-        if(isLong)
+        if(isLong)// 롱노트 판정
         {
-            // 롱노트 판정
+            // 롱노트에서 몇 번의 판정을 해야되는지 구하는 변수 ((노트 끝 - 노트 시작) * bpm / 60)
+            float betweenSrtEndCnt = (((StageManager.instance.notes[noteIdx].endTime -
+                StageManager.instance.notes[noteIdx].srtTime) * StageManager.instance.bpm) / 60);
+
+            // 첫 번째 입력 판정
+            yield return new WaitUntil(() => (
+            StageManager.instance.inputNoteIdx == noteIdx &&
+            Input.GetKeyDown(KeyCode.Space) &&
+            StageManager.instance.mainMusic.time >= StageManager.instance.notes[noteIdx].srtTime - 1f
+            ));
+
+            CheckNoteScore(StageManager.instance.mainMusic.time, StageManager.instance.notes[noteIdx].srtTime);
+
+            // 중간 노트들 점수(콤보) 추가하는 과정 필요
+            for(int i = 0; i < (int)betweenSrtEndCnt; i++)
+            {
+                if (Input.GetKey(KeyCode.Space) && StageManager.instance.mainMusic.time >= StageManager.instance.notes[noteIdx].srtTime + (i * perSecBPM))
+                {
+                    StageManager.instance.combo++;
+                    print($"Long Perfect! combo: {StageManager.instance.combo}");
+                }
+            }
+
+
+            // 마지막 롱노트 입력 판정
+            yield return new WaitUntil(() => (
+           StageManager.instance.inputNoteIdx == noteIdx &&
+           Input.GetKeyUp(KeyCode.Space) &&
+           StageManager.instance.mainMusic.time >= StageManager.instance.notes[noteIdx].endTime
+           ));
+
+            CheckNoteScore(StageManager.instance.mainMusic.time, StageManager.instance.notes[noteIdx].endTime);
         }
-        else if(!isLong)
+        else if(!isLong) // 숏, 더블 노트 판정
         {
             // 현재 노트 인덱스가 입력받아야할 노트인지
             // 스페이스 바 입력 여부
@@ -62,9 +102,9 @@ public class CLazerSetActive : MonoBehaviour
             StageManager.instance.mainMusic.time >= StageManager.instance.notes[noteIdx].srtTime - 1f
             ));
 
-            CheckNoteScore(StageManager.instance.mainMusic.time);
+            CheckNoteScore(StageManager.instance.mainMusic.time, StageManager.instance.notes[noteIdx].endTime);
         }
-      
+
         StageManager.instance.inputNoteIdx++;
         gameObject.SetActive(false);
     }
