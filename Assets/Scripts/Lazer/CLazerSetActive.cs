@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 #region ¿À°¡À»
 #endregion
@@ -14,6 +15,8 @@ public class CLazerSetActive : MonoBehaviour
     public bool isLong { get; set; }
 
     private float perSecBPM;
+
+    public Slider yesNoBar;
 
     private void Start()
     {
@@ -32,16 +35,19 @@ public class CLazerSetActive : MonoBehaviour
         {
             StageManager.instance.combo++;
             print($"{StageManager.instance.inputNoteIdx} Perfect! combo: {StageManager.instance.combo}");
+            StageManager.instance.yesNoBar.value += StageManager.instance.mainMusic.clip.length * 0.0001f;
         }
         else if (Mathf.Abs(curMusicTime - endTime) < 0.3f)
         {
             StageManager.instance.combo++;
             print($"{StageManager.instance.inputNoteIdx} Good! combo: {StageManager.instance.combo}");
+            StageManager.instance.yesNoBar.value += StageManager.instance.mainMusic.clip.length * 0.0001f;
         }
         else if(Mathf.Abs(curMusicTime - endTime) <= 1f)
         {
             print($"{StageManager.instance.inputNoteIdx} Early Miss!");
             StageManager.instance.combo = 0;
+            StageManager.instance.yesNoBar.value -= StageManager.instance.mainMusic.clip.length * 0.0005f;
         }
     }
 
@@ -49,6 +55,7 @@ public class CLazerSetActive : MonoBehaviour
     {
         yield return new WaitForSeconds(StageManager.instance.noteMoveSpeed + StageManager.instance.noteSize);
         print($"{StageManager.instance.inputNoteIdx} Late Miss!");
+        StageManager.instance.yesNoBar.value -= StageManager.instance.mainMusic.clip.length * 0.0005f;
         StageManager.instance.combo = 0;
         StageManager.instance.inputNoteIdx++;
         gameObject.SetActive(false);
@@ -77,6 +84,7 @@ public class CLazerSetActive : MonoBehaviour
                 if (Input.GetKey(KeyCode.Space) && StageManager.instance.mainMusic.time >= StageManager.instance.notes[noteIdx].srtTime + (i * perSecBPM))
                 {
                     StageManager.instance.combo++;
+                    StageManager.instance.yesNoBar.value += StageManager.instance.mainMusic.clip.length * 0.0001f;
                     print($"Long Perfect! combo: {StageManager.instance.combo}");
                 }
             }

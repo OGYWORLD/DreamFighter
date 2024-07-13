@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 #region 오가을
 #endregion
@@ -28,6 +29,8 @@ public class StageManager : MonoBehaviour
     public int inputNoteIdx { get; set; } = 0; // 입력할 노트의 인덱스
 
     public int combo { get; set; } = 0; // 콤보
+
+    public Slider yesNoBar; // yesNoBar 상단 게이지바
 
     private void Awake()
     {
