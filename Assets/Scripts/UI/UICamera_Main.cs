@@ -10,7 +10,7 @@ public class UICamera_Main : MonoBehaviour
 {
     //todo: (인혜) 인스펙터에서의 값 조정을 모두 완료하면 스크립트에 반영하고 SerializeField 떼기.
 
-    [SerializeField]private Camera cam;
+    private Camera cam;
 
     float movePosSpeed = 3f;
     float moveRotationSpeed = 3f;
@@ -18,12 +18,12 @@ public class UICamera_Main : MonoBehaviour
     /// <summary>
     /// 타이틀 씬에서의 카메라 위치 초기값 겸 시작점
     /// </summary>
-    [SerializeField] Vector3 startPosition = new Vector3(-90.1f, 21.75f, 13.1f);
+    [SerializeField] Vector3 startPosition = new Vector3(-82.77859f, 15.04829f, 9.848166f);
 
     /// <summary>
     /// 타이틀 씬에서의 카메라 각도 초기값 겸 시작점
     /// </summary>
-    [SerializeField] Quaternion startRotation = Quaternion.Euler(new Vector3(3.27f, 71.5f, 0f));
+    [SerializeField] Quaternion startRotation = Quaternion.Euler(new Vector3(354.4679f, 71.50002f, 0f));
 
 
     /// <summary>
@@ -45,7 +45,7 @@ public class UICamera_Main : MonoBehaviour
         cam = GetComponent<Camera>();
     }
 
-    void Start()
+    void OnEnable()
     {
         ShowTitleScreen();
         StartCoroutine(ShowMainScreenCoroutine());
@@ -56,11 +56,17 @@ public class UICamera_Main : MonoBehaviour
     
     void ShowTitleScreen()
     {
+        // 정확한 위치 반영을 위한 테스트
+        //startPosition = cam.transform.position;
+        //startRotation = cam.transform.rotation;
+
         InitTransform();
 
         //UIManager.Instance.SetActiveUI(UIManager.Instance.titleUI, true);
 
         // todo: (인혜) 배경음악 플레이 시작 등
+
+        StartCoroutine(ShowMainScreenCoroutine());
     }
 
 
