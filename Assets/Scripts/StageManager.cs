@@ -15,6 +15,8 @@ public class StageManager : MonoBehaviour
 
     public AudioSource mainMusic; // 스테이지 노래
 
+    public float bpm; // bpm
+
     public List<Note> notes { get; set; } = new List<Note>(); // 노트 정보 리스트
 
     public float noteMoveSpeed { get; set; } = 4f; // 노트 이동 속도
@@ -24,6 +26,8 @@ public class StageManager : MonoBehaviour
     public float noteSize { get; set; } = 0f; // 노트 사이즈, 롱노트 사이즈를 위해 사용됨
 
     public int inputNoteIdx { get; set; } = 0; // 입력할 노트의 인덱스
+
+    public int combo { get; set; } = 0; // 콤보
 
     private void Awake()
     {
