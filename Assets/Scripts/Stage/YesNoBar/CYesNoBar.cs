@@ -18,7 +18,7 @@ public class CYesNoBar : MonoBehaviour
         StartCoroutine(UpdateBar());
     }
 
-    // 게이지바는 음악 길이 * 0.00003f씩 감소
+    // 게이지바는 음악 길이 * 0.00001f씩 감소
     IEnumerator UpdateBar()
     {
         yield return new WaitUntil(() => (StageManager.instance.mainMusic.isPlaying 

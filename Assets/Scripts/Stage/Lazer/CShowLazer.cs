@@ -27,7 +27,7 @@ public class CShowLazer : MonoBehaviour
     public GameObject longNotePrefab; // ·Õ ³ëÆ® ÇÁ¸®ÆÕ
     public GameObject doubleNotePrefab; // ´õºí ³ëÆ® ÇÁ¸®ÆÕ
 
-    private int shortNoteNum = 6; // ¼ô ³ëÆ® Ç® Å©±â
+    private int shortNoteNum = 9; // ¼ô ³ëÆ® Ç® Å©±â
     private int longNoteNum = 3; // ·Õ ³ëÆ® Ç® Å©±â
     private int doubleNoteNum = 8; // ´õºí ³ëÆ® Ç® Å©±â
 

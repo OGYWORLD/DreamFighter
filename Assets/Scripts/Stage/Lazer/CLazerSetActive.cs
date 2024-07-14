@@ -61,7 +61,7 @@ public class CLazerSetActive : MonoBehaviour
 
     IEnumerator WaitUntilCondition()
     {
-        if(isLong)// 롱노트 판정
+        if (isLong)// 롱노트 판정
         {
             // 롱노트에서 몇 번의 판정을 해야되는지 구하는 변수 ((노트 끝 - 노트 시작) * bpm / 60)
             float betweenSrtEndCnt = (((StageManager.instance.notes[noteIdx].endTime -
