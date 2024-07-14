@@ -3047,7 +3047,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd12f87ff24b80c4db708390611d6b38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  disAprParticle: {fileID: 1500905843500318400, guid: aedae2d802ac89a4096cfa2522fde943, type: 3}
+  scParticle: {fileID: 1500905843500318400, guid: aedae2d802ac89a4096cfa2522fde943, type: 3}
+  wrParticle: {fileID: 6443201503165068771, guid: 102f70ce4c36369429ab4825602c9c61, type: 3}
 --- !u!64 &401894447
 MeshCollider:
   m_ObjectHideFlags: 0

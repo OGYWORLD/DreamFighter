@@ -32,22 +32,23 @@ public class CLazerSetActive : MonoBehaviour
 
     void CheckNoteScore(float curMusicTime, float endTime)
     {
-        disApr.ShowDisAprParticle(gameObject.transform.position);
-
         if (Mathf.Abs(curMusicTime - endTime) < 0.2f)
         {
+            disApr.ShowSCParticle(gameObject.transform.position);
             StageManager.instance.combo++;
             print($"{StageManager.instance.inputNoteIdx} Perfect! combo: {StageManager.instance.combo}");
             StageManager.instance.yesNoBar.value += StageManager.instance.mainMusic.clip.length * 0.0001f;
         }
         else if (Mathf.Abs(curMusicTime - endTime) < 0.3f)
         {
+            disApr.ShowSCParticle(gameObject.transform.position);
             StageManager.instance.combo++;
             print($"{StageManager.instance.inputNoteIdx} Good! combo: {StageManager.instance.combo}");
             StageManager.instance.yesNoBar.value += StageManager.instance.mainMusic.clip.length * 0.0001f;
         }
         else if(Mathf.Abs(curMusicTime - endTime) <= 1f)
         {
+            disApr.ShowWRParticle(gameObject.transform.position);
             print($"{StageManager.instance.inputNoteIdx} Early Miss!");
             StageManager.instance.combo = 0;
             StageManager.instance.yesNoBar.value -= StageManager.instance.mainMusic.clip.length * 0.0005f;
@@ -57,6 +58,9 @@ public class CLazerSetActive : MonoBehaviour
     IEnumerator LazerSetHide()
     {
         yield return new WaitForSeconds(StageManager.instance.noteMoveSpeed + StageManager.instance.noteSize);
+
+        disApr.ShowWRParticle(gameObject.transform.position);
+
         print($"{StageManager.instance.inputNoteIdx} Late Miss!");
         StageManager.instance.yesNoBar.value -= StageManager.instance.mainMusic.clip.length * 0.0005f;
         StageManager.instance.combo = 0;
@@ -84,6 +88,12 @@ public class CLazerSetActive : MonoBehaviour
             // 중간 노트들 점수(콤보) 추가하는 과정
             for(int i = 0; i < (int)betweenSrtEndCnt; i++)
             {
+                // TODO: 밑에 wait unitl에 조건 안 걸리는 거 아닌지 확인 필요
+                if (!Input.GetKey(KeyCode.Space))
+                {
+                    break;
+                }
+
                 if (Input.GetKey(KeyCode.Space) && StageManager.instance.mainMusic.time >= StageManager.instance.notes[noteIdx].srtTime + (i * perSecBPM))
                 {
                     StageManager.instance.combo++;
@@ -96,8 +106,7 @@ public class CLazerSetActive : MonoBehaviour
             // 마지막 롱노트 입력 판정
             yield return new WaitUntil(() => (
            StageManager.instance.inputNoteIdx == noteIdx &&
-           Input.GetKeyUp(KeyCode.Space) &&
-           StageManager.instance.mainMusic.time >= StageManager.instance.notes[noteIdx].endTime - 0.3f
+           Input.GetKeyUp(KeyCode.Space)
            ));
 
             CheckNoteScore(StageManager.instance.mainMusic.time, StageManager.instance.notes[noteIdx].endTime);
