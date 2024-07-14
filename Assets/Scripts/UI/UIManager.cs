@@ -7,37 +7,78 @@ using System;
 #region 우인혜
 #endregion
 
-//[Serializable]
-//public class UIObject
-//{
-//    public GameObject uiObject;
+public enum UIState
+{
+    Enter,
+    Main,
+    Loading,
+    InGame,
+    Exit
+}
 
-//    public void FadeIn()
-//    {
+[Serializable]
+public class Panels
+{
+    public string name;
+    public GameObject panel;
+}
 
-//    }
-
-//    public void FadeOut()
-//    {
-
-//    }
-//}
+[Serializable]
+public class Buttons
+{
+    public string name;
+    public Button button;
+}
 
 public class UIManager : Singleton<UIManager>
 {
+    public bool isMainLoadAgain = false;
+
     //public GameObject TitleWorldObject;
-    public Dictionary<string, GameObject> WorldUIObjects = new();
+    //public Dictionary<string, GameObject> WorldUIObjects = new();
+
+    /// <summary>
+    /// 화면 페이지별로 구분해서 담을 리스트
+    /// </summary>
+    public List<Panels> PageList = new();
+
+    /// <summary>
+    /// 화면 영역별로 구분해서 담을 리스트
+    /// </summary>
+    public List<Panels> BoxList = new();
+
+    public List<Buttons> ButtonList = new();
 
     public Canvas MainCanvas;
+ 
+    public Dictionary<UIState, Action> stateDelegates = new();
+    private UIState currentUIState;
 
-    public void SetActiveUI(GameObject obj, bool b)
+    /// <summary>
+    /// 델리게이트 등록
+    /// </summary>
+    public void RegisterDelegate(UIState state, Action action)
     {
-        obj.gameObject.SetActive(b);
+        stateDelegates[state] = action;
     }
 
-    public void SetActiveUIByName()
+    /// <summary>
+    /// 델리게이트 제거
+    /// </summary>
+    /// <param name="state"></param>
+    public void UnregisterDelegate(UIState state)
     {
+        stateDelegates.Remove(state);
+    }
 
+    IEnumerator StateDelegateCoroutine()
+    {
+        if (stateDelegates.ContainsKey(currentUIState))
+        {
+            stateDelegates[currentUIState]?.Invoke();
+        }
+
+        yield return null;
     }
 
 }

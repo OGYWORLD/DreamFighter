@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
 
-// todo: (인혜) 프로필 보간... 이걸 고쳐서 쓰거나 아니면 다른 방법을 찾거나
+#region 우인혜
+#endregion
 
 public class ProfileInterpolation : MonoBehaviour
 {
