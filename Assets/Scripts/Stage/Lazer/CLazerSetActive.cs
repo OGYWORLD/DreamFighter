@@ -11,12 +11,10 @@ using UnityEngine.UI;
 /// </summary>
 public class CLazerSetActive : MonoBehaviour
 {
-    public int noteIdx { get; set; }
+    public int noteIdx { get; set; } = 0;
     public bool isLong { get; set; }
 
     private float perSecBPM;
-
-    public Slider yesNoBar;
 
     private void Start()
     {
@@ -78,7 +76,7 @@ public class CLazerSetActive : MonoBehaviour
 
             CheckNoteScore(StageManager.instance.mainMusic.time, StageManager.instance.notes[noteIdx].srtTime);
 
-            // 중간 노트들 점수(콤보) 추가하는 과정 필요
+            // 중간 노트들 점수(콤보) 추가하는 과정
             for(int i = 0; i < (int)betweenSrtEndCnt; i++)
             {
                 if (Input.GetKey(KeyCode.Space) && StageManager.instance.mainMusic.time >= StageManager.instance.notes[noteIdx].srtTime + (i * perSecBPM))
@@ -94,7 +92,7 @@ public class CLazerSetActive : MonoBehaviour
             yield return new WaitUntil(() => (
            StageManager.instance.inputNoteIdx == noteIdx &&
            Input.GetKeyUp(KeyCode.Space) &&
-           StageManager.instance.mainMusic.time >= StageManager.instance.notes[noteIdx].endTime
+           StageManager.instance.mainMusic.time >= StageManager.instance.notes[noteIdx].endTime - 0.3f
            ));
 
             CheckNoteScore(StageManager.instance.mainMusic.time, StageManager.instance.notes[noteIdx].endTime);

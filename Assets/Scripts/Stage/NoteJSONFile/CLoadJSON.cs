@@ -14,7 +14,7 @@ using System.IO;
 
 public class CLoadJSON : MonoBehaviour
 {
-    private void Start()
+    private void Awake()
     {
         LoadJSON();
     }
