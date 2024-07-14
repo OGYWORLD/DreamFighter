@@ -19,6 +19,8 @@ public class CLazerSetActive : MonoBehaviour
 
     public CDisAprNote disApr;
 
+    public Animator comboAnim;
+
     private void Start()
     {
         perSecBPM = StageManager.instance.bpm / 60f;
@@ -35,14 +37,20 @@ public class CLazerSetActive : MonoBehaviour
         if (Mathf.Abs(curMusicTime - endTime) < 0.2f)
         {
             disApr.ShowSCParticle(gameObject.transform.position);
+
             StageManager.instance.combo++;
+            comboAnim.SetBool("isCombo", true);
+
             print($"{StageManager.instance.inputNoteIdx} Perfect! combo: {StageManager.instance.combo}");
             StageManager.instance.yesNoBar.value += StageManager.instance.mainMusic.clip.length * 0.0001f;
         }
         else if (Mathf.Abs(curMusicTime - endTime) < 0.3f)
         {
             disApr.ShowSCParticle(gameObject.transform.position);
+
             StageManager.instance.combo++;
+            comboAnim.SetBool("isCombo", true);
+
             print($"{StageManager.instance.inputNoteIdx} Good! combo: {StageManager.instance.combo}");
             StageManager.instance.yesNoBar.value += StageManager.instance.mainMusic.clip.length * 0.0001f;
         }
@@ -126,7 +134,8 @@ public class CLazerSetActive : MonoBehaviour
         }
 
         StageManager.instance.inputNoteIdx++;
-        
+
+        comboAnim.SetBool("isCombo", false);
         gameObject.SetActive(false);
     }
 }

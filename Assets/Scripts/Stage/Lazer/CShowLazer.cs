@@ -24,6 +24,8 @@ public class CShowLazer : MonoBehaviour
 
     public CDisAprNote disApr; // 노트 소멸 시 이벤트 발생 스크립트
 
+    public Animator comboAnim; // 콤보 텍스트 애니메이션
+
     // 오브젝트 풀링
     public GameObject shortNotePrefab; // 숏 노트 프리팹
     public GameObject longNotePrefab; // 롱 노트 프리팹
@@ -111,6 +113,7 @@ public class CShowLazer : MonoBehaviour
                     lazerSet.isLong = false;
 
                     lazerSet.disApr = disApr;
+                    lazerSet.comboAnim = comboAnim;
 
                     shortPool[shortIdx].transform.position = shortNoteTrans[shortIdx % shortNoteTrans.Count].position;
                     shortPool[shortIdx].SetActive(true);
@@ -130,6 +133,7 @@ public class CShowLazer : MonoBehaviour
                     lazerSet.isLong = true;
 
                     lazerSet.disApr = disApr;
+                    lazerSet.comboAnim = comboAnim;
 
                     longPool[longIdx].transform.localScale = new Vector3(
                         StageManager.instance.noteSize * (StageManager.instance.betweenDis / StageManager.instance.noteMoveSpeed),
@@ -155,6 +159,7 @@ public class CShowLazer : MonoBehaviour
                     lazerSet.isLong = false;
 
                     lazerSet.disApr = disApr;
+                    lazerSet.comboAnim = comboAnim;
 
                     doublePool[doubleIdx].transform.position = longNoteTrans.position;
                     doublePool[doubleIdx].SetActive(true);
