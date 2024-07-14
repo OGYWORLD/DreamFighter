@@ -3003,6 +3003,51 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -8549080477697052757, guid: ef176958a034278499258966dc8f7095, type: 3}
+--- !u!1 &400845891
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 400845892}
+  - component: {fileID: 400845893}
+  m_Layer: 0
+  m_Name: DisAprParticle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &400845892
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 400845891}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &400845893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 400845891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd12f87ff24b80c4db708390611d6b38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  disAprParticle: {fileID: 1500905843500318400, guid: aedae2d802ac89a4096cfa2522fde943, type: 3}
 --- !u!64 &401894447
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -16881,6 +16926,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b9648fecfc48ae4580fa5bb391e52c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  disApr: {fileID: 400845893}
   shortNotePrefab: {fileID: 6989631996198652295, guid: 2c6de3ae3a50162458d85810184fadfa, type: 3}
   longNotePrefab: {fileID: 2636474150613465443, guid: 56ee48492a618814291a55e438f59a7a, type: 3}
   doubleNotePrefab: {fileID: 8790738653606079532, guid: 05cfcdc9cba8c104696caefc1014abe5, type: 3}
@@ -20247,7 +20293,7 @@ GameObject:
   - component: {fileID: 1974068742}
   - component: {fileID: 1974068744}
   m_Layer: 0
-  m_Name: FUI Bright Metallic Click Reverberant
+  m_Name: ClickSound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

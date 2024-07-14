@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 #region ¿À°¡À»
 #endregion
@@ -16,6 +17,8 @@ public class CLazerSetActive : MonoBehaviour
 
     private float perSecBPM;
 
+    public CDisAprNote disApr;
+
     private void Start()
     {
         perSecBPM = StageManager.instance.bpm / 60f;
@@ -29,6 +32,8 @@ public class CLazerSetActive : MonoBehaviour
 
     void CheckNoteScore(float curMusicTime, float endTime)
     {
+        disApr.ShowDisAprParticle(gameObject.transform.position);
+
         if (Mathf.Abs(curMusicTime - endTime) < 0.2f)
         {
             StageManager.instance.combo++;
@@ -112,6 +117,7 @@ public class CLazerSetActive : MonoBehaviour
         }
 
         StageManager.instance.inputNoteIdx++;
+        
         gameObject.SetActive(false);
     }
 }

@@ -22,6 +22,8 @@ public class CShowLazer : MonoBehaviour
 
     private float speed = 10f; // 레이저 이동 속도
 
+    public CDisAprNote disApr; // 노트 소멸 시 이벤트 발생 스크립트
+
     // 오브젝트 풀링
     public GameObject shortNotePrefab; // 숏 노트 프리팹
     public GameObject longNotePrefab; // 롱 노트 프리팹
@@ -108,6 +110,8 @@ public class CShowLazer : MonoBehaviour
                     lazerSet.noteIdx = noteIdx;
                     lazerSet.isLong = false;
 
+                    lazerSet.disApr = disApr;
+
                     shortPool[shortIdx].transform.position = shortNoteTrans[shortIdx % shortNoteTrans.Count].position;
                     shortPool[shortIdx].SetActive(true);
                     shortIdx++;
@@ -124,6 +128,8 @@ public class CShowLazer : MonoBehaviour
                     lazerSet = longPool[longIdx].GetComponent<CLazerSetActive>();
                     lazerSet.noteIdx = noteIdx;
                     lazerSet.isLong = true;
+
+                    lazerSet.disApr = disApr;
 
                     longPool[longIdx].transform.localScale = new Vector3(
                         StageManager.instance.noteSize * (StageManager.instance.betweenDis / StageManager.instance.noteMoveSpeed),
@@ -147,6 +153,8 @@ public class CShowLazer : MonoBehaviour
                     lazerSet = doublePool[doubleIdx].GetComponent<CLazerSetActive>();
                     lazerSet.noteIdx = noteIdx;
                     lazerSet.isLong = false;
+
+                    lazerSet.disApr = disApr;
 
                     doublePool[doubleIdx].transform.position = longNoteTrans.position;
                     doublePool[doubleIdx].SetActive(true);

@@ -2,6 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+#region 오가을
+#endregion
+
+/// <summary>
+/// 롱 노트의 사라질 때의 타이밍을 나타내는 원형 아이콘을 동작시키는 스크립트 입니다.
+/// </summary>
+
 public class CLongNoteCircle : MonoBehaviour
 {
     public Transform circle; // 원 아이콘

@@ -42,8 +42,6 @@ public class StageManager : MonoBehaviour
         {
             Destroy(this);
         }
-
-        
     }
 }
 
