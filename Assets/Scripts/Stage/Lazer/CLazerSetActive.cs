@@ -39,7 +39,7 @@ public class CLazerSetActive : MonoBehaviour
             disApr.ShowSCParticle(gameObject.transform.position);
 
             StageManager.instance.combo++;
-            comboAnim.SetBool("isCombo", true);
+           // comboAnim.SetBool("isCombo", true);
 
             print($"{StageManager.instance.inputNoteIdx} Perfect! combo: {StageManager.instance.combo}");
             StageManager.instance.yesNoBar.value += StageManager.instance.mainMusic.clip.length * 0.0001f;
@@ -49,7 +49,7 @@ public class CLazerSetActive : MonoBehaviour
             disApr.ShowSCParticle(gameObject.transform.position);
 
             StageManager.instance.combo++;
-            comboAnim.SetBool("isCombo", true);
+            //comboAnim.SetBool("isCombo", true);
 
             print($"{StageManager.instance.inputNoteIdx} Good! combo: {StageManager.instance.combo}");
             StageManager.instance.yesNoBar.value += StageManager.instance.mainMusic.clip.length * 0.0001f;

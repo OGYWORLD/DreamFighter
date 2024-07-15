@@ -12,6 +12,10 @@ using UnityEngine;
 
 public class CDisAprNote : MonoBehaviour
 {
+    public AudioSource ef;
+    public AudioClip scEF;
+    public AudioClip wrEF;
+
     public GameObject scParticle;
     public GameObject wrParticle;
 
@@ -49,6 +53,10 @@ public class CDisAprNote : MonoBehaviour
 
     public void ShowSCParticle(Vector3 pos)
     {
+        // 효과음
+        ef.clip = scEF;
+        ef.Play();
+
         scPool[scIdx].transform.position = pos;
         scPool[scIdx].SetActive(true);
 
@@ -62,6 +70,10 @@ public class CDisAprNote : MonoBehaviour
 
     public void ShowWRParticle(Vector3 pos)
     {
+        // 효과음
+        ef.clip = wrEF;
+        ef.Play();
+
         wrPool[wrIdx].transform.position = pos;
         wrPool[wrIdx].SetActive(true);
 
