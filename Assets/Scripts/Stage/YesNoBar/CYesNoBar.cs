@@ -26,7 +26,10 @@ public class CYesNoBar : MonoBehaviour
 
         while(StageManager.instance.mainMusic.isPlaying)
         {
-            StageManager.instance.yesNoBar.value -= StageManager.instance.mainMusic.clip.length * 0.00001f;
+            if(!StageManager.instance.isCutScene)
+            {
+                StageManager.instance.yesNoBar.value -= StageManager.instance.mainMusic.clip.length * 0.00001f;
+            }
 
             yield return new WaitForSeconds(0.1f);
         }

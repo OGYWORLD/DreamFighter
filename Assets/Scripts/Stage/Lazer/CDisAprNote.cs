@@ -13,6 +13,13 @@ using UnityEngine.UI;
 
 public class CDisAprNote : MonoBehaviour
 {
+    public enum Result
+    {
+        Perfect,
+        Good,
+        Wrong
+    }
+
     public class ResultImage // 이미지를 필드로 가지고 있는 클래스
     {
         public GameObject perfectImage { get; set; } 
@@ -92,13 +99,13 @@ public class CDisAprNote : MonoBehaviour
             wrPool.Add(obj);
 
             // imagePool
-            GameObject obj01 = Instantiate(resultImage[0], resultParents);
+            GameObject obj01 = Instantiate(resultImage[(int)Result.Perfect], resultParents);
             obj01.SetActive(false);
 
-            GameObject obj02 = Instantiate(resultImage[1], resultParents);
+            GameObject obj02 = Instantiate(resultImage[(int)Result.Good], resultParents);
             obj02.SetActive(false);
 
-            GameObject obj03 = Instantiate(resultImage[2], resultParents);
+            GameObject obj03 = Instantiate(resultImage[(int)Result.Wrong], resultParents);
             obj03.SetActive(false);
 
             resultImg.Add(new ResultImage() { perfectImage = obj01, goodImage = obj02, wrongImage = obj03 });
@@ -129,7 +136,7 @@ public class CDisAprNote : MonoBehaviour
     public void ShowWRParticle(Vector3 pos)
     {
         // 결과 이미지
-        ImgSetPos(pos, 2); // 2: wrong Image
+        ImgSetPos(pos, (int)Result.Wrong); // 2: wrong Image
 
         // 효과음
         ef.clip = wrEF;

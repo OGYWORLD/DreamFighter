@@ -38,9 +38,14 @@ public class StageManager : MonoBehaviour
     public int goodCnt { get; set; } = 0; // 굿 개수
     public int wrCnt { get; set; } = 0; // 틀린 개수
 
+    public bool isCutScene { get; set; } = false; // 현재 컷씬 실행 중?
+
+    // 현재 스테이지 0: neon city, 1: menu UI, 2: code
+    public int curStage { get; set; } = 0;
+
     private void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
         }

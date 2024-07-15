@@ -20,8 +20,6 @@ public class CShowLazer : MonoBehaviour
         DoubleNote
     }
 
-    private float speed = 10f; // 레이저 이동 속도
-
     public CDisAprNote disApr; // 노트 소멸 시 이벤트 발생 스크립트
 
     public Animator comboAnim; // 콤보 텍스트 애니메이션
@@ -103,7 +101,9 @@ public class CShowLazer : MonoBehaviour
     void RespawnLazer()
     {
         // 노트 시간 보다 StageManager.instance.noteMoveSpeed초 전에 레이저를 생성한다.
-        if (StageManager.instance.mainMusic.time >= StageManager.instance.notes[noteIdx].srtTime - StageManager.instance.noteMoveSpeed)
+        if (StageManager.instance.curStage == 0
+            && !StageManager.instance.isCutScene
+            && StageManager.instance.mainMusic.time >= StageManager.instance.notes[noteIdx].srtTime - StageManager.instance.noteMoveSpeed)
         {
             switch (StageManager.instance.notes[noteIdx].noteCategory)
             {
