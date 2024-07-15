@@ -5,7 +5,7 @@ using UnityEngine;
 public class CCameraIntro : MonoBehaviour
 {
     private Vector3 initPos = new Vector3(0.439999998f, 1.34000003f, 7.61999989f);
-    private Vector3 targetPos = new Vector3(0.439999998f, 1.34000003f, 4.55999994f);
+    private Vector3 targetPos = new Vector3(0.439999998f, 2.79999995f, 4.55999994f);
 
     private void OnEnable()
     {
