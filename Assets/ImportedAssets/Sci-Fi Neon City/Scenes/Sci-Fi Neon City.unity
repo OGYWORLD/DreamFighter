@@ -398,7 +398,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &29905583
 Transform:
   m_ObjectHideFlags: 0
@@ -768,7 +768,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &68196790
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -829,7 +829,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!224 &68196793
 RectTransform:
@@ -865,6 +865,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   background: {fileID: 824996572}
+  cutSceneCanvas: {fileID: 2091215067}
+  cutScenePlayer: {fileID: 1444588675}
 --- !u!64 &72192008
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -5204,7 +5206,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 28.599976, y: 26.799988}
+  m_AnchoredPosition: {x: 28.600098, y: 26.800049}
   m_SizeDelta: {x: 0, y: 100}
   m_Pivot: {x: 0, y: 0}
 --- !u!95 &577764077
@@ -11473,7 +11475,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 611843419}
-  - component: {fileID: 611843420}
   m_Layer: 0
   m_Name: ScriptManager
   m_TagString: Untagged
@@ -11496,18 +11497,6 @@ Transform:
   m_Father: {fileID: 855255817}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &611843420
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 611843418}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c0110f81ccc31a4290427302bef7209, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!64 &612929696
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -17589,7 +17578,7 @@ GameObject:
   - component: {fileID: 1299304604}
   - component: {fileID: 1299304607}
   m_Layer: 5
-  m_Name: Button (Legacy)
+  m_Name: Debug_TimeCheckButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18577,12 +18566,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bgm: {fileID: 1602077168}
-  cutSceneCanvas: {fileID: 2091215067}
-  cutScenePlayer: {fileID: 1444588675}
   stage:
   - {fileID: 29905582}
   - {fileID: 1927350080}
   - {fileID: 1927350080}
+  fade: {fileID: 68196794}
 --- !u!64 &1445767559
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -20541,7 +20529,7 @@ GameObject:
   - component: {fileID: 1696630097}
   - component: {fileID: 1696630096}
   m_Layer: 5
-  m_Name: Stage01Canvas
+  m_Name: TotalCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22443,7 +22431,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1927350081
 Transform:
   m_ObjectHideFlags: 0
@@ -23779,7 +23767,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!224 &2091215071
 RectTransform:
@@ -58173,6 +58161,7 @@ GameObject:
   - component: {fileID: 2995525165335753487}
   - component: {fileID: 2995525165335753489}
   - component: {fileID: 2995525165335753488}
+  - component: {fileID: 2995525165335753490}
   m_Layer: 8
   m_Name: Main Camera
   m_TagString: Untagged
@@ -58187,14 +58176,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2995525165335753484}
-  m_LocalRotation: {x: 0.20922449, y: 0.6754444, z: -0.20922461, w: 0.6754443}
-  m_LocalPosition: {x: 0.24, y: 8.74, z: 0}
+  m_LocalRotation: {x: 0, y: -0.94202816, z: 0, w: 0.3355339}
+  m_LocalPosition: {x: 15.58, y: 2.17, z: 74.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1969516884}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 34.422, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -140.79, z: 0}
 --- !u!81 &2995525165335753487
 AudioListener:
   m_ObjectHideFlags: 0
@@ -58280,6 +58269,18 @@ MonoBehaviour:
   blendDistance: 0
   weight: 1
   priority: 0
+--- !u!114 &2995525165335753490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2995525165335753484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df434591acea4354abe779365f667138, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!23 &2996834691699932359
 MeshRenderer:
   m_ObjectHideFlags: 0

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Video;
 
 #region ¿À°¡À»
 #endregion
@@ -13,20 +14,29 @@ public class CFadeOutIn : MonoBehaviour
 {
     public Image background;
 
+    public GameObject cutSceneCanvas; // ÄÆ¾À Äµ¹ö½º
+    public VideoPlayer cutScenePlayer; // ÄÆ¾À ºñµð¿À ÇÃ·¹ÀÌ¾î
+
     private void Start()
     {
-        StartCoroutine(FadeInOut(1, 0));
+        StartCoroutine(FadeInOut(1, 0, 2));
     }
 
-    public void Fade(int srt, int end)
+    public void Fade(int srt, int end, float time)
     {
-        StartCoroutine(FadeInOut(srt, end));
+        StartCoroutine(FadeInOut(srt, end, time));
     }
 
-    IEnumerator FadeInOut(int srt, int end)
+    IEnumerator FadeInOut(int srt, int end, float totalTime)
     {
+        if(srt == 1)
+        {
+            // ÄÆ¾À ºñÈ°¼ºÈ­
+            cutScenePlayer.Stop();
+            cutSceneCanvas.SetActive(false);
+        }
+
         float sumTime = 0f;
-        float totalTime = 2f;
 
         while (sumTime <= totalTime)
         {
@@ -43,11 +53,10 @@ public class CFadeOutIn : MonoBehaviour
 
         if(srt == 0)
         {
-            Time.timeScale = 0f;
-        }
-        else
-        {
-            Time.timeScale = 1f;
+            print(Time.time);
+            // ÄÆ½Å ÀüÈ¯
+            cutSceneCanvas.SetActive(true);
+            cutScenePlayer.Play();
         }
 
         yield break;

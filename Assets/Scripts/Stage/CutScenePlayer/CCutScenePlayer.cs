@@ -16,14 +16,15 @@ public class CCutScenePlayer : MonoBehaviour
 {
     public AudioSource bgm; // 배경음악
 
-    public GameObject cutSceneCanvas; // 컷씬 캔버스
-    public VideoPlayer cutScenePlayer; // 컷씬 비디오 플레이어
-
     private List<CutScene> cutscene = new List<CutScene>(); // 컷씬 시작, 종료를 담은 리스트
 
     private int idx = 0; // 컷씬 리스트 인덱스
 
     public GameObject[] stage = new GameObject[3]; // 스테이지
+
+    public CFadeOutIn fade; // 페이드 인 아웃
+
+    private bool isPlay = false; // 컷씬 재생 여부 (실제 재생 여부와 페이드 때문에 시점이 달라서 변수로 처리)
 
     private void Awake()
     {
@@ -51,7 +52,7 @@ public class CCutScenePlayer : MonoBehaviour
 
     private void IsCutSceneCheck()
     {
-        if (bgm.time >= cutscene[idx].srtTime - 5f)
+        if (bgm.time >= cutscene[idx].srtTime - 8f)
         {
             StageManager.instance.isCutScene = true;
         }
@@ -59,22 +60,18 @@ public class CCutScenePlayer : MonoBehaviour
         if (bgm.time >= cutscene[idx].endTime + 5f)
         {
             StageManager.instance.isCutScene = false;
+            idx++;
         }
     }
 
     private void IntoCutScene()
     {
-       if(!cutScenePlayer.isPlaying && bgm.time >= cutscene[StageManager.instance.curStage].srtTime)
+       if (!isPlay && bgm.time >= cutscene[StageManager.instance.curStage].srtTime - 2f)
        {
-            // 노래 볼륨 조절
-
-
-            // 컷신 전환
-            cutSceneCanvas.SetActive(true);
-            cutScenePlayer.Play();
+            isPlay = true;
 
             // 노트 idx 건너뛰어줘야함
-            for(int i = StageManager.instance.inputNoteIdx; i < StageManager.instance.notes.Count; i++)
+            for (int i = StageManager.instance.inputNoteIdx; i < StageManager.instance.notes.Count; i++)
             {
                 if(cutscene[StageManager.instance.curStage].endTime >= StageManager.instance.notes[i].srtTime)
                 {
@@ -82,17 +79,15 @@ public class CCutScenePlayer : MonoBehaviour
                     break;
                 }
             }
-       }
+
+            fade.Fade(0, 1, 1);
+        }
     }
 
     private void IntoStage()
     {
         if (bgm.time >= cutscene[StageManager.instance.curStage].endTime)
         {
-            // 스테이지 전환
-            cutSceneCanvas.SetActive(false);
-            cutScenePlayer.Stop();
-
             // 노트 인덱스 업데이트는 2번째 스테이지에서 CShowLazer를 사용하지 않고 새로 스크립트 파서
             // 풀링해줄 거기 때문에 그 스크립트에서 StageManager.instance.inputNoteIdx 값을 활성화됐을때 집어넣는 방식으로 구현할예정
 
@@ -100,6 +95,11 @@ public class CCutScenePlayer : MonoBehaviour
             stage[StageManager.instance.curStage].SetActive(false);
             StageManager.instance.curStage++;
             stage[StageManager.instance.curStage].SetActive(true);
+
+            // 스테이지 전환
+            fade.Fade(1, 0, 1);
+
+            isPlay = false;
         }
     }
 }
