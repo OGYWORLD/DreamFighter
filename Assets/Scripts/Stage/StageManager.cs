@@ -22,7 +22,7 @@ public class StageManager : MonoBehaviour
 
     public float noteMoveSpeed { get; set; } = 4f; // 노트 이동 속도
 
-    public float betweenDis {get; set;} = 58f; // 레이저 생성 위치와 카메라 사이의 거리
+    public float betweenDis { get; set; } = 58f; // 레이저 생성 위치와 카메라 사이의 거리
 
     public float noteSize { get; set; } = 0f; // 노트 사이즈, 롱노트 사이즈를 위해 사용됨
 
@@ -31,6 +31,12 @@ public class StageManager : MonoBehaviour
     public int combo { get; set; } = 0; // 콤보
 
     public Slider yesNoBar; // yesNoBar 상단 게이지바
+
+    public int score { get; set; } = 0; // 스코어
+
+    public int perfectCnt { get; set; } = 0; // 퍼펙트 개수
+    public int goodCnt { get; set; } = 0; // 굿 개수
+    public int wrCnt { get; set; } = 0; // 틀린 개수
 
     private void Awake()
     {

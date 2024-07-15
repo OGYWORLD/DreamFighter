@@ -36,7 +36,10 @@ public class CLazerSetActive : MonoBehaviour
     {
         if (Mathf.Abs(curMusicTime - endTime) < 0.2f)
         {
-            disApr.ShowSCParticle(gameObject.transform.position);
+            disApr.ShowSCParticle(gameObject.transform.position, 0);
+
+            StageManager.instance.score += 100;
+            StageManager.instance.perfectCnt++;
 
             StageManager.instance.combo++;
            // comboAnim.SetBool("isCombo", true);
@@ -46,7 +49,10 @@ public class CLazerSetActive : MonoBehaviour
         }
         else if (Mathf.Abs(curMusicTime - endTime) < 0.3f)
         {
-            disApr.ShowSCParticle(gameObject.transform.position);
+            disApr.ShowSCParticle(gameObject.transform.position, 1);
+
+            StageManager.instance.score += 50;
+            StageManager.instance.goodCnt++;
 
             StageManager.instance.combo++;
             //comboAnim.SetBool("isCombo", true);
@@ -57,6 +63,9 @@ public class CLazerSetActive : MonoBehaviour
         else if(Mathf.Abs(curMusicTime - endTime) <= 1f)
         {
             disApr.ShowWRParticle(gameObject.transform.position);
+
+            StageManager.instance.wrCnt++;
+
             print($"{StageManager.instance.inputNoteIdx} Early Miss!");
             StageManager.instance.combo = 0;
             StageManager.instance.yesNoBar.value -= StageManager.instance.mainMusic.clip.length * 0.0005f;
@@ -68,6 +77,8 @@ public class CLazerSetActive : MonoBehaviour
         yield return new WaitForSeconds(StageManager.instance.noteMoveSpeed + StageManager.instance.noteSize);
 
         disApr.ShowWRParticle(gameObject.transform.position);
+
+        StageManager.instance.wrCnt++;
 
         print($"{StageManager.instance.inputNoteIdx} Late Miss!");
         StageManager.instance.yesNoBar.value -= StageManager.instance.mainMusic.clip.length * 0.0005f;
