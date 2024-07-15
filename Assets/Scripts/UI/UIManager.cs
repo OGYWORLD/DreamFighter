@@ -15,44 +15,36 @@ public enum UIState
     InGame,
     Exit
 }
+// 팝업은 현재 상태와 무관하게 트리거 시 항상 반영.
 
-[Serializable]
-public class Panels
+public enum PageState
 {
-    public string name;
-    public GameObject panel;
-}
-
-[Serializable]
-public class Buttons
-{
-    public string name;
-    public Button button;
+    Chat,
+    Record,
+    Info,
+    Setting,
+    Exit
 }
 
 public class UIManager : Singleton<UIManager>
 {
+    public Camera UIMainCamera;
+
+    // 이 씬으로 들어왔을 때 타이틀을 띄울지, 바로 메인 화면으로 들어갈지 결정하는 변수
     public bool isMainLoadAgain = false;
 
     //public GameObject TitleWorldObject;
     //public Dictionary<string, GameObject> WorldUIObjects = new();
-
-    /// <summary>
-    /// 화면 페이지별로 구분해서 담을 리스트
-    /// </summary>
-    public List<Panels> PageList = new();
-
-    /// <summary>
-    /// 화면 영역별로 구분해서 담을 리스트
-    /// </summary>
-    public List<Panels> BoxList = new();
-
-    public List<Buttons> ButtonList = new();
-
-    public Canvas MainCanvas;
  
     public Dictionary<UIState, Action> stateDelegates = new();
-    private UIState currentUIState;
+    private UIState CurrentUIState;
+
+
+    private void OnEnable()
+    {
+
+    }
+
 
     /// <summary>
     /// 델리게이트 등록
@@ -73,9 +65,9 @@ public class UIManager : Singleton<UIManager>
 
     IEnumerator StateDelegateCoroutine()
     {
-        if (stateDelegates.ContainsKey(currentUIState))
+        if (stateDelegates.ContainsKey(CurrentUIState))
         {
-            stateDelegates[currentUIState]?.Invoke();
+            stateDelegates[CurrentUIState]?.Invoke();
         }
 
         yield return null;

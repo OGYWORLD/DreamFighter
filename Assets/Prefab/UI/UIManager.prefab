@@ -44,22 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85d505714f6d98342b18fe1fe7f282da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UIMainCamera: {fileID: 0}
   isMainLoadAgain: 0
-  PageList:
-  - name: Record Page
-    panel: {fileID: 0}
-  - name: 
-    panel: {fileID: 0}
-  BoxList: []
-  ButtonList:
-  - name: Start Btn
-    button: {fileID: 0}
-  - name: Chat List Btn
-    button: {fileID: 0}
-  - name: Record List Btn
-    button: {fileID: 0}
-  - name: Setting Btn
-    button: {fileID: 0}
-  - name: Info Btn
-    button: {fileID: 0}
-  MainCanvas: {fileID: 0}

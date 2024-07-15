@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class StartKeyInfo : MonoBehaviour
 {
     Graphic StartInfo;
-    public float duration = 1f;
+    public float distanceTime = 0.8f;
 
     private void Awake()
     {
@@ -38,7 +38,7 @@ public class StartKeyInfo : MonoBehaviour
             currentColor.a = currentColor.a == 1 ? 0 : 1;
             StartInfo.color = currentColor;
 
-            yield return new WaitForSeconds(duration);
+            yield return new WaitForSeconds(distanceTime);
         }
     }
 }

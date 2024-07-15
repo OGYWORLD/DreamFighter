@@ -169,3 +169,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StartInfo: {fileID: 0}
   TitleObject: {fileID: 0}
+  duration: 3

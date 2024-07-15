@@ -10,6 +10,15 @@ public class WorldTitleObject : MonoBehaviour
     readonly Vector3 initPos = new Vector3(52.07f, -12.37f, 27.77f);
     readonly Quaternion initRotation = Quaternion.Euler(new Vector3(-5.977f, 239.822f, 0.123f));
 
+    Animator animator;
+
+    //===============================================================================================
+
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
+    }
+
     private void Start()
     {
         StartCoroutine(FlyInTitleCoroutine());
@@ -17,35 +26,35 @@ public class WorldTitleObject : MonoBehaviour
 
     private void OnDisable()
     {
-        StartCoroutine(FlyOutTitleCoroutine());
+        StopAllCoroutines();
     }
+
+    //================================================================================================
 
     IEnumerator FlyInTitleCoroutine()
     {
+        print("FlyInTitle");
         yield return null;
 
-        //StartCoroutine(FloatTitleCoroutine());
+        StartCoroutine(FloatTitleCoroutine());
+    }
+
+    public void FlyOutTitle()
+    {
+        StartCoroutine(FlyOutTitleCoroutine());
     }
 
     IEnumerator FlyOutTitleCoroutine()
     {
-        yield return null;
-
-        //StopAllCoroutines();
-    }
+        animator.SetTrigger("Fly Out");
+        yield return null;}
 
     IEnumerator FloatTitleCoroutine()
     {
-        Vector3 initPos = transform.position;
-
-        while (true)
-        {
-
-
-
-            yield return new WaitForSeconds(1f);
-        }
-
-
+        yield return new WaitForSeconds(2f);
+        animator.SetBool("isFloating", true);
     }
 }
+
+
+// isUp = transform.position == new vector3(initPos.y )

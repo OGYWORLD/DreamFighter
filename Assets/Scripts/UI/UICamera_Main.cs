@@ -10,8 +10,6 @@ using UnityEngine.EventSystems;
 
 public class UICamera_Main : MonoBehaviour
 {
-    private Camera cam;
-
     // UI 요소
     public Graphic StartInfo;
 
@@ -19,12 +17,12 @@ public class UICamera_Main : MonoBehaviour
     public GameObject TitleObject;
 
 
-    #region 카메라 보간 정보
-
     /// <summary>
     /// 보간이 이루어질 시간
     /// </summary>
-    float duration = 3f;
+    public float duration = 2.5f;
+
+    #region 카메라 보간 정보
 
     /// <summary>
     /// 타이틀 씬에서의 카메라 위치 초기값 겸 시작점
@@ -52,16 +50,9 @@ public class UICamera_Main : MonoBehaviour
 
     //========================================================================================================
 
-
-    private void Awake()
-    {
-        cam = GetComponent<Camera>();
-    }
-
     private void OnEnable()
     {
         ShowTitleScreen();
-
     }
 
     //========================================================================================================
@@ -83,9 +74,7 @@ public class UICamera_Main : MonoBehaviour
 
             StartCoroutine(ShowMainScreenCoroutine());
         }
-        
     }
-
 
     IEnumerator ShowOnceCoroutine()
     {
@@ -97,7 +86,10 @@ public class UICamera_Main : MonoBehaviour
 
         // 더 사용하지 않는 오브젝트를 비활성화
         StartInfo.gameObject.SetActive(false);
-        TitleObject.gameObject.SetActive(false);
+
+        //TitleObject.gameObject.SetActive(false);
+        //Invoke("FlyOutTitleCoroutine", 0.1f);
+        TitleObject.SendMessage("FlyOutTitleCoroutine");
 
         StartCoroutine(ShowMainScreenCoroutine());
     }
@@ -110,37 +102,35 @@ public class UICamera_Main : MonoBehaviour
 
 
     /// <summary>
-    /// duration 동안 카메라 위치와 각도 전환 <br/>
-    /// 보간의 시작점을 카메라 자신으로 설정해 두어서 원한다면 다른 상태에서도 지정 위치와 각도로 전환 가능.
+    /// duration 동안 카메라 위치와 각도 전환
     /// </summary>
     IEnumerator CamTransitionCoroutine()
     {
-        float elapsedTime = 0.0f;
+        
+        float delta = 0.0f;
 
-        while (elapsedTime < duration)
+        while (delta <= duration)
         {
-            float t = Time.deltaTime / duration;
-            
-            // todo: (인혜) duration에 딱 맞춰서 도착지점에 이르게 하기
+            float t = delta / duration;
 
-            cam.transform.position = Vector3.Lerp(cam.transform.position, endPosition, t);
-            cam.transform.rotation = Quaternion.Slerp(cam.transform.rotation, endRotation, t);
+            transform.position = Vector3.Lerp(startPosition, endPosition, t);
+            transform.rotation = Quaternion.Slerp(startRotation, endRotation, t);
 
-            elapsedTime += Time.deltaTime;
+            delta += Time.deltaTime;
             yield return null;
         }
 
-        //cam.transform.position = endPosition;
-        //cam.transform.rotation = endRotation;
+        TitleObject.SetActive(false);
+
     }
 
     /// <summary>
-    /// 카메라를 지정된 시작 위치로 되돌리는 메서드
+    /// 작업 중 변경에 대비해 카메라를 지정된 시작 위치로 되돌리는 메서드
     /// </summary>
     void InitCamTransform()
     {
-        cam.transform.position = startPosition;
-        cam.transform.rotation = startRotation;
+        transform.position = startPosition;
+        transform.rotation = startRotation;
     }
 
 }
