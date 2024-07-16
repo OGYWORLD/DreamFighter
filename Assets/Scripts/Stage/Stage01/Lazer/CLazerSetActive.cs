@@ -15,11 +15,9 @@ public class CLazerSetActive : MonoBehaviour
     public int noteIdx { get; set; } = 0;
     public bool isLong { get; set; }
 
-    private float perSecBPM;
+    protected float perSecBPM;
 
     public CDisAprNote disApr;
-
-    public Animator comboAnim;
 
     private void Start()
     {
@@ -28,11 +26,12 @@ public class CLazerSetActive : MonoBehaviour
 
     private void OnEnable()
     {
+        print(noteIdx);
         StartCoroutine(WaitUntilCondition()); // 플레이어로 부터 스페이스바를 입력받으면 레이저를 비활성화 시킵니다.
         StartCoroutine(LazerSetHide()); // 판정 시간에서 벗어나면 레이저를 비활성화 시킵니다.
     }
 
-    void CheckNoteScore(float curMusicTime, float endTime)
+    protected void CheckNoteScore(float curMusicTime, float endTime)
     {
         if (Mathf.Abs(curMusicTime - endTime) < 0.2f)
         {
@@ -42,9 +41,8 @@ public class CLazerSetActive : MonoBehaviour
             StageManager.instance.perfectCnt++;
 
             StageManager.instance.combo++;
-           // comboAnim.SetBool("isCombo", true);
 
-            print($"{StageManager.instance.inputNoteIdx} Perfect! combo: {StageManager.instance.combo}");
+            //print($"{StageManager.instance.inputNoteIdx} Perfect! combo: {StageManager.instance.combo}");
             StageManager.instance.yesNoBar.value += StageManager.instance.mainMusic.clip.length * 0.0001f;
         }
         else if (Mathf.Abs(curMusicTime - endTime) < 0.3f)
@@ -55,9 +53,8 @@ public class CLazerSetActive : MonoBehaviour
             StageManager.instance.goodCnt++;
 
             StageManager.instance.combo++;
-            //comboAnim.SetBool("isCombo", true);
 
-            print($"{StageManager.instance.inputNoteIdx} Good! combo: {StageManager.instance.combo}");
+            //print($"{StageManager.instance.inputNoteIdx} Good! combo: {StageManager.instance.combo}");
             StageManager.instance.yesNoBar.value += StageManager.instance.mainMusic.clip.length * 0.0001f;
         }
         else if(Mathf.Abs(curMusicTime - endTime) <= 1f)
@@ -72,7 +69,7 @@ public class CLazerSetActive : MonoBehaviour
         }
     }
 
-    IEnumerator LazerSetHide()
+    protected IEnumerator LazerSetHide()
     {
         yield return new WaitForSeconds(StageManager.instance.noteMoveSpeed + StageManager.instance.noteSize);
 
@@ -87,7 +84,7 @@ public class CLazerSetActive : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    IEnumerator WaitUntilCondition()
+    protected IEnumerator WaitUntilCondition()
     {
         if (isLong)// 롱노트 판정
         {
@@ -146,7 +143,6 @@ public class CLazerSetActive : MonoBehaviour
 
         StageManager.instance.inputNoteIdx++;
 
-        comboAnim.SetBool("isCombo", false);
         gameObject.SetActive(false);
     }
 }

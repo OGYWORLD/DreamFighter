@@ -22,7 +22,7 @@ public class StageManager : MonoBehaviour
 
     public float noteMoveSpeed { get; set; } = 4f; // 노트 이동 속도
 
-    public float betweenDis { get; set; } = 58f; // 레이저 생성 위치와 카메라 사이의 거리
+    public float betweenDis { get; set; } = 58f; // 노트 생성 위치와 카메라 사이의 거리
 
     public float noteSize { get; set; } = 0f; // 노트 사이즈, 롱노트 사이즈를 위해 사용됨
 

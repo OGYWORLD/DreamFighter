@@ -22,28 +22,26 @@ public class CShowLazer : MonoBehaviour
 
     public CDisAprNote disApr; // 노트 소멸 시 이벤트 발생 스크립트
 
-    public Animator comboAnim; // 콤보 텍스트 애니메이션
-
     // 오브젝트 풀링
     public GameObject shortNotePrefab; // 숏 노트 프리팹
     public GameObject longNotePrefab; // 롱 노트 프리팹
     public GameObject doubleNotePrefab; // 더블 노트 프리팹
 
-    private int shortNoteNum = 9; // 숏 노트 풀 크기
-    private int longNoteNum = 3; // 롱 노트 풀 크기
-    private int doubleNoteNum = 8; // 더블 노트 풀 크기
+    protected int shortNoteNum = 9; // 숏 노트 풀 크기
+    protected int longNoteNum = 3; // 롱 노트 풀 크기
+    protected int doubleNoteNum = 8; // 더블 노트 풀 크기
 
-    private List<GameObject> shortPool = new List<GameObject>(); // 숏 노트 풀
-    private List<GameObject> longPool = new List<GameObject>(); // 롱 노트 풀
-    private List<GameObject> doublePool = new List<GameObject>(); // 더블 노트 풀
+    protected List<GameObject> shortPool = new List<GameObject>(); // 숏 노트 풀
+    protected List<GameObject> longPool = new List<GameObject>(); // 롱 노트 풀
+    protected List<GameObject> doublePool = new List<GameObject>(); // 더블 노트 풀
 
-    private int shortIdx; // 숏 노트 풀 인덱스
-    private int longIdx; // 롱 노트 풀 인덱스
-    private int doubleIdx; // 더블 노트 풀 인덱스
+    protected int shortIdx; // 숏 노트 풀 인덱스
+    protected int longIdx; // 롱 노트 풀 인덱스
+    protected int doubleIdx; // 더블 노트 풀 인덱스
 
-    private int noteIdx; // 노트 리스트 인덱스
+    protected int noteIdx; // 노트 리스트 인덱스
 
-    private CLazerSetActive lazerSet; // 노트 레이저 세팅 인덱스
+    protected CLazerSetActive lazerSet; // 노트 레이저 세팅 인덱스
 
     /// <summary>
     /// 인스펙터 창에서 리스폰 베리어에서의 리스폰 오브젝트의 위치를 받습니다.
@@ -51,7 +49,7 @@ public class CShowLazer : MonoBehaviour
     public List<Transform> shortNoteTrans = new List<Transform>(); // 숏 노트 생성 위치
     public Transform longNoteTrans; // 롱 노트 생성 위치
 
-    private void Start()
+    protected virtual void Start()
     {
         // 풀 생성
         MakePool();
@@ -65,7 +63,7 @@ public class CShowLazer : MonoBehaviour
         RespawnLazer();
     }
 
-    void MakePool()
+    protected void MakePool()
     {
         // 숏 노트 오브젝트 풀 초기화
         for(int i = 0; i < shortNoteNum; i++)
@@ -92,17 +90,16 @@ public class CShowLazer : MonoBehaviour
         }
     }
 
-    void SetDistance()
+    protected virtual void SetDistance()
     {
         StageManager.instance.noteSize = StageManager.instance.notes[noteIdx].endTime - StageManager.instance.notes[noteIdx].srtTime;
         StageManager.instance.betweenDis = 58f - (StageManager.instance.notes[noteIdx].endTime - StageManager.instance.notes[noteIdx].srtTime);
     }
 
-    void RespawnLazer()
+    protected void RespawnLazer()
     {
         // 노트 시간 보다 StageManager.instance.noteMoveSpeed초 전에 레이저를 생성한다.
-        if (StageManager.instance.curStage == 0
-            && !StageManager.instance.isCutScene
+        if (!StageManager.instance.isCutScene
             && StageManager.instance.mainMusic.time >= StageManager.instance.notes[noteIdx].srtTime - StageManager.instance.noteMoveSpeed)
         {
             switch (StageManager.instance.notes[noteIdx].noteCategory)
@@ -113,7 +110,6 @@ public class CShowLazer : MonoBehaviour
                     lazerSet.isLong = false;
 
                     lazerSet.disApr = disApr;
-                    lazerSet.comboAnim = comboAnim;
 
                     shortPool[shortIdx].transform.position = shortNoteTrans[shortIdx % shortNoteTrans.Count].position;
                     shortPool[shortIdx].SetActive(true);
@@ -133,7 +129,6 @@ public class CShowLazer : MonoBehaviour
                     lazerSet.isLong = true;
 
                     lazerSet.disApr = disApr;
-                    lazerSet.comboAnim = comboAnim;
 
                     longPool[longIdx].transform.localScale = new Vector3(
                         StageManager.instance.noteSize * (StageManager.instance.betweenDis / StageManager.instance.noteMoveSpeed),
@@ -159,7 +154,6 @@ public class CShowLazer : MonoBehaviour
                     lazerSet.isLong = false;
 
                     lazerSet.disApr = disApr;
-                    lazerSet.comboAnim = comboAnim;
 
                     doublePool[doubleIdx].transform.position = longNoteTrans.position;
                     doublePool[doubleIdx].SetActive(true);

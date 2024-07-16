@@ -73,7 +73,7 @@ public class CCutScenePlayer : MonoBehaviour
             // ³ëÆ® idx °Ç³Ê¶Ù¾îÁà¾ßÇÔ
             for (int i = StageManager.instance.inputNoteIdx; i < StageManager.instance.notes.Count; i++)
             {
-                if(cutscene[StageManager.instance.curStage].endTime >= StageManager.instance.notes[i].srtTime)
+                if(cutscene[StageManager.instance.curStage].endTime <= StageManager.instance.notes[i].srtTime)
                 {
                     StageManager.instance.inputNoteIdx = i;
                     break;
