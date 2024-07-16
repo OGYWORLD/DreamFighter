@@ -12,8 +12,7 @@ using System;
 /// </summary>
 public class CLazerSetActive : MonoBehaviour
 {
-    //public int noteIdx { get; set; } = 0;
-    public int noteIdx = 0;
+    public int noteIdx { get; set; } = 0;
     public bool isLong { get; set; }
 
     protected float perSecBPM;

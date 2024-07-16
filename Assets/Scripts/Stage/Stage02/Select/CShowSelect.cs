@@ -17,7 +17,7 @@ public class CShowSelect : CShowLazer
 
     private void OnEnable()
     {
-        StageManager.instance.betweenDis = 4.802f;
+        StageManager.instance.betweenDis = 4.841f;
     }
 
     private void Update()
