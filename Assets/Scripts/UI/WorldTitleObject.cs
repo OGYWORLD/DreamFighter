@@ -33,7 +33,6 @@ public class WorldTitleObject : MonoBehaviour
 
     IEnumerator FlyInTitleCoroutine()
     {
-        print("FlyInTitle");
         yield return null;
 
         StartCoroutine(FloatTitleCoroutine());
@@ -47,7 +46,8 @@ public class WorldTitleObject : MonoBehaviour
     IEnumerator FlyOutTitleCoroutine()
     {
         animator.SetTrigger("Fly Out");
-        yield return null;}
+        yield return null;
+    }
 
     IEnumerator FloatTitleCoroutine()
     {

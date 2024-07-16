@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7502915825358165327}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: World UI Objects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 5201068175679888664}
   - component: {fileID: 8054987803570596306}
   - component: {fileID: 9200930235197207916}
+  - component: {fileID: 9159715071251510362}
   m_Layer: 6
   m_Name: Title
   m_TagString: Untagged
@@ -58,14 +59,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8415517734724585479}
-  m_LocalRotation: {x: -0.02401736, y: 0.866086, z: -0.012791768, w: -0.49915382}
-  m_LocalPosition: {x: -79.89074, y: 16.660145, z: 14.661334}
+  m_LocalRotation: {x: 0.1384196, y: 0.88319707, z: -0.063750304, w: -0.44355258}
+  m_LocalPosition: {x: -68.34305, y: 12.802141, z: 6.3571296}
   m_LocalScale: {x: 100, y: 100, z: 100.00003}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7502915825358165327}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -5.977, y: 239.82199, z: 0.123}
+  m_LocalEulerAnglesHint: {x: -0.584, y: 233.243, z: 17.522}
 --- !u!33 &5201068175679888664
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -128,4 +129,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c2eea9c47e3bfe4bb290e366789b93b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  floatDistance: 1
+--- !u!95 &9159715071251510362
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8415517734724585479}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b2acbd98234d0ba40a224b7808c9c87c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
