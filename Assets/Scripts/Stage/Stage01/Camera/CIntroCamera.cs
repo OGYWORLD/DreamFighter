@@ -34,6 +34,9 @@ public class CIntroCamera : MonoBehaviour
             yield return null;
         }
 
+        gameObject.transform.localPosition = targetPos;
+        gameObject.transform.rotation = targetRotation;
+
         yield break;
     }
 }

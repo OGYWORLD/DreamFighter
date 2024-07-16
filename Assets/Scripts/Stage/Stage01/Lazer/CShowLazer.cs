@@ -27,9 +27,12 @@ public class CShowLazer : MonoBehaviour
     public GameObject longNotePrefab; // 롱 노트 프리팹
     public GameObject doubleNotePrefab; // 더블 노트 프리팹
 
+    // 숏노트와 공유하는 position의 개수가 3개고 더블노트는 2개씩 같은 자리에 출력되어야 하므로
+    // (숏노트 인덱스 + (롱노트 인덱스 / 2)) % position의 개수(3자리)으로 자리를 지정해주기 위해
+    // 숏노트와 롱노트/2 의 풀 크기는 3의 배수가 되도록 한다.
     protected int shortNoteNum = 9; // 숏 노트 풀 크기
     protected int longNoteNum = 10; // 롱 노트 풀 크기
-    protected int doubleNoteNum = 8; // 더블 노트 풀 크기
+    protected int doubleNoteNum = 12; // 더블 노트 풀 크기
 
     protected List<GameObject> shortPool = new List<GameObject>(); // 숏 노트 풀
     protected List<GameObject> longPool = new List<GameObject>(); // 롱 노트 풀
@@ -46,7 +49,7 @@ public class CShowLazer : MonoBehaviour
     /// <summary>
     /// 인스펙터 창에서 리스폰 베리어에서의 리스폰 오브젝트의 위치를 받습니다.
     /// </summary>
-    public List<Transform> shortNoteTrans = new List<Transform>(); // 숏 노트 생성 위치
+    public List<Transform> shortNoteTrans = new List<Transform>(); // 숏, 더블 노트 생성 위치
     public Transform longNoteTrans; // 롱 노트 생성 위치
 
     protected virtual void Start()
@@ -63,12 +66,12 @@ public class CShowLazer : MonoBehaviour
         RespawnLazer();
     }
 
-    protected void MakePool()
+    protected virtual void MakePool()
     {
         // 숏 노트 오브젝트 풀 초기화
         for(int i = 0; i < shortNoteNum; i++)
         {
-            GameObject obj = Instantiate(shortNotePrefab, shortNoteTrans[i % shortNoteTrans.Count].position, Quaternion.identity);
+            GameObject obj = Instantiate(shortNotePrefab, Vector3.zero, Quaternion.identity);
             obj.SetActive(false);
             shortPool.Add(obj);
         }
@@ -76,7 +79,7 @@ public class CShowLazer : MonoBehaviour
         // 롱 노트 오브젝트 풀 초기화
         for (int i = 0; i < longNoteNum; i++)
         {
-            GameObject obj = Instantiate(longNotePrefab, longNoteTrans.position, Quaternion.identity);
+            GameObject obj = Instantiate(longNotePrefab, Vector3.zero, Quaternion.identity);
             obj.SetActive(false);
             longPool.Add(obj);
         }
@@ -84,7 +87,7 @@ public class CShowLazer : MonoBehaviour
         // 더블 노트 오브젝트 풀 초기화
         for (int i = 0; i < doubleNoteNum; i++)
         {
-            GameObject obj = Instantiate(doubleNotePrefab, longNoteTrans.position, Quaternion.identity);
+            GameObject obj = Instantiate(doubleNotePrefab, Vector3.zero, Quaternion.identity);
             obj.SetActive(false);
             doublePool.Add(obj);
         }
@@ -110,7 +113,7 @@ public class CShowLazer : MonoBehaviour
 
                     lazerSet.disApr = disApr;
 
-                    shortPool[shortIdx].transform.position = shortNoteTrans[shortIdx % shortNoteTrans.Count].position;
+                    shortPool[shortIdx].transform.position = shortNoteTrans[(shortIdx + (doubleIdx / 2)) % shortNoteTrans.Count].position;
                     shortPool[shortIdx].SetActive(true);
                     shortIdx++;
 
@@ -148,13 +151,14 @@ public class CShowLazer : MonoBehaviour
                     break;
 
                 case (int)NoteCategory.DoubleNote:
+
                     lazerSet = doublePool[doubleIdx].GetComponent<CLazerSetActive>();
                     lazerSet.noteIdx = noteIdx;
                     lazerSet.isLong = false;
 
                     lazerSet.disApr = disApr;
 
-                    doublePool[doubleIdx].transform.position = longNoteTrans.position;
+                    doublePool[doubleIdx].transform.position = shortNoteTrans[(shortIdx + (doubleIdx / 2)) % shortNoteTrans.Count].position;
                     doublePool[doubleIdx].SetActive(true);
                     doubleIdx++;
 

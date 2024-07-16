@@ -17,6 +17,6 @@ public class CMoveSelect : MonoBehaviour
 
     private void Update()
     {
-        transform.Translate(-speed * Time.deltaTime, 0f, 0f);
+        transform.Translate(speed * Time.deltaTime, 0f, 0f);
     }
 }
