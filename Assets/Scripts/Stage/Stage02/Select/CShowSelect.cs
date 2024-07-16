@@ -9,13 +9,15 @@ public class CShowSelect : CShowLazer
 {
     protected override void Start()
     {
+        noteIdx = StageManager.instance.inputNoteIdx;
+
         // Ç® »ý¼º
         MakePool();
     }
 
     private void OnEnable()
     {
-        noteIdx = StageManager.instance.inputNoteIdx;
+        StageManager.instance.betweenDis = 4.802f;
     }
 
     private void Update()
@@ -26,7 +28,6 @@ public class CShowSelect : CShowLazer
 
     protected override void SetDistance()
     {
-        StageManager.instance.noteSize = StageManager.instance.notes[noteIdx].endTime - StageManager.instance.notes[noteIdx].srtTime;
-        StageManager.instance.betweenDis = 4f - (StageManager.instance.notes[noteIdx].endTime - StageManager.instance.notes[noteIdx].srtTime);
+        StageManager.instance.betweenDis = 4.802f - (StageManager.instance.notes[noteIdx].endTime - StageManager.instance.notes[noteIdx].srtTime);
     }
 }

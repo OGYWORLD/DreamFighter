@@ -70,10 +70,9 @@ public class CCutScenePlayer : MonoBehaviour
        {
             isPlay = true;
 
-            // 노트 idx 건너뛰어줘야함
-            for (int i = StageManager.instance.inputNoteIdx; i < StageManager.instance.notes.Count; i++)
+            for(int i = StageManager.instance.inputNoteIdx; i < StageManager.instance.notes.Count; i++)
             {
-                if(cutscene[StageManager.instance.curStage].endTime <= StageManager.instance.notes[i].srtTime)
+                if(cutscene[idx].endTime + 5f <= StageManager.instance.notes[i].srtTime - 4f)
                 {
                     StageManager.instance.inputNoteIdx = i;
                     break;

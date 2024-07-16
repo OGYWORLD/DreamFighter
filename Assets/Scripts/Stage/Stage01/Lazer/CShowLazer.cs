@@ -28,7 +28,7 @@ public class CShowLazer : MonoBehaviour
     public GameObject doubleNotePrefab; // 더블 노트 프리팹
 
     protected int shortNoteNum = 9; // 숏 노트 풀 크기
-    protected int longNoteNum = 3; // 롱 노트 풀 크기
+    protected int longNoteNum = 10; // 롱 노트 풀 크기
     protected int doubleNoteNum = 8; // 더블 노트 풀 크기
 
     protected List<GameObject> shortPool = new List<GameObject>(); // 숏 노트 풀
@@ -92,13 +92,12 @@ public class CShowLazer : MonoBehaviour
 
     protected virtual void SetDistance()
     {
-        StageManager.instance.noteSize = StageManager.instance.notes[noteIdx].endTime - StageManager.instance.notes[noteIdx].srtTime;
         StageManager.instance.betweenDis = 58f - (StageManager.instance.notes[noteIdx].endTime - StageManager.instance.notes[noteIdx].srtTime);
     }
 
     protected void RespawnLazer()
     {
-        // 노트 시간 보다 StageManager.instance.noteMoveSpeed초 전에 레이저를 생성한다.
+        // 노트 시간 보다 StageManager.instance.noteMoveSpeed초 전에 노트를 생성한다.
         if (!StageManager.instance.isCutScene
             && StageManager.instance.mainMusic.time >= StageManager.instance.notes[noteIdx].srtTime - StageManager.instance.noteMoveSpeed)
         {
@@ -131,7 +130,7 @@ public class CShowLazer : MonoBehaviour
                     lazerSet.disApr = disApr;
 
                     longPool[longIdx].transform.localScale = new Vector3(
-                        StageManager.instance.noteSize * (StageManager.instance.betweenDis / StageManager.instance.noteMoveSpeed),
+                        (StageManager.instance.notes[noteIdx].endTime - StageManager.instance.notes[noteIdx].srtTime) * (StageManager.instance.betweenDis / StageManager.instance.noteMoveSpeed),
                         longPool[longIdx].transform.localScale.y,
                         longPool[longIdx].transform.localScale.z
                         );
@@ -168,5 +167,6 @@ public class CShowLazer : MonoBehaviour
                     break;
             }
         }
+
     }
 }

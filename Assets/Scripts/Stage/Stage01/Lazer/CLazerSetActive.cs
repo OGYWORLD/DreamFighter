@@ -12,7 +12,8 @@ using System;
 /// </summary>
 public class CLazerSetActive : MonoBehaviour
 {
-    public int noteIdx { get; set; } = 0;
+    //public int noteIdx { get; set; } = 0;
+    public int noteIdx = 0;
     public bool isLong { get; set; }
 
     protected float perSecBPM;
@@ -26,7 +27,6 @@ public class CLazerSetActive : MonoBehaviour
 
     private void OnEnable()
     {
-        print(noteIdx);
         StartCoroutine(WaitUntilCondition()); // 플레이어로 부터 스페이스바를 입력받으면 레이저를 비활성화 시킵니다.
         StartCoroutine(LazerSetHide()); // 판정 시간에서 벗어나면 레이저를 비활성화 시킵니다.
     }
@@ -42,7 +42,6 @@ public class CLazerSetActive : MonoBehaviour
 
             StageManager.instance.combo++;
 
-            //print($"{StageManager.instance.inputNoteIdx} Perfect! combo: {StageManager.instance.combo}");
             StageManager.instance.yesNoBar.value += StageManager.instance.mainMusic.clip.length * 0.0001f;
         }
         else if (Mathf.Abs(curMusicTime - endTime) < 0.3f)
@@ -54,7 +53,6 @@ public class CLazerSetActive : MonoBehaviour
 
             StageManager.instance.combo++;
 
-            //print($"{StageManager.instance.inputNoteIdx} Good! combo: {StageManager.instance.combo}");
             StageManager.instance.yesNoBar.value += StageManager.instance.mainMusic.clip.length * 0.0001f;
         }
         else if(Mathf.Abs(curMusicTime - endTime) <= 1f)
@@ -71,16 +69,14 @@ public class CLazerSetActive : MonoBehaviour
 
     protected IEnumerator LazerSetHide()
     {
-        yield return new WaitForSeconds(StageManager.instance.noteMoveSpeed + StageManager.instance.noteSize);
-
+        yield return new WaitForSeconds(StageManager.instance.noteMoveSpeed + (StageManager.instance.notes[noteIdx].endTime - StageManager.instance.notes[noteIdx].srtTime));
         disApr.ShowWRParticle(gameObject.transform.position);
 
         StageManager.instance.wrCnt++;
-
-        print($"{StageManager.instance.inputNoteIdx} Late Miss!");
         StageManager.instance.yesNoBar.value -= StageManager.instance.mainMusic.clip.length * 0.0005f;
         StageManager.instance.combo = 0;
         StageManager.instance.inputNoteIdx++;
+
         gameObject.SetActive(false);
     }
 
@@ -131,7 +127,7 @@ public class CLazerSetActive : MonoBehaviour
         {
             // 현재 노트 인덱스가 입력받아야할 노트인지
             // 스페이스 바 입력 여부
-            // 노트가 생성되고 3초가 지났는지 체크 후 실행
+            // 노트가 생성되고 n초가 지났는지 체크 후 실행
             yield return new WaitUntil(() => (
             StageManager.instance.inputNoteIdx == noteIdx &&
             Input.GetKeyDown(KeyCode.Space) &&
