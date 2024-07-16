@@ -56,9 +56,8 @@ public class CDisAprNote : MonoBehaviour
     public Camera mainCamera;
 
     // 클릭 효과음
-    public AudioSource ef;
-    public AudioClip scEF;
-    public AudioClip wrEF;
+    public AudioSource scAS;
+    public AudioSource wrAS;
 
     // 파티클
     public GameObject scParticle;
@@ -68,22 +67,22 @@ public class CDisAprNote : MonoBehaviour
     public GameObject[] resultImage = new GameObject[3];
 
     // 풀 사이즈
-    private int poolSize = 5;
+    protected int poolSize = 5;
 
-    private List<GameObject> scPool = new List<GameObject>(); // 정확한 입력 파티클
-    private List<GameObject> wrPool = new List<GameObject>(); // 잘못된 입력 파티클
-    private List<ResultImage> resultImg = new List<ResultImage>(); // 결과 이미지
+    protected List<GameObject> scPool = new List<GameObject>(); // 정확한 입력 파티클
+    protected List<GameObject> wrPool = new List<GameObject>(); // 잘못된 입력 파티클
+    protected List<ResultImage> resultImg = new List<ResultImage>(); // 결과 이미지
 
-    private int scIdx = 0; // 정확한 입력 풀 인덱스
-    private int wrIdx = 0; // 잘못된 입력 풀 인덱스
-    private int imgIdx = 0; // 이미지 풀 인덱스
+    protected int scIdx = 0; // 정확한 입력 풀 인덱스
+    protected int wrIdx = 0; // 잘못된 입력 풀 인덱스
+    protected int imgIdx = 0; // 이미지 풀 인덱스
 
     private void Start()
     {
         MakePool();
     }
 
-    void MakePool()
+    protected virtual void MakePool()
     {
         // scPool
         for(int i = 0; i < poolSize; i++)
@@ -113,14 +112,13 @@ public class CDisAprNote : MonoBehaviour
 
     }
 
-    public void ShowSCParticle(Vector3 pos, int category)
+    public virtual void ShowSCParticle(Vector3 pos, int category)
     {
         // 결과 이미지
         ImgSetPos(pos, category);
 
         // 효과음
-        ef.clip = scEF;
-        ef.Play();
+        scAS.Play();
 
         scPool[scIdx].transform.position = pos;
         scPool[scIdx].SetActive(true);
@@ -133,14 +131,13 @@ public class CDisAprNote : MonoBehaviour
         }
     }
 
-    public void ShowWRParticle(Vector3 pos)
+    public virtual void ShowWRParticle(Vector3 pos)
     {
         // 결과 이미지
         ImgSetPos(pos, (int)Result.Wrong); // 2: wrong Image
 
         // 효과음
-        ef.clip = wrEF;
-        ef.Play();
+        wrAS.Play();
 
         wrPool[wrIdx].transform.position = pos;
         wrPool[wrIdx].SetActive(true);
@@ -153,7 +150,7 @@ public class CDisAprNote : MonoBehaviour
         }
     }
 
-    void ImgSetPos(Vector3 pos, int category)
+    private void ImgSetPos(Vector3 pos, int category)
     {
         resultImg[imgIdx][category].transform.position = mainCamera.WorldToScreenPoint(pos);
         resultImg[imgIdx][category].SetActive(true);

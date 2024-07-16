@@ -52,12 +52,12 @@ public class CCutScenePlayer : MonoBehaviour
 
     private void IsCutSceneCheck()
     {
-        if (bgm.time >= cutscene[idx].srtTime - 8f)
+        if (bgm.time >= cutscene[idx].srtTime - 7f)
         {
             StageManager.instance.isCutScene = true;
         }
 
-        if (bgm.time >= cutscene[idx].endTime + 5f)
+        if (bgm.time >= cutscene[idx].endTime + 3f)
         {
             StageManager.instance.isCutScene = false;
             idx++;
@@ -72,7 +72,7 @@ public class CCutScenePlayer : MonoBehaviour
 
             for(int i = StageManager.instance.inputNoteIdx; i < StageManager.instance.notes.Count; i++)
             {
-                if(cutscene[idx].endTime + 5f <= StageManager.instance.notes[i].srtTime - 4f)
+                if(cutscene[idx].endTime + 3f <= StageManager.instance.notes[i].srtTime - 4f)
                 {
                     StageManager.instance.inputNoteIdx = i;
                     break;
