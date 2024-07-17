@@ -6,31 +6,33 @@ using System;
 #region 우인혜
 #endregion
 
-public enum ObjNames
+public enum ObjBtnNames
 {
     Start,
     Chat,
     Record,
-    Info,
     Exit
 
-    //,IndexCount
+    ,IndexCount // 정해진 오브젝트 외의 클릭을 처리하는 경우에도 활용 중
 }
 
+/// <summary>
+/// 인스펙터에서 List로 담을 버튼용 3D 오브젝트 정보
+/// </summary>
 [Serializable]
 public class WorldObjectInfo
 {
-    public ObjNames name;
+    public ObjBtnNames name;
     public GameObject WorldObject;
 }
 
 public class WorldObjectButton : MonoBehaviour
 {
     public List<WorldObjectInfo> WorldBtnList = new();
-    private Dictionary<ObjNames, GameObject> WorldBtnDic = new();
-    private Dictionary<GameObject, ObjNames> ReverseDictionary = new();
+    private Dictionary<ObjBtnNames, GameObject> WorldBtnDic = new();
+    private Dictionary<GameObject, ObjBtnNames> ReverseWBtnDic = new();
 
-    ObjNames e_ClickedObjectName;
+    ObjBtnNames e_ClickedObjectName;
 
 
     int layerMaskValue;
@@ -44,10 +46,16 @@ public class WorldObjectButton : MonoBehaviour
 
         string[] layerNames = {"World Object Button"};
         layerMaskValue = LayerMask.GetMask(layerNames);
+
+        e_ClickedObjectName = ObjBtnNames.IndexCount;
     }
 
+    private void Start()
+    {
+        StartCoroutine(InputButtonCheckCoroutine());
+    }
 
-//==============================================================================================
+    //==============================================================================================
 
 
     /// <summary>
@@ -60,7 +68,7 @@ public class WorldObjectButton : MonoBehaviour
             if(!WorldBtnDic.ContainsKey(info.name))
             {
                 WorldBtnDic[info.name] = info.WorldObject;
-                ReverseDictionary[info.WorldObject] = info.name;
+                ReverseWBtnDic[info.WorldObject] = info.name;
             }
             else
             {
@@ -69,19 +77,9 @@ public class WorldObjectButton : MonoBehaviour
         }
 
         WorldBtnList = null;
+
+        //print("리스트에서 딕셔너리로 옮겨 담음");
     }
-
-    //private void EnumToString()
-    //{
-    //    int enumLength = (int)ObjNames.IndexCount - 1;
-
-    //    ObjStringName = new string[enumLength];
-
-    //    for(int i = 0; i < enumLength; i++)
-    //    {
-    //        ObjStringName[i] = ((ObjNames)i).ToString();
-    //    }
-    //}
 
 
     /// <summary>
@@ -90,17 +88,22 @@ public class WorldObjectButton : MonoBehaviour
     /// <returns></returns>
     IEnumerator InputButtonCheckCoroutine()
     {
+        //print("InputButtonCheckCoroutine 실행됨");
+
         while(true)
         {
             yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
 
             StartCoroutine(SortClickedButtonCoroutine());
+
+            yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
+
         }
     }
 
+
     /// <summary>
-    /// <seealso cref="Dictionary{TKey, TValue}<"/>의 key로 사용하기 위해 충돌 대상의 이름을 판별하는 코루틴  <br/>
-    /// 이후 자동으로 다음 동작을 결정하는 코루틴 실행
+    /// 클릭된 버튼 오브젝트에 따라 자동으로 다음 동작을 결정하는 코루틴
     /// </summary>
     IEnumerator SortClickedButtonCoroutine()
     {
@@ -117,7 +120,14 @@ public class WorldObjectButton : MonoBehaviour
 
             string clickedObjectString = FindKeyByValue(clickedObject);
             
-            e_ClickedObjectName = (ObjNames)Enum.Parse(typeof(ObjNames), clickedObjectString);
+            e_ClickedObjectName = (ObjBtnNames)Enum.Parse(typeof(ObjBtnNames), clickedObjectString);
+
+            //Debug.Log("SortClickedButtonCoroutine 실행됨");
+        }
+        else
+        {
+            // 한 번 할당된 값이 그대로 유지되어 올바른 대상 이외의 클릭에서도 계속 쓰이는 것을 막기 위해 초기화
+            e_ClickedObjectName = ObjBtnNames.IndexCount;
         }
 
         SwitchActivateMethod();
@@ -125,11 +135,17 @@ public class WorldObjectButton : MonoBehaviour
         yield return null;
     }
 
+    /// <summary>
+    /// WorldBtnDic의 키와 값을 반대로 매핑한 ReverseWBtnDic에서 WorldBtnDic의 키를 찾아 주는 메서드. <br/>
+    /// 이 방법을 쓰면 메모리는 조금 더 쓰지만 Dictionary 자체는 기본적으로 시간 복잡도가 낮고, 중복 요소 체크가 용이함.
+    /// </summary>
+    /// <param name="value"></param>
+    /// <returns></returns>
     string FindKeyByValue(GameObject value)
     {
-        if(ReverseDictionary.ContainsKey(value))
+        if(ReverseWBtnDic.ContainsKey(value))
         {
-            return ReverseDictionary[value].ToString();
+            return ReverseWBtnDic[value].ToString();
         }
         else
         {
@@ -144,78 +160,52 @@ public class WorldObjectButton : MonoBehaviour
     {
         switch (e_ClickedObjectName)
         {
-            case ObjNames.Chat:
+            case ObjBtnNames.Chat:
                 ShowChat();
                 break;
 
-            case ObjNames.Record:
+            case ObjBtnNames.Record:
                 ShowRecord();
                 break;
 
-            case ObjNames.Info:
-                ShowInfo();
-                break;
-
-            case ObjNames.Exit:
+            case ObjBtnNames.Exit:
                 ShowExit();
                 break;
 
-            case ObjNames.Start:
+            case ObjBtnNames.Start:
                 ShowStart();
+                break;
+
+            default:
+                // do nothing
                 break;
         }
     }
 
 
     
-    // 메서드에 코루틴을 담자~
+    // todo: (인혜) 메서드에 코루틴을 담자!
 
     void ShowChat()
     {
-
+        print("채팅을 해요~");
     }
 
     void ShowRecord()
     {
-
-    }
-
-    void ShowInfo()
-    {
-
+        print("기록을 보자!");
     }
 
     void ShowExit()
     {
         print("나가는 문을 클릭했다!");
-        // todo: 안 고쳐졌다. 정 안 되면 그냥 3D버튼 하나하나 스크립트 만들어 주자...
 
         // todo: (인혜) 종료 의사 확인 팝업 띄우기, Yes인 경우 종료화면 코루틴
     }
 
     void ShowStart()
-    { 
+    {
+        print("게임 시작!");
         // todo: (인혜) 로딩화면 연결
-    }
-
-
-    // 이거 객체지향 맞나요... 점점 길어지기만 하는 스크립트.
-
-
-
-    // 이건 잘 먹힌다...
-    private void OnMouseEnter()
-    {
-        Debug.Log("버튼 영역에 마우스 들어왔다!");
-    }
-
-    private void OnMouseExit()
-    {
-        Debug.Log("마우스 치움!");
-    }
-
-    private void OnMouseUpAsButton()
-    {
-        Debug.Log("처음 클릭했던 곳에서 클릭 해제!");
     }
 }

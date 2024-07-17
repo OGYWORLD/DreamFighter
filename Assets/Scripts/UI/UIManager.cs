@@ -19,11 +19,34 @@ public enum UIState
 // 그런데 이걸 디자인 패턴을 써서 만들 자신이 있니...
 // 일단 그냥 되는 대로 연결해 보자.
 
+public enum CanvasNamesEnum
+{
+    BtnCVS,
+    InfoCVS,
+
+    PopupCVS,
+
+    ChatCVS,
+    RecordCVS,
+    ScoreCVS
+
+    , IndexCountCVS
+   
+}
+
 [Serializable]
-public class CanvasByString
+public class ElementsInCVS
 {
     public string name;
+    public GameObject obj;
+}
+
+[Serializable]
+public class CanvasByEnumName
+{
+    public CanvasNamesEnum name;
     public Canvas canvas;
+    public ElementsInCVS[] Elements;
 }
 
 public class UIManager : Singleton<UIManager>
@@ -31,26 +54,19 @@ public class UIManager : Singleton<UIManager>
     // 씬을 전환할 때 활성화/비활성화하기 위해 참조
     public Camera UIMainCamera;
 
-    // 이 씬으로 들어왔을 때 타이틀을 띄울지, 바로 메인 화면으로 들어갈지 결정하는 변수
+    // 타이틀부터 띄울지, 바로 메인 화면으로 들어갈지 결정하는 변수
     public bool isMainLoadAgain = false;
 
     // 델리게이트
     //public Dictionary<UIState, Action> stateDelegates = new();
     //private UIState CurrentUIState;
 
-    public List<CanvasByString> canvasList = new List<CanvasByString>();
-    public Dictionary<string, Canvas> canvasDic = new Dictionary<string, Canvas>();
+    public List<CanvasByEnumName> canvasList = new();
+    public Dictionary<CanvasNamesEnum, Canvas> canvasDic = new();
 
     private void Start()
     {
         InitCanvasDictionary();
-
-        
-
-        
-
-        //테스트 성공
-        //canvasDic[canvasList[1].name].gameObject.SetActive(true);
     }
 
     /// <summary>
@@ -58,7 +74,7 @@ public class UIManager : Singleton<UIManager>
     /// </summary>
     void InitCanvasDictionary()
     {
-        foreach (CanvasByString canvasInfo in canvasList)
+        foreach (CanvasByEnumName canvasInfo in canvasList)
         {
             if (!canvasDic.ContainsKey(canvasInfo.name))
             {

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7647796666082015893}
   - component: {fileID: 7647796666082015894}
   - component: {fileID: 7647796666082015898}
+  - component: {fileID: 7718415148794120883}
   m_Layer: 0
   m_Name: UI Camera_Main
   m_TagString: Untagged
@@ -170,3 +171,11 @@ MonoBehaviour:
   StartInfo: {fileID: 0}
   TitleObject: {fileID: 0}
   duration: 3
+--- !u!81 &7718415148794120883
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7647796666082015895}
+  m_Enabled: 0

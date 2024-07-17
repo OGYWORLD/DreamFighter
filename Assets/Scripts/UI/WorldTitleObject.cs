@@ -55,6 +55,3 @@ public class WorldTitleObject : MonoBehaviour
         animator.SetBool("isFloating", true);
     }
 }
-
-
-// isUp = transform.position == new vector3(initPos.y )
