@@ -15,11 +15,6 @@ public class CShowSelect : CShowLazer
         MakePool();
     }
 
-    private void OnEnable()
-    {
-        StageManager.instance.betweenDis = 4.841f;
-    }
-
     protected sealed override void MakePool()
     {
         // 숏 노트 오브젝트 풀 초기화
@@ -55,6 +50,6 @@ public class CShowSelect : CShowLazer
 
     protected sealed override void SetDistance()
     {
-        StageManager.instance.betweenDis = 4.802f - (StageManager.instance.notes[noteIdx].endTime - StageManager.instance.notes[noteIdx].srtTime);
+        StageManager.instance.betweenDis = 20f - (StageManager.instance.notes[noteIdx].endTime - StageManager.instance.notes[noteIdx].srtTime);
     }
 }

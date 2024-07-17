@@ -60,7 +60,7 @@ public class CLazerSetActive : MonoBehaviour
 
             StageManager.instance.wrCnt++;
 
-            print($"{StageManager.instance.inputNoteIdx} Early Miss!");
+            print($"Early Miss! noteIdx: {noteIdx}");
             StageManager.instance.combo = 0;
             StageManager.instance.yesNoBar.value -= StageManager.instance.mainMusic.clip.length * 0.0005f;
         }
@@ -70,6 +70,8 @@ public class CLazerSetActive : MonoBehaviour
     {
         yield return new WaitForSeconds(StageManager.instance.noteMoveSpeed + (StageManager.instance.notes[noteIdx].endTime - StageManager.instance.notes[noteIdx].srtTime));
         disApr.ShowWRParticle(gameObject.transform.position);
+
+        print($"Late Miss! noteIdx: {noteIdx}");
 
         StageManager.instance.wrCnt++;
         StageManager.instance.yesNoBar.value -= StageManager.instance.mainMusic.clip.length * 0.0005f;
@@ -132,6 +134,8 @@ public class CLazerSetActive : MonoBehaviour
             Input.GetKeyDown(KeyCode.Space) &&
             StageManager.instance.mainMusic.time >= StageManager.instance.notes[noteIdx].srtTime - 1f
             ));
+
+            print($"Success! noteIdx: {noteIdx}");
 
             CheckNoteScore(StageManager.instance.mainMusic.time, StageManager.instance.notes[noteIdx].endTime);
         }
