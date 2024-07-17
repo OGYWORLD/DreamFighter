@@ -137,7 +137,7 @@ Material:
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Color0: {r: 2.150735, g: 3.0418363, b: 4.5000005, a: 1}
-    - _DepthColor: {r: 0, g: 1341.3256, b: 239.32002, a: 1}
+    - _DepthColor: {r: 1341.3252, g: 473.93973, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _MainTexSpeed: {r: -0.5, g: 0, b: 0, a: 0}
     - _NoiseDistortionSpeed: {r: -0.2, g: 0, b: 0, a: 0}
