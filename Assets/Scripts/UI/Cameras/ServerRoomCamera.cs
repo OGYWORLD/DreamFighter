@@ -5,7 +5,7 @@ using UnityEngine;
 #region 우인혜
 #endregion
 
-public class OfficeSceneCamera : MonoBehaviour
+public class ServerRoomCamera : MonoBehaviour
 {
     // 보간이 이루어질 시간
     float duration = 3f;

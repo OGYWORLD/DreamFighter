@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.EventSystems;
 
 #region 우인혜
 #endregion
@@ -92,7 +93,7 @@ public class WorldObjectButton : MonoBehaviour
 
         while(true)
         {
-            yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
+            yield return new WaitUntil(() => Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject());
 
             StartCoroutine(SortClickedButtonCoroutine());
 
@@ -178,6 +179,8 @@ public class WorldObjectButton : MonoBehaviour
 
             default:
                 // do nothing
+                CloseCurrentCanvas();
+                // todo: (인혜) UI 영역 바깥쪽을 클릭했을 때 열려 있던 캔버스가 비활성화되게끔
                 break;
         }
     }
@@ -188,16 +191,38 @@ public class WorldObjectButton : MonoBehaviour
 
     void ShowChat()
     {
-        print("채팅을 해요~");
+        if(UIManager.Instance.CheckCurrentAndNewCVSAreSame(CanvasNamesEnum.ChatCVS))
+        {
+            return;
+        }
+
+        SetCurrentCanvas(CanvasNamesEnum.ChatCVS);
+        OpenCurrentCanvas();
     }
 
     void ShowRecord()
     {
+        if (UIManager.Instance.CheckCurrentAndNewCVSAreSame(CanvasNamesEnum.ChatCVS))
+        {
+            return;
+        }
+
+        SetCurrentCanvas(CanvasNamesEnum.RecordCVS);
+        OpenCurrentCanvas();
+
         print("기록을 보자!");
     }
 
     void ShowExit()
     {
+        if (UIManager.Instance.CheckCurrentAndNewCVSAreSame(CanvasNamesEnum.PopupCVS))
+        {
+            return;
+        }
+
+        SetCurrentCanvas(CanvasNamesEnum.PopupCVS);
+        OpenCurrentCanvas();
+
         print("나가는 문을 클릭했다!");
 
         // todo: (인혜) 종료 의사 확인 팝업 띄우기, Yes인 경우 종료화면 코루틴
@@ -208,4 +233,41 @@ public class WorldObjectButton : MonoBehaviour
         print("게임 시작!");
         // todo: (인혜) 로딩화면 연결
     }
+
+    void CloseCurrentCanvas()
+    {
+        if(UIManager.Instance.CurrentCanvas == null)
+        {
+            return;
+        }
+        else
+        {
+            UIManager.Instance.CurrentCanvas.gameObject.SetActive(false);
+            // todo : (인혜) CurrentCanvas 체크하는 함수 만들기... 그리고 이 위치에서 기본 UI 캔버스 활성화시키기
+        }
+
+
+        print("열려 있던 캔버스 닫기");
+    }
+
+    void OpenCurrentCanvas()
+    {
+        UIManager.Instance.CurrentCanvas.gameObject.SetActive(true);
+    }
+
+    void OpenTargetCanvas(CanvasNamesEnum name)
+    {
+        UIManager.Instance.canvasDic[name].gameObject.SetActive(true);
+    }
+
+    void SetCurrentCanvas(CanvasNamesEnum name)
+    {
+        UIManager.Instance.CurrentCanvas = UIManager.Instance.canvasDic[name];
+    }
+
+    void SetTargetCanvas(CanvasNamesEnum name, bool b)
+    {
+        UIManager.Instance.canvasDic[name].gameObject.SetActive(b);
+    }
+
 }

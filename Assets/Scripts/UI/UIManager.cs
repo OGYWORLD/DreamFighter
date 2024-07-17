@@ -46,7 +46,6 @@ public class CanvasByEnumName
 {
     public CanvasNamesEnum name;
     public Canvas canvas;
-    public ElementsInCVS[] Elements;
 }
 
 public class UIManager : Singleton<UIManager>
@@ -57,12 +56,12 @@ public class UIManager : Singleton<UIManager>
     // 타이틀부터 띄울지, 바로 메인 화면으로 들어갈지 결정하는 변수
     public bool isMainLoadAgain = false;
 
-    // 델리게이트
-    //public Dictionary<UIState, Action> stateDelegates = new();
-    //private UIState CurrentUIState;
-
     public List<CanvasByEnumName> canvasList = new();
     public Dictionary<CanvasNamesEnum, Canvas> canvasDic = new();
+    private Dictionary<Canvas, CanvasNamesEnum> ReverseCVSDic = new();
+
+    public Canvas CurrentCanvas;
+    public Canvas LastCanvas;
 
     private void Start()
     {
@@ -79,6 +78,7 @@ public class UIManager : Singleton<UIManager>
             if (!canvasDic.ContainsKey(canvasInfo.name))
             {
                 canvasDic.Add(canvasInfo.name, canvasInfo.canvas);
+                ReverseCVSDic.Add(canvasInfo.canvas, canvasInfo.name);
             }
             else
             {
@@ -88,67 +88,18 @@ public class UIManager : Singleton<UIManager>
 
         // 다시 쓸 거라면 clear, 다시 쓰지 않을 거라면 null
         canvasList = null;
-
     }
 
-
-    //private void CheckCurrentState()
-    //{
-    //    switch (CurrentUIState)
-    //    {
-    //        case UIState.Enter:
-    //            break;
-
-    //        case UIState.Main:
-    //            break;
-
-    //        case UIState.Loading:
-    //            break;
-
-    //        case UIState.InGame:
-    //            break;
-
-    //        case UIState.Exit:
-    //            break;
-
-    //        default: print("UI상태 체크 오류");
-    //            break;
-    //    }
-    //}
-
-
-    #region 델리게이트...
-    /*
-     /// <summary>
-    /// 델리게이트 등록
-    /// </summary>
-    public void RegisterDelegate(UIState state, Action action)
+    public bool CheckCurrentAndNewCVSAreSame(CanvasNamesEnum name)
     {
-        stateDelegates[state] = action;
-    }
-
-    /// <summary>
-    /// 델리게이트 제거
-    /// </summary>
-    /// <param name="state"></param>
-    public void UnregisterDelegate(UIState state)
-    {
-        stateDelegates.Remove(state);
-    }
-
-    IEnumerator StateDelegateCoroutine()
-    {
-        if (stateDelegates.ContainsKey(CurrentUIState))
+        if(name == ReverseCVSDic[CurrentCanvas])
         {
-            stateDelegates[CurrentUIState]?.Invoke();
+            return true;
         }
-
-        yield return null;
+        else
+        {
+            return false;
+        }
     }
-     
-     
-     */
-
-    #endregion
 
 }

@@ -8,7 +8,7 @@ using UnityEngine.EventSystems;
 #region 우인혜
 #endregion
 
-public class UIMainCamera : MonoBehaviour
+public class TitleSceneCamera : MonoBehaviour
 {
     // UI 요소
     public Graphic StartInfo;
