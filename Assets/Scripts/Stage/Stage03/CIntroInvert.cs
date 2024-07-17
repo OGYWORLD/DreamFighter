@@ -6,7 +6,7 @@ using UnityEngine;
 #endregion
 
 /// <summary>
-/// stage03에서 메쉬 머트리얼을 홀로그램으로 변환하는 스크립트 입니다.
+/// stage03의 인트로 동작 스크립트 입니다.
 /// </summary>
 public class CIntroInvert : MonoBehaviour
 {
@@ -15,7 +15,8 @@ public class CIntroInvert : MonoBehaviour
 
     public GameObject loading;
 
-    public GameObject mainCamera;
+    public GameObject leftCameraObj;
+    public GameObject rightCameraObj;
 
     private IEnumerator Start()
     {
@@ -30,18 +31,22 @@ public class CIntroInvert : MonoBehaviour
         float sumTime = 0f;
         float totalTime = 2f;
 
-        Vector3 initPos = mainCamera.transform.position;
-        Vector3 targetPos = mainCamera.transform.position + new Vector3(0f, 0f, 3f);
+        Vector3 initPos = leftCameraObj.transform.position;
+        Vector3 targetPos = leftCameraObj.transform.position + new Vector3(0f, 0f, 3f);
 
         while(sumTime <= totalTime)
         {
             float t = sumTime / totalTime;
-            mainCamera.transform.position = Vector3.Lerp(initPos, targetPos, t);
+            leftCameraObj.transform.position = Vector3.Lerp(initPos, targetPos, t);
 
             sumTime += Time.deltaTime;
 
             yield return null;
         }
+
+        Camera rightCamera = leftCameraObj.GetComponent<Camera>();
+        rightCameraObj.SetActive(true);
+        rightCamera.rect = new Rect(0f, 0f, 0.5f, 1f);
 
         yield break;
     }
