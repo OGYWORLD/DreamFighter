@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Horizontal scanlines with flicker
+  m_Name: AS03Mat
   m_Shader: {fileID: 4800000, guid: 002f6eab9ba9b994d8eec7af12c232ac, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords:
@@ -42,7 +42,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: d03ac06582a61864db90544c645d211c, type: 3}
+        m_Texture: {fileID: 2800000, guid: c0d4a42c29d6db641aedc6ddb043d86e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:

@@ -13,18 +13,15 @@ public class CIntroInvert : MonoBehaviour
     public Renderer hologram;
     public Renderer display;
 
-    public GameObject loading;
-
     public GameObject leftCameraObj;
     public GameObject rightCameraObj;
 
     private IEnumerator Start()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
 
         display.material = hologram.material;
         gameObject.GetComponent<Renderer>().material = hologram.material;
-        loading.SetActive(false);
 
         yield return new WaitForSeconds(1f);
 

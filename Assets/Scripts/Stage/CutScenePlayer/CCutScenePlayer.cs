@@ -87,9 +87,6 @@ public class CCutScenePlayer : MonoBehaviour
     {
         if (bgm.time >= cutscene[StageManager.instance.curStage].endTime)
         {
-            // 노트 인덱스 업데이트는 2번째 스테이지에서 CShowLazer를 사용하지 않고 새로 스크립트 파서
-            // 풀링해줄 거기 때문에 그 스크립트에서 StageManager.instance.inputNoteIdx 값을 활성화됐을때 집어넣는 방식으로 구현할예정
-
             // 스테이지 교환
             stage[StageManager.instance.curStage].SetActive(false);
             StageManager.instance.curStage++;
