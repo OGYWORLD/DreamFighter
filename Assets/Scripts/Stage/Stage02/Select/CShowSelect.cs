@@ -10,6 +10,7 @@ public class CShowSelect : CShowLazer
     protected override void Start()
     {
         noteIdx = StageManager.instance.inputNoteIdx;
+        StageManager.instance.betweenDis = 20f;
 
         // Ç® »ý¼º
         MakePool();

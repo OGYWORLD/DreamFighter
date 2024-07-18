@@ -6,8 +6,7 @@ public class CSelectSetActive : CLazerSetActive
 {
     protected override void CheckNoteScore(float curMusicTime, float endTime, Vector3 Pos)
     {
-        print($"{Pos.x} {checkZone}");
-        if (Mathf.Abs(Pos.x - checkZone) <= 0.5f && Mathf.Abs(curMusicTime - endTime) < 0.2f)
+        if (Mathf.Abs(Pos.x - checkZone) <= 0.6f)
         {
             disApr.ShowSCParticle(gameObject.transform.position, 0);
 
@@ -18,7 +17,7 @@ public class CSelectSetActive : CLazerSetActive
 
             StageManager.instance.yesNoBar.value += StageManager.instance.mainMusic.clip.length * 0.0001f;
         }
-        else if (Mathf.Abs(Pos.x - checkZone) <= 2f && Mathf.Abs(curMusicTime - endTime) < 0.3f)
+        else if (Mathf.Abs(Pos.x - checkZone) <= 1.2f)
         {
             disApr.ShowSCParticle(gameObject.transform.position, 1);
 
@@ -53,8 +52,10 @@ public class CSelectSetActive : CLazerSetActive
             yield return new WaitUntil(() => (
             StageManager.instance.inputNoteIdx == noteIdx &&
             Input.GetKeyDown(KeyCode.Space) &&
-            Mathf.Abs(gameObject.transform.position.x - checkZone) <= 3f
+            Mathf.Abs(gameObject.transform.position.x - checkZone) <= 2f
             ));
+
+            print($"{gameObject.transform.position.x} {checkZone} {(StageManager.instance.notes[noteIdx].endTime - StageManager.instance.notes[noteIdx].srtTime)}");
 
             CheckNoteScore(StageManager.instance.mainMusic.time, StageManager.instance.notes[noteIdx].srtTime, gameObject.transform.position);
 
@@ -72,6 +73,7 @@ public class CSelectSetActive : CLazerSetActive
                     StageManager.instance.combo++;
                     StageManager.instance.yesNoBar.value += StageManager.instance.mainMusic.clip.length * 0.0001f;
                     print($"Long Perfect! combo: {StageManager.instance.combo}");
+                    disApr.ShowSCParticle(gameObject.transform.position, 0);
                 }
             }
 
@@ -82,7 +84,7 @@ public class CSelectSetActive : CLazerSetActive
            Input.GetKeyUp(KeyCode.Space)
            ));
 
-            CheckNoteScore(StageManager.instance.mainMusic.time, StageManager.instance.notes[noteIdx].endTime, gameObject.transform.position);
+            base.CheckNoteScore(StageManager.instance.mainMusic.time, StageManager.instance.notes[noteIdx].endTime, gameObject.transform.position);
         }
         else if (!isLong) // 숏, 더블 노트 판정
         {
@@ -92,7 +94,7 @@ public class CSelectSetActive : CLazerSetActive
             yield return new WaitUntil(() => (
             StageManager.instance.inputNoteIdx == noteIdx &&
             Input.GetKeyDown(KeyCode.Space) &&
-            Mathf.Abs(gameObject.transform.position.x - checkZone) <= 3f
+            Mathf.Abs(gameObject.transform.position.x - checkZone) <= 2f
             ));
 
             print($"Success! noteIdx: {noteIdx}");

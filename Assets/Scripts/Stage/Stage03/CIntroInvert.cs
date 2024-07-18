@@ -16,6 +16,8 @@ public class CIntroInvert : MonoBehaviour
     public GameObject leftCameraObj;
     public GameObject rightCameraObj;
 
+    public GameObject checkZone;
+
     private IEnumerator Start()
     {
         yield return new WaitForSeconds(1f);
@@ -42,6 +44,7 @@ public class CIntroInvert : MonoBehaviour
         }
 
         Camera rightCamera = leftCameraObj.GetComponent<Camera>();
+        checkZone.SetActive(true);
         rightCameraObj.SetActive(true);
         rightCamera.rect = new Rect(0f, 0f, 0.5f, 1f);
 

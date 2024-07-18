@@ -10,6 +10,7 @@ public class CShowASNote : CShowLazer
     protected override void Start()
     {
         noteIdx = StageManager.instance.inputNoteIdx;
+        StageManager.instance.betweenDis = 10f;
 
         // Ç® »ý¼º
         MakePool();
@@ -50,7 +51,9 @@ public class CShowASNote : CShowLazer
 
     protected sealed override void SetDistance()
     {
-        StageManager.instance.betweenDis = 10f - (StageManager.instance.notes[noteIdx].endTime - StageManager.instance.notes[noteIdx].srtTime);
+        StageManager.instance.betweenDis = 10f
+            - ((StageManager.instance.noteRespawnTime / 10f) *
+            (StageManager.instance.notes[noteIdx].endTime - StageManager.instance.notes[noteIdx].srtTime));
     }
 
     protected override void RespawnLazer()
@@ -65,6 +68,7 @@ public class CShowASNote : CShowLazer
                     lazerSet = shortPool[shortIdx].GetComponent<CLazerSetActive>();
                     lazerSet.noteIdx = noteIdx;
                     lazerSet.isLong = false;
+                    lazerSet.checkZone = checkZone.transform.position.x;
 
                     lazerSet.disApr = disApr;
 
@@ -84,6 +88,7 @@ public class CShowASNote : CShowLazer
                     lazerSet = longPool[longIdx].GetComponent<CLazerSetActive>();
                     lazerSet.noteIdx = noteIdx;
                     lazerSet.isLong = true;
+                    lazerSet.checkZone = checkZone.transform.position.x;
 
                     lazerSet.disApr = disApr;
 
@@ -110,6 +115,7 @@ public class CShowASNote : CShowLazer
                     lazerSet = doublePool[doubleIdx].GetComponent<CLazerSetActive>();
                     lazerSet.noteIdx = noteIdx;
                     lazerSet.isLong = false;
+                    lazerSet.checkZone = checkZone.transform.position.x;
 
                     lazerSet.disApr = disApr;
 
