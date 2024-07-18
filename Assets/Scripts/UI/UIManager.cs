@@ -24,13 +24,6 @@ public enum CanvasNamesEnum
 }
 
 [Serializable]
-public class ElementsInCVS
-{
-    public string name;
-    public GameObject obj;
-}
-
-[Serializable]
 public class CanvasByEnumName
 {
     public CanvasNamesEnum name;
@@ -64,14 +57,14 @@ public class UIManager : Singleton<UIManager>
     {
         foreach (CanvasByEnumName canvasInfo in canvasList)
         {
-            if (!canvasDic.ContainsKey(canvasInfo.name))
+            if (!canvasDic.ContainsKey(canvasInfo.name) && !canvasDic.ContainsValue(canvasInfo.canvas))
             {
                 canvasDic.Add(canvasInfo.name, canvasInfo.canvas);
                 ReverseCVSDic.Add(canvasInfo.canvas, canvasInfo.name);
             }
             else
             {
-                Debug.LogWarning($"Duplicate canvas name found: { canvasInfo.name}");
+                Debug.LogWarning($"Duplicate found: { canvasInfo.name}");
             }
         }
 

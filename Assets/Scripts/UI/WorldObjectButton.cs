@@ -191,12 +191,12 @@ public class WorldObjectButton : MonoBehaviour
 
     void ShowSetting()
     {
-        if(UIManager.Instance.CheckCurrentAndNewCVSAreSame(CanvasNamesEnum.ChatCVS))
+        if(UIManager.Instance.CheckCurrentAndNewCVSAreSame(CanvasNamesEnum.SettingCVS))
         {
             return;
         }
 
-        SetCurrentCanvas(CanvasNamesEnum.ChatCVS);
+        SetCurrentCanvas(CanvasNamesEnum.SettingCVS);
         OpenCurrentCanvas();
     }
 
@@ -207,7 +207,7 @@ public class WorldObjectButton : MonoBehaviour
             return;
         }
 
-        SetCurrentCanvas(CanvasNamesEnum.RecordCVS);
+        SetCurrentCanvas(CanvasNamesEnum.ChatCVS);
         OpenCurrentCanvas();
     }
 

@@ -60,6 +60,10 @@ PrefabInstance:
       value: tablet
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 4f394708c2c904d48bb84b5389f0a9a2, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4f394708c2c904d48bb84b5389f0a9a2, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
