@@ -43,12 +43,6 @@ public class CShowSelect : CShowLazer
         }
     }
 
-    private void Update()
-    {
-        SetDistance();
-        RespawnLazer();
-    }
-
     protected sealed override void SetDistance()
     {
         StageManager.instance.betweenDis = 20f 

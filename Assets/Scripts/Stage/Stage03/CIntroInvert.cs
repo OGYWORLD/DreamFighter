@@ -16,7 +16,7 @@ public class CIntroInvert : MonoBehaviour
     public GameObject leftCameraObj;
     public GameObject rightCameraObj;
 
-    public GameObject checkZone;
+    private Quaternion targetRotation = Quaternion.Euler(34.42f, 0f, 0f);
 
     private IEnumerator Start()
     {
@@ -43,10 +43,15 @@ public class CIntroInvert : MonoBehaviour
             yield return null;
         }
 
+        Camera leftCamera = leftCameraObj.GetComponent<Camera>();
+        leftCamera.cullingMask = 1;
+
+        leftCameraObj.transform.position = new Vector3(0.24f, 5.74f, 0f);
+        leftCameraObj.transform.rotation = targetRotation;
+
         Camera rightCamera = leftCameraObj.GetComponent<Camera>();
-        checkZone.SetActive(true);
         rightCameraObj.SetActive(true);
-        rightCamera.rect = new Rect(0f, 0f, 0.5f, 1f);
+        rightCamera.rect = new Rect(0f, 0f, 0.7f, 1f);
 
         yield break;
     }

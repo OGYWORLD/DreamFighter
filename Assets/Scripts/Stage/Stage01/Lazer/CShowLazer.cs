@@ -31,7 +31,7 @@ public class CShowLazer : MonoBehaviour
     // (숏노트 인덱스 + (롱노트 인덱스 / 2)) % position의 개수(3자리)으로 자리를 지정해주기 위해
     // 숏노트와 롱노트/2 의 풀 크기는 3의 배수가 되도록 한다.
     protected int shortNoteNum = 9; // 숏 노트 풀 크기
-    protected int longNoteNum = 10; // 롱 노트 풀 크기
+    protected int longNoteNum = 12; // 롱 노트 풀 크기
     protected int doubleNoteNum = 12; // 더블 노트 풀 크기
 
     protected List<GameObject> shortPool = new List<GameObject>(); // 숏 노트 풀
@@ -62,7 +62,7 @@ public class CShowLazer : MonoBehaviour
         StageManager.instance.mainMusic.Play();
     }
 
-    private void Update()
+    protected void Update()
     {
         SetDistance();
         RespawnLazer();
