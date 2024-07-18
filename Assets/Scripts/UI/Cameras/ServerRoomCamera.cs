@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 #region ¿ìÀÎÇý
 #endregion
@@ -48,4 +49,5 @@ public class ServerRoomCamera : MonoBehaviour
             yield return null;
         }
     }
+
 }

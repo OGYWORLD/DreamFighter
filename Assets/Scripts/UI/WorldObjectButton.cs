@@ -10,7 +10,7 @@ using UnityEngine.EventSystems;
 public enum ObjBtnNames
 {
     Start,
-    Chat,
+    Setting,
     Record,
     Exit
 
@@ -161,8 +161,8 @@ public class WorldObjectButton : MonoBehaviour
     {
         switch (e_ClickedObjectName)
         {
-            case ObjBtnNames.Chat:
-                ShowChat();
+            case ObjBtnNames.Setting:
+                ShowSetting();
                 break;
 
             case ObjBtnNames.Record:
@@ -189,7 +189,7 @@ public class WorldObjectButton : MonoBehaviour
     
     // todo: (인혜) 메서드에 코루틴을 담자!
 
-    void ShowChat()
+    void ShowSetting()
     {
         if(UIManager.Instance.CheckCurrentAndNewCVSAreSame(CanvasNamesEnum.ChatCVS))
         {
@@ -200,7 +200,7 @@ public class WorldObjectButton : MonoBehaviour
         OpenCurrentCanvas();
     }
 
-    void ShowRecord()
+    void ShowStart()
     {
         if (UIManager.Instance.CheckCurrentAndNewCVSAreSame(CanvasNamesEnum.ChatCVS))
         {
@@ -209,8 +209,6 @@ public class WorldObjectButton : MonoBehaviour
 
         SetCurrentCanvas(CanvasNamesEnum.RecordCVS);
         OpenCurrentCanvas();
-
-        print("기록을 보자!");
     }
 
     void ShowExit()
@@ -228,9 +226,9 @@ public class WorldObjectButton : MonoBehaviour
         // todo: (인혜) 종료 의사 확인 팝업 띄우기, Yes인 경우 종료화면 코루틴
     }
 
-    void ShowStart()
+    void ShowRecord()
     {
-        print("게임 시작!");
+        print("기록 열람");
         // todo: (인혜) 로딩화면 연결
     }
 

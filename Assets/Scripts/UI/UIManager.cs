@@ -7,18 +7,6 @@ using System;
 #region 우인혜
 #endregion
 
-public enum UIState
-{
-    Enter,
-    Main,
-    Loading,
-    InGame,
-    Exit
-}
-// 팝업은 현재 상태와 무관하게 트리거 시 항상 반영.
-// 그런데 이걸 디자인 패턴을 써서 만들 자신이 있니...
-// 일단 그냥 되는 대로 연결해 보자.
-
 public enum CanvasNamesEnum
 {
     BtnCVS,
@@ -26,6 +14,7 @@ public enum CanvasNamesEnum
 
     PopupCVS,
 
+    SettingCVS,
     ChatCVS,
     RecordCVS,
     ScoreCVS
