@@ -50,14 +50,14 @@ public class CShowASNote : CShowLazer
 
     protected sealed override void SetDistance()
     {
-        StageManager.instance.betweenDis = 20f - (StageManager.instance.notes[noteIdx].endTime - StageManager.instance.notes[noteIdx].srtTime);
+        StageManager.instance.betweenDis = 10f - (StageManager.instance.notes[noteIdx].endTime - StageManager.instance.notes[noteIdx].srtTime);
     }
 
     protected override void RespawnLazer()
     {
         // 노트 시간 보다 StageManager.instance.noteMoveSpeed초 전에 노트를 생성한다.
         if (!StageManager.instance.isCutScene
-            && StageManager.instance.mainMusic.time >= StageManager.instance.notes[noteIdx].srtTime - StageManager.instance.noteMoveSpeed)
+            && StageManager.instance.mainMusic.time >= StageManager.instance.notes[noteIdx].srtTime - StageManager.instance.noteRespawnTime)
         {
             switch (StageManager.instance.notes[noteIdx].noteCategory)
             {
@@ -89,7 +89,7 @@ public class CShowASNote : CShowLazer
 
                     longPool[longIdx].transform.localScale = new Vector3(
                         longPool[longIdx].transform.localScale.x,
-                        (StageManager.instance.notes[noteIdx].endTime - StageManager.instance.notes[noteIdx].srtTime) * (StageManager.instance.betweenDis / StageManager.instance.noteMoveSpeed),
+                        (StageManager.instance.notes[noteIdx].endTime - StageManager.instance.notes[noteIdx].srtTime) * (StageManager.instance.betweenDis / StageManager.instance.noteRespawnTime),
                         longPool[longIdx].transform.localScale.z
                         );
 

@@ -16,7 +16,7 @@ public class CCameraMove : MonoBehaviour
 
     private void Start()
     {
-        speed = (StageManager.instance.betweenDis / StageManager.instance.noteMoveSpeed);
+        speed = (StageManager.instance.betweenDis / StageManager.instance.noteRespawnTime);
 
         StartCoroutine(WaitIntro());
     }

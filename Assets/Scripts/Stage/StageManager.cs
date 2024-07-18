@@ -20,7 +20,7 @@ public class StageManager : MonoBehaviour
 
     public List<Note> notes { get; set; } = new List<Note>(); // 노트 정보 리스트
 
-    public float noteMoveSpeed { get; set; } = 4f; // 노트 이동 속도
+    public float noteRespawnTime { get; set; } = 4f; // 노트 리스폰 초 (판정 n 초 전 생성)
 
     public float betweenDis { get; set; } = 58f; // 노트 생성 위치와 카메라 사이의 거리
 

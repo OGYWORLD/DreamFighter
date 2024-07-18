@@ -50,6 +50,9 @@ public class CShowSelect : CShowLazer
 
     protected sealed override void SetDistance()
     {
-        StageManager.instance.betweenDis = 20f - (StageManager.instance.notes[noteIdx].endTime - StageManager.instance.notes[noteIdx].srtTime);
+        StageManager.instance.betweenDis = 20f 
+            - ((StageManager.instance.noteRespawnTime / 20f) *
+            (StageManager.instance.notes[noteIdx].endTime - StageManager.instance.notes[noteIdx].srtTime));
     }
+
 }

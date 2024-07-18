@@ -8,8 +8,8 @@ public class CMoveAS : MonoBehaviour
 
     private void Start()
     {
-        StageManager.instance.betweenDis = 20f;
-        speed = (StageManager.instance.betweenDis / StageManager.instance.noteMoveSpeed);
+        StageManager.instance.betweenDis = 10f;
+        speed = (StageManager.instance.betweenDis / StageManager.instance.noteRespawnTime);
     }
 
     private void Update()

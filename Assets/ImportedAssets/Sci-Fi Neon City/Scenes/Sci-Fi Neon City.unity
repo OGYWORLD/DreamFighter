@@ -17329,6 +17329,7 @@ MonoBehaviour:
   - {fileID: 2024414395}
   - {fileID: 1049774881}
   longNoteTrans: {fileID: 2024414395}
+  checkZone: {fileID: 0}
 --- !u!64 &1044126935
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -17367,7 +17368,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1049774880}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.878, y: -17.788, z: 5.78}
+  m_LocalPosition: {x: 0.878, y: -7.788, z: 5.78}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -19199,7 +19200,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1228932026}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.93, y: -17.788, z: 5.78}
+  m_LocalPosition: {x: -0.93, y: -7.788, z: 5.78}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -22012,6 +22013,7 @@ MonoBehaviour:
   - {fileID: 1610678994}
   - {fileID: 1202756107}
   longNoteTrans: {fileID: 1382369759}
+  checkZone: {fileID: 1061552}
 --- !u!64 &1538813978
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -22988,6 +22990,7 @@ MonoBehaviour:
   - {fileID: 625508281}
   - {fileID: 868407602}
   longNoteTrans: {fileID: 625508281}
+  checkZone: {fileID: 1061552}
 --- !u!1 &1658327154
 GameObject:
   m_ObjectHideFlags: 0
@@ -26247,7 +26250,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2024414394}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.034, y: -17.788, z: 5.78}
+  m_LocalPosition: {x: -0.034, y: -7.788, z: 5.78}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
