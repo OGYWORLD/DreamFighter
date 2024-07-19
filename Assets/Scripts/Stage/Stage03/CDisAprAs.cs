@@ -13,12 +13,12 @@ public class CDisAprAs : CDisAprNote
         for (int i = 0; i < poolSize; i++)
         {
             // scPool
-            GameObject obj = Instantiate(scParticle, Vector3.zero, Quaternion.Euler(0f, 0f, 0f)); // 파티클
+            GameObject obj = Instantiate(scParticle, Vector3.zero, Quaternion.Euler(0f, -90f, 0f)); // 파티클
             obj.SetActive(false);
             scPool.Add(obj);
 
             // wrPool
-            obj = Instantiate(wrParticle, Vector3.zero, Quaternion.Euler(0f, 180f, 90f));
+            obj = Instantiate(wrParticle, Vector3.zero, Quaternion.Euler(0f, 0f, 90f));
             obj.SetActive(false);
             wrPool.Add(obj);
 

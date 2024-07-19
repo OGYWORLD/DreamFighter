@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 5461823996488268371}
   - component: {fileID: 5230867223049578377}
   - component: {fileID: 7382598795808534957}
+  - component: {fileID: 8868203590286951393}
   m_Layer: 0
   m_Name: LongAS
   m_TagString: Untagged
@@ -146,6 +147,26 @@ MonoBehaviour:
   targetSize: {x: 0.05, y: 0.05, z: 0.05}
   initialSize: {x: 0.5, y: 0.5, z: 0.5}
   lazerSet: {fileID: 5461823996488268371}
+--- !u!114 &8868203590286951393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2636474150613465443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 981ca920f0f7bcf4b92e4d5b62b6dee8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textures:
+  - {fileID: 2800000, guid: 0c4708c61d4e807408e934c957777cf2, type: 3}
+  - {fileID: 2800000, guid: c0d4a42c29d6db641aedc6ddb043d86e, type: 3}
+  - {fileID: 2800000, guid: 17ba03375961c66439cc137b31533ab6, type: 3}
+  - {fileID: 2800000, guid: 6b4ebf04dfa96cc4aa7cc1aa617c0060, type: 3}
+  - {fileID: 2800000, guid: 41a8f2517128a9d4fb308008fa002e32, type: 3}
+  - {fileID: 2800000, guid: 23419f4faea45094e91512418eee7a24, type: 3}
+  - {fileID: 2800000, guid: 019489a77e1c25d4abfdc9fbfde16f50, type: 3}
 --- !u!1 &3839273273432750081
 GameObject:
   m_ObjectHideFlags: 0

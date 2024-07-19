@@ -9,7 +9,7 @@ public class CASCameraMove : CCameraMove
 {
     protected sealed override void Start()
     {
-        StageManager.instance.betweenDis = 58f;
+        StageManager.instance.betweenDis = 48f;
 
         base.Start();
     }
@@ -20,5 +20,12 @@ public class CASCameraMove : CCameraMove
         {
             transform.Translate(0f, 0f, speed * Time.deltaTime);
         }
+    }
+
+    protected sealed override IEnumerator WaitIntro()
+    {
+        yield return new WaitForSeconds(4f);
+
+        isIntroEnd = true;
     }
 }

@@ -29,7 +29,7 @@ public class CCameraMove : MonoBehaviour
         }  
     }
 
-    protected IEnumerator WaitIntro()
+    protected virtual IEnumerator WaitIntro()
     {
         yield return new WaitForSeconds(4f);
 

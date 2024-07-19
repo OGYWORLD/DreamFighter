@@ -16,7 +16,10 @@ public class CIntroInvert : MonoBehaviour
     public GameObject leftCameraObj;
     public GameObject rightCameraObj;
 
+    private Vector3 targetPos = new Vector3(0.24f, 8.74f, 0f);
     private Quaternion targetRotation = Quaternion.Euler(34.42f, 0f, 0f);
+
+    public GameObject gameUI;
 
     private IEnumerator Start()
     {
@@ -28,30 +31,27 @@ public class CIntroInvert : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         float sumTime = 0f;
-        float totalTime = 2f;
+        float totalTime = 1.6f;
 
         Vector3 initPos = leftCameraObj.transform.position;
-        Vector3 targetPos = leftCameraObj.transform.position + new Vector3(0f, 0f, 3f);
+        Vector3 finPos = leftCameraObj.transform.position + new Vector3(3f, 0f, 0f);
 
-        while(sumTime <= totalTime)
+        Camera leftCamera = leftCameraObj.GetComponent<Camera>();
+        Camera rightCamera = rightCameraObj.GetComponent<Camera>();
+
+        while (sumTime <= totalTime)
         {
             float t = sumTime / totalTime;
-            leftCameraObj.transform.position = Vector3.Lerp(initPos, targetPos, t);
+            leftCameraObj.transform.position = Vector3.Lerp(initPos, finPos, t);
 
             sumTime += Time.deltaTime;
 
             yield return null;
         }
 
-        Camera leftCamera = leftCameraObj.GetComponent<Camera>();
-        leftCamera.cullingMask = 1;
-
-        leftCameraObj.transform.position = new Vector3(0.24f, 5.74f, 0f);
-        leftCameraObj.transform.rotation = targetRotation;
-
-        Camera rightCamera = leftCameraObj.GetComponent<Camera>();
+        leftCamera.rect = new Rect(0f, 0f, 0.7f, 1f);
+        gameUI.SetActive(true);
         rightCameraObj.SetActive(true);
-        rightCamera.rect = new Rect(0f, 0f, 0.7f, 1f);
 
         yield break;
     }
