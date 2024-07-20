@@ -14,7 +14,7 @@ public enum ObjBtnNames
     Record,
     Exit
 
-    ,IndexCount // 정해진 오브젝트 외의 클릭을 처리하는 경우에도 활용 중
+    ,IndexCount // 정해진 오브젝트 외의 클릭을 처리하는 경우에도 활용
 }
 
 /// <summary>
@@ -33,8 +33,20 @@ public class WorldObjectButton : MonoBehaviour
     private Dictionary<ObjBtnNames, GameObject> WorldBtnDic = new();
     private Dictionary<GameObject, ObjBtnNames> ReverseWBtnDic = new();
 
-    ObjBtnNames e_ClickedObjectName;
 
+    private Dictionary<GameObject, GameObject> testDict = new();
+
+    public GameObject ExitBtnObj;
+    public GameObject StartBtnObj;
+    public GameObject RecordBtnObj;
+    public GameObject SettingBtnObj;
+
+    public Canvas ExitCVS;
+    public Canvas StartCVS;
+    public Canvas RecordCVS;
+    public Canvas SettingCVS;
+
+    ObjBtnNames e_ClickedObjectName;
 
     int layerMaskValue;
 
@@ -119,19 +131,25 @@ public class WorldObjectButton : MonoBehaviour
         {
             GameObject clickedObject = hitInfo.collider.gameObject;
 
-            string clickedObjectString = FindKeyByValue(clickedObject);
-            
-            e_ClickedObjectName = (ObjBtnNames)Enum.Parse(typeof(ObjBtnNames), clickedObjectString);
+            string clickedObjectString;
 
-            //Debug.Log("SortClickedButtonCoroutine 실행됨");
+            FindKeyByValue(clickedObject, out clickedObjectString);
+
+            if(clickedObject != default)
+            {
+                e_ClickedObjectName = (ObjBtnNames)Enum.Parse(typeof(ObjBtnNames), clickedObjectString);
+                SwitchActivateMethod();
+            }
+            else
+            {
+                CloseCurrentCanvas();
+            }
         }
         else
         {
             // 한 번 할당된 값이 그대로 유지되어 올바른 대상 이외의 클릭에서도 계속 쓰이는 것을 막기 위해 초기화
             e_ClickedObjectName = ObjBtnNames.IndexCount;
         }
-
-        SwitchActivateMethod();
 
         yield return null;
     }
@@ -150,8 +168,21 @@ public class WorldObjectButton : MonoBehaviour
         }
         else
         {
-            return null;
+            return ObjBtnNames.IndexCount.ToString();
         }
+    }
+
+    void FindKeyByValue(GameObject value, out string key)
+    {
+        if (ReverseWBtnDic.ContainsKey(value))
+        {
+            key = ReverseWBtnDic[value].ToString();
+        }
+        else
+        {
+            key = default;
+        }
+        
     }
 
     /// <summary>
@@ -179,22 +210,14 @@ public class WorldObjectButton : MonoBehaviour
 
             default:
                 // do nothing
-                CloseCurrentCanvas();
-                // todo: (인혜) UI 영역 바깥쪽을 클릭했을 때 열려 있던 캔버스가 비활성화되게끔
                 break;
         }
     }
 
 
-    
-    // todo: (인혜) 메서드에 코루틴을 담자!
-
     void ShowSetting()
     {
-        if(UIManager.Instance.CheckCurrentAndNewCVSAreSame(CanvasNamesEnum.SettingCVS))
-        {
-            return;
-        }
+        //UIManager.Instance.canvasDic[CanvasNamesEnum.SettingCVS].gameObject.SetActive(true);
 
         SetCurrentCanvas(CanvasNamesEnum.SettingCVS);
         OpenCurrentCanvas();
@@ -213,12 +236,12 @@ public class WorldObjectButton : MonoBehaviour
 
     void ShowExit()
     {
-        if (UIManager.Instance.CheckCurrentAndNewCVSAreSame(CanvasNamesEnum.PopupCVS))
+        if (UIManager.Instance.CheckCurrentAndNewCVSAreSame(CanvasNamesEnum.PopupExitCVS))
         {
             return;
         }
 
-        SetCurrentCanvas(CanvasNamesEnum.PopupCVS);
+        SetCurrentCanvas(CanvasNamesEnum.PopupExitCVS);
         OpenCurrentCanvas();
 
         print("나가는 문을 클릭했다!");
@@ -229,7 +252,6 @@ public class WorldObjectButton : MonoBehaviour
     void ShowRecord()
     {
         print("기록 열람");
-        // todo: (인혜) 로딩화면 연결
     }
 
     void CloseCurrentCanvas()
@@ -241,9 +263,7 @@ public class WorldObjectButton : MonoBehaviour
         else
         {
             UIManager.Instance.CurrentCanvas.gameObject.SetActive(false);
-            // todo : (인혜) CurrentCanvas 체크하는 함수 만들기... 그리고 이 위치에서 기본 UI 캔버스 활성화시키기
         }
-
 
         print("열려 있던 캔버스 닫기");
     }
@@ -251,11 +271,6 @@ public class WorldObjectButton : MonoBehaviour
     void OpenCurrentCanvas()
     {
         UIManager.Instance.CurrentCanvas.gameObject.SetActive(true);
-    }
-
-    void OpenTargetCanvas(CanvasNamesEnum name)
-    {
-        UIManager.Instance.canvasDic[name].gameObject.SetActive(true);
     }
 
     void SetCurrentCanvas(CanvasNamesEnum name)

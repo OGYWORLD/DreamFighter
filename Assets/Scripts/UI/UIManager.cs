@@ -12,7 +12,7 @@ public enum CanvasNamesEnum
     BtnCVS,
     InfoCVS,
 
-    PopupCVS,
+    PopupExitCVS,
 
     SettingCVS,
     ChatCVS,
@@ -43,7 +43,7 @@ public class UIManager : Singleton<UIManager>
     private Dictionary<Canvas, CanvasNamesEnum> ReverseCVSDic = new();
 
     public Canvas CurrentCanvas;
-    public Canvas LastCanvas;
+    
 
     private void Start()
     {

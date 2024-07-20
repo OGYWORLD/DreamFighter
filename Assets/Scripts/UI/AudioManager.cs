@@ -15,13 +15,33 @@ public class AudioManager : Singleton<AudioManager>
         SetMasterVolume(masterVolume);
     }
 
+    /// <summary>
+    /// 오디오소스 볼륨 변경
+    /// </summary>
+    /// <param name="volume">0에서 1</param>
     public void SetMasterVolume(float volume)
     {
-        masterVolume = Mathf.Clamp01(volume / 100f); // 정규화
+        masterVolume = volume;
 
         AudioSource[] allAudioSources = FindObjectsOfType<AudioSource>();
 
-        foreach(AudioSource audioSource in allAudioSources)
+        foreach (AudioSource audioSource in allAudioSources)
+        {
+            audioSource.volume = masterVolume;
+        }
+    }
+
+    /// <summary>
+    /// 오디오소스 볼륨 변경
+    /// </summary>
+    /// <param name="volume">0에서 100</param>
+    public void SetMasterVolume(int volume)
+    {
+        masterVolume = Mathf.Clamp01(volume / 100f);
+
+        AudioSource[] allAudioSources = FindObjectsOfType<AudioSource>();
+
+        foreach (AudioSource audioSource in allAudioSources)
         {
             audioSource.volume = masterVolume;
         }

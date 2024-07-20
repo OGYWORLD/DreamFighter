@@ -15,13 +15,11 @@ public class AudioController : MonoBehaviour
     [SerializeField] float currentVolume;
     [SerializeField] float lastVolume;
 
-    AudioSource testAudio;
+    public AudioSource testAudio;
 
     private void Awake()
     {
-        testAudio = GetComponentInChildren<AudioSource>();
-
-        slider.value = lastVolume = AudioManager.Instance.masterVolume;
+        testAudio.volume = slider.value = AudioManager.Instance.masterVolume;
         UpdateSliderValueToTMP();
 
         slider.onValueChanged.AddListener(OnSliderValueChanged);
@@ -31,7 +29,7 @@ public class AudioController : MonoBehaviour
     void SetTestAudioVolume()
     {
         print("테스트 오디오 볼륨 변경");
-        testAudio.volume = currentVolume;
+        testAudio.volume = slider.value = currentVolume;
     }
 
     public void SetTestAudioVolume(float value)

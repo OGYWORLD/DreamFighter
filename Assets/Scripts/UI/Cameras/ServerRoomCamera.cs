@@ -8,6 +8,9 @@ using UnityEngine.UI;
 
 public class ServerRoomCamera : MonoBehaviour
 {
+    public GameObject WorldObjBtn;
+    public GameObject info;
+
     // 보간이 이루어질 시간
     float duration = 3f;
 
@@ -21,10 +24,17 @@ public class ServerRoomCamera : MonoBehaviour
 
     #endregion
 
-    private void Start()
+    private void OnEnable()
     {
+        WorldObjBtn.gameObject.SetActive(true);
+
         InitTransform();
         StartCoroutine(TransformInterpolation());
+    }
+
+    private void OnDisable()
+    {
+        SetInfo(false);
     }
 
     void InitTransform()
@@ -32,11 +42,13 @@ public class ServerRoomCamera : MonoBehaviour
         transform.position = startPos;
         transform.rotation = startRotation;
 
-        print("시작 위치 초기화");
+        print("Server Room 카메라 시작 위치 초기화 완료");
     }
 
     IEnumerator TransformInterpolation()
     {
+        print("Server Room 카메라 초기 이동 시작");
+
         float delta = 0.0f;
 
         while(delta <= duration)
@@ -48,6 +60,15 @@ public class ServerRoomCamera : MonoBehaviour
 
             yield return null;
         }
+
+        print("Server Room 카메라 초기 이동 종료");
+
+        SetInfo(true);
+    }
+
+    void SetInfo(bool b)
+    {
+        info.gameObject.SetActive(b);
     }
 
 }
