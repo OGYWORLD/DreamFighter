@@ -10,18 +10,18 @@ using UnityEngine;
 /// </summary>
 public class CCameraMove : MonoBehaviour
 {
-    private float speed; // 초속
+    protected float speed; // 초속
 
-    private bool isIntroEnd; // 인트로 재생용 변수
+    protected bool isIntroEnd; // 인트로 재생용 변수
 
-    private void Start()
+    protected virtual void Start()
     {
-        speed = (StageManager.instance.betweenDis / StageManager.instance.noteMoveSpeed);
+        speed = (StageManager.instance.betweenDis / StageManager.instance.noteRespawnTime);
 
         StartCoroutine(WaitIntro());
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         if(isIntroEnd)
         {
@@ -29,7 +29,7 @@ public class CCameraMove : MonoBehaviour
         }  
     }
 
-    IEnumerator WaitIntro()
+    protected virtual IEnumerator WaitIntro()
     {
         yield return new WaitForSeconds(4f);
 

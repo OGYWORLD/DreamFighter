@@ -10,14 +10,10 @@ public class CShowSelect : CShowLazer
     protected override void Start()
     {
         noteIdx = StageManager.instance.inputNoteIdx;
+        StageManager.instance.betweenDis = 20f;
 
         // Ç® »ý¼º
         MakePool();
-    }
-
-    private void OnEnable()
-    {
-        StageManager.instance.betweenDis = 4.841f;
     }
 
     protected sealed override void MakePool()
@@ -47,14 +43,11 @@ public class CShowSelect : CShowLazer
         }
     }
 
-    private void Update()
-    {
-        SetDistance();
-        RespawnLazer();
-    }
-
     protected sealed override void SetDistance()
     {
-        StageManager.instance.betweenDis = 4.802f - (StageManager.instance.notes[noteIdx].endTime - StageManager.instance.notes[noteIdx].srtTime);
+        StageManager.instance.betweenDis = 20f 
+            - ((StageManager.instance.noteRespawnTime / 20f) *
+            (StageManager.instance.notes[noteIdx].endTime - StageManager.instance.notes[noteIdx].srtTime));
     }
+
 }

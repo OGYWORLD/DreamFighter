@@ -24,9 +24,9 @@ public class CCircleControl : MonoBehaviour
     {
         float sumTime = 0f;
 
-        while (sumTime <= StageManager.instance.noteMoveSpeed)
+        while (sumTime <= StageManager.instance.noteRespawnTime)
         {
-            float t = sumTime / StageManager.instance.noteMoveSpeed;
+            float t = sumTime / StageManager.instance.noteRespawnTime;
             circle.localScale = Vector3.Lerp(initialSize, targetSize, t);
 
             sumTime += Time.deltaTime;

@@ -14,23 +14,24 @@ public class CLazerSetActive : MonoBehaviour
 {
     public int noteIdx { get; set; } = 0;
     public bool isLong { get; set; }
+    public float checkZone { get; set; }
 
     protected float perSecBPM;
 
     public CDisAprNote disApr;
 
-    private void Start()
+    protected void Start()
     {
         perSecBPM = StageManager.instance.bpm / 60f;
     }
 
-    private void OnEnable()
+    protected void OnEnable()
     {
         StartCoroutine(WaitUntilCondition()); // 플레이어로 부터 스페이스바를 입력받으면 레이저를 비활성화 시킵니다.
         StartCoroutine(LazerSetHide()); // 판정 시간에서 벗어나면 레이저를 비활성화 시킵니다.
     }
 
-    protected void CheckNoteScore(float curMusicTime, float endTime)
+    protected virtual void CheckNoteScore(float curMusicTime, float endTime, Vector3 pos)
     {
         if (Mathf.Abs(curMusicTime - endTime) < 0.2f)
         {
@@ -54,13 +55,13 @@ public class CLazerSetActive : MonoBehaviour
 
             StageManager.instance.yesNoBar.value += StageManager.instance.mainMusic.clip.length * 0.0001f;
         }
-        else if(Mathf.Abs(curMusicTime - endTime) <= 1f)
+        else
         {
             disApr.ShowWRParticle(gameObject.transform.position);
 
             StageManager.instance.wrCnt++;
 
-            print($"{StageManager.instance.inputNoteIdx} Early Miss!");
+            print($"Early Miss! noteIdx: {noteIdx}");
             StageManager.instance.combo = 0;
             StageManager.instance.yesNoBar.value -= StageManager.instance.mainMusic.clip.length * 0.0005f;
         }
@@ -68,8 +69,10 @@ public class CLazerSetActive : MonoBehaviour
 
     protected IEnumerator LazerSetHide()
     {
-        yield return new WaitForSeconds(StageManager.instance.noteMoveSpeed + (StageManager.instance.notes[noteIdx].endTime - StageManager.instance.notes[noteIdx].srtTime));
+        yield return new WaitForSeconds(StageManager.instance.noteRespawnTime + (StageManager.instance.notes[noteIdx].endTime - StageManager.instance.notes[noteIdx].srtTime));
         disApr.ShowWRParticle(gameObject.transform.position);
+
+        print($"Late Miss! noteIdx: {noteIdx}");
 
         StageManager.instance.wrCnt++;
         StageManager.instance.yesNoBar.value -= StageManager.instance.mainMusic.clip.length * 0.0005f;
@@ -79,7 +82,7 @@ public class CLazerSetActive : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    protected IEnumerator WaitUntilCondition()
+    protected virtual IEnumerator WaitUntilCondition()
     {
         if (isLong)// 롱노트 판정
         {
@@ -94,7 +97,7 @@ public class CLazerSetActive : MonoBehaviour
             StageManager.instance.mainMusic.time >= StageManager.instance.notes[noteIdx].srtTime - 1f
             ));
 
-            CheckNoteScore(StageManager.instance.mainMusic.time, StageManager.instance.notes[noteIdx].srtTime);
+            CheckNoteScore(StageManager.instance.mainMusic.time, StageManager.instance.notes[noteIdx].srtTime, gameObject.transform.position);
 
             // 중간 노트들 점수(콤보) 추가하는 과정
             for(int i = 0; i < (int)betweenSrtEndCnt; i++)
@@ -120,7 +123,7 @@ public class CLazerSetActive : MonoBehaviour
            Input.GetKeyUp(KeyCode.Space)
            ));
 
-            CheckNoteScore(StageManager.instance.mainMusic.time, StageManager.instance.notes[noteIdx].endTime);
+            CheckNoteScore(StageManager.instance.mainMusic.time, StageManager.instance.notes[noteIdx].endTime, gameObject.transform.position);
         }
         else if(!isLong) // 숏, 더블 노트 판정
         {
@@ -133,7 +136,9 @@ public class CLazerSetActive : MonoBehaviour
             StageManager.instance.mainMusic.time >= StageManager.instance.notes[noteIdx].srtTime - 1f
             ));
 
-            CheckNoteScore(StageManager.instance.mainMusic.time, StageManager.instance.notes[noteIdx].endTime);
+            print($"Success! noteIdx: {noteIdx}");
+
+            CheckNoteScore(StageManager.instance.mainMusic.time, StageManager.instance.notes[noteIdx].endTime, gameObject.transform.position);
         }
 
         StageManager.instance.inputNoteIdx++;

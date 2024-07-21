@@ -30,7 +30,7 @@ public class CLongNoteCircle : MonoBehaviour
 
         float sumTime = 0f;
 
-        float duringTime = StageManager.instance.noteMoveSpeed +
+        float duringTime = StageManager.instance.noteRespawnTime +
             StageManager.instance.notes[lazerSet.noteIdx].endTime - StageManager.instance.notes[lazerSet.noteIdx].srtTime;
 
         while (sumTime <= duringTime)

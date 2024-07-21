@@ -11,8 +11,7 @@ public class CMoveSelect : MonoBehaviour
 
     private void Start()
     {
-        StageManager.instance.betweenDis = 4.802f;
-        speed = (StageManager.instance.betweenDis / StageManager.instance.noteMoveSpeed);
+        speed = (StageManager.instance.betweenDis / StageManager.instance.noteRespawnTime);
     }
 
     private void Update()
