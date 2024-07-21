@@ -105,7 +105,7 @@ public class CShowLazer : MonoBehaviour
     protected virtual void RespawnLazer()
     {
         // 노트 시간 보다 StageManager.instance.noteMoveSpeed초 전에 노트를 생성한다.
-        if (!StageManager.instance.isCutScene
+        if (!StageManager.instance.isCantMakeNote
             && StageManager.instance.mainMusic.time >= StageManager.instance.notes[noteIdx].srtTime - StageManager.instance.noteRespawnTime)
         {
             switch (StageManager.instance.notes[noteIdx].noteCategory)
