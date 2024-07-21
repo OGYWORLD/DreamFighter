@@ -34,7 +34,10 @@ public class CSelectSetActive : CLazerSetActive
 
             StageManager.instance.wrCnt++;
 
-            print($"Early Miss! noteIdx: {noteIdx}");
+            if (StageManager.instance.maxCombo < StageManager.instance.combo)
+            {
+                StageManager.instance.maxCombo = StageManager.instance.combo;
+            }
             StageManager.instance.combo = 0;
             StageManager.instance.yesNoBar.value -= StageManager.instance.mainMusic.clip.length * 0.0005f;
         }
@@ -96,8 +99,6 @@ public class CSelectSetActive : CLazerSetActive
             Input.GetKeyDown(KeyCode.Space) &&
             Mathf.Abs(gameObject.transform.position.x - checkZone) <= 2f
             ));
-
-            print($"Success! noteIdx: {noteIdx}");
 
             CheckNoteScore(StageManager.instance.mainMusic.time, StageManager.instance.notes[noteIdx].endTime, gameObject.transform.position);
         }

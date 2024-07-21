@@ -38,7 +38,13 @@ public class StageManager : MonoBehaviour
     public int goodCnt { get; set; } = 0; // 굿 개수
     public int wrCnt { get; set; } = 0; // 틀린 개수
 
-    public bool isCutScene { get; set; } = false; // 현재 컷씬 실행 중?
+    public int maxCombo { get; set; } = 0; // 최대 콤보
+
+    public bool isCantMakeNote { get; set; } = false; // 노트 생성 불가능 여부
+
+    public bool isPlayingCutScene { get; set; } = false; // 컷씬 재생 여부
+
+    public bool isGameOver { get; set; } = false; // 게임 오버 여부
 
     // 현재 스테이지 0: neon city, 1: menu UI, 2: code
     public int curStage { get; set; } = 0;

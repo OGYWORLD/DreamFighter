@@ -27,7 +27,7 @@ public class CFadeOutIn : MonoBehaviour
         StartCoroutine(FadeInOut(srt, end, time));
     }
 
-    IEnumerator FadeInOut(int srt, int end, float totalTime)
+    public IEnumerator FadeInOut(int srt, int end, float totalTime)
     {
         if(srt == 1)
         {
@@ -53,8 +53,8 @@ public class CFadeOutIn : MonoBehaviour
 
         if(srt == 0)
         {
-            print(Time.time);
             // ÄÆ½Å ÀüÈ¯
+            Time.timeScale = 1f;
             cutSceneCanvas.SetActive(true);
             cutScenePlayer.Play();
         }

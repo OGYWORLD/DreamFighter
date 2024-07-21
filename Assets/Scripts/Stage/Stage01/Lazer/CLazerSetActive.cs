@@ -57,11 +57,17 @@ public class CLazerSetActive : MonoBehaviour
         }
         else
         {
-            disApr.ShowWRParticle(gameObject.transform.position);
+            if(!StageManager.instance.isGameOver)
+            {
+                disApr.ShowWRParticle(gameObject.transform.position);
+            }
 
             StageManager.instance.wrCnt++;
 
-            print($"Early Miss! noteIdx: {noteIdx}");
+            if (StageManager.instance.maxCombo < StageManager.instance.combo)
+            {
+                StageManager.instance.maxCombo = StageManager.instance.combo;
+            }
             StageManager.instance.combo = 0;
             StageManager.instance.yesNoBar.value -= StageManager.instance.mainMusic.clip.length * 0.0005f;
         }
@@ -70,9 +76,10 @@ public class CLazerSetActive : MonoBehaviour
     protected IEnumerator LazerSetHide()
     {
         yield return new WaitForSeconds(StageManager.instance.noteRespawnTime + (StageManager.instance.notes[noteIdx].endTime - StageManager.instance.notes[noteIdx].srtTime));
-        disApr.ShowWRParticle(gameObject.transform.position);
-
-        print($"Late Miss! noteIdx: {noteIdx}");
+        if (!StageManager.instance.isGameOver)
+        {
+            disApr.ShowWRParticle(gameObject.transform.position);
+        }
 
         StageManager.instance.wrCnt++;
         StageManager.instance.yesNoBar.value -= StageManager.instance.mainMusic.clip.length * 0.0005f;

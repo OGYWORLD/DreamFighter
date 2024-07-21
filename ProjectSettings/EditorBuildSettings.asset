@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/ImportedAssets/Sci-Fi Neon City/Scenes/Sci-Fi Neon City.unity
+    guid: 9fe75eb4ec4a48f4ea6672729ac7600b
   m_configObjects: {}
