@@ -19,11 +19,14 @@ public class AudioController : MonoBehaviour
 
     private void Awake()
     {
-        testAudio.volume = slider.value = AudioManager.Instance.masterVolume;
-        UpdateSliderValueToTMP();
-
         slider.onValueChanged.AddListener(OnSliderValueChanged);
         inputField.onValueChanged.AddListener(OnInputFieldValueChanged);
+    }
+
+    private void OnEnable()
+    {
+        testAudio.volume = slider.value = AudioManager.Instance.masterVolume;
+        UpdateSliderValueToTMP();
     }
 
     void SetTestAudioVolume()
@@ -38,9 +41,11 @@ public class AudioController : MonoBehaviour
         testAudio.volume = value;
     }
 
-    void SendValueToAudioManager()
+    public void SendValueToAudioManager()
     {
         AudioManager.Instance.SetMasterVolume(currentVolume);
+
+        print($"마스터 볼륨: {AudioManager.Instance.masterVolume}");
     }
 
     /// <summary>
@@ -52,23 +57,9 @@ public class AudioController : MonoBehaviour
         inputField.text = intValue.ToString();
     }
 
-    /*
-     public void OnSliderValueChanged(float value)
-    {
-        if(value == lastVolume)
-        {
-            return;
-        }
-
-        if(value >= 0f && value <= 1f)
-        {
-            AudioManager.Instance.SetMasterVolume(value);
-            UpdateSliderValueToTMP();
-        }
-    }
-     
-     */
-
+    /// <summary>
+    /// 슬라이더 값이 변경되었을 때 실행될 메서드
+    /// </summary>
     public void OnSliderValueChanged(float value)
     {
         slider.value = value;
@@ -82,17 +73,15 @@ public class AudioController : MonoBehaviour
     {
         int intValue = int.Parse(value);
 
-        if(intValue >= 0 && intValue <= 100)
-        {
-            currentVolume = Mathf.Clamp01(intValue / 100f);
-        }
-        else
+        if (intValue > 100 || intValue < 0)
         {
             currentVolume = lastVolume;
         }
+        else
+        {
+            currentVolume = lastVolume = Mathf.Clamp01(intValue / 100f);
+        }
 
         OnSliderValueChanged(currentVolume);
-
-        lastVolume = currentVolume;
     }
 }

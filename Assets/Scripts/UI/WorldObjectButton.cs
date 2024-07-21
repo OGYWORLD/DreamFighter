@@ -33,22 +33,11 @@ public class WorldObjectButton : MonoBehaviour
     private Dictionary<ObjBtnNames, GameObject> WorldBtnDic = new();
     private Dictionary<GameObject, ObjBtnNames> ReverseWBtnDic = new();
 
-
-    private Dictionary<GameObject, GameObject> testDict = new();
-
-    public GameObject ExitBtnObj;
-    public GameObject StartBtnObj;
-    public GameObject RecordBtnObj;
-    public GameObject SettingBtnObj;
-
-    public Canvas ExitCVS;
-    public Canvas StartCVS;
-    public Canvas RecordCVS;
-    public Canvas SettingCVS;
-
     ObjBtnNames e_ClickedObjectName;
 
     int layerMaskValue;
+
+    public Camera serverRoomCam;
 
     //==============================================================================================
 
@@ -96,7 +85,7 @@ public class WorldObjectButton : MonoBehaviour
 
 
     /// <summary>
-    /// 마우스 왼쪽 버튼이 눌리는 경우에만 어느 오브젝트가 클릭되었는지 판별하는 일회성 코루틴을 실행시키는 코루틴
+    /// 마우스 왼쪽 버튼이 눌리는 경우에만 어느 오브젝트가 클릭되었는지 판별하는 메서드를 실행
     /// </summary>
     /// <returns></returns>
     IEnumerator InputButtonCheckCoroutine()
@@ -107,8 +96,9 @@ public class WorldObjectButton : MonoBehaviour
         {
             yield return new WaitUntil(() => Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject());
 
-            StartCoroutine(SortClickedButtonCoroutine());
+            //StartCoroutine(SortClickedButtonCoroutine());
 
+            SortClickedButton();
             yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
 
         }
@@ -118,7 +108,7 @@ public class WorldObjectButton : MonoBehaviour
     /// <summary>
     /// 클릭된 버튼 오브젝트에 따라 자동으로 다음 동작을 결정하는 코루틴
     /// </summary>
-    IEnumerator SortClickedButtonCoroutine()
+    void SortClickedButton()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hitInfo;
@@ -150,8 +140,6 @@ public class WorldObjectButton : MonoBehaviour
             // 한 번 할당된 값이 그대로 유지되어 올바른 대상 이외의 클릭에서도 계속 쓰이는 것을 막기 위해 초기화
             e_ClickedObjectName = ObjBtnNames.IndexCount;
         }
-
-        yield return null;
     }
 
     /// <summary>
@@ -172,6 +160,7 @@ public class WorldObjectButton : MonoBehaviour
         }
     }
 
+    // 오버로딩
     void FindKeyByValue(GameObject value, out string key)
     {
         if (ReverseWBtnDic.ContainsKey(value))
@@ -190,6 +179,7 @@ public class WorldObjectButton : MonoBehaviour
     /// </summary>
     void SwitchActivateMethod()
     {
+
         switch (e_ClickedObjectName)
         {
             case ObjBtnNames.Setting:
@@ -217,55 +207,31 @@ public class WorldObjectButton : MonoBehaviour
 
     void ShowSetting()
     {
-        //UIManager.Instance.canvasDic[CanvasNamesEnum.SettingCVS].gameObject.SetActive(true);
-
         SetCurrentCanvas(CanvasNamesEnum.SettingCVS);
         OpenCurrentCanvas();
     }
 
     void ShowStart()
     {
-        if (UIManager.Instance.CheckCurrentAndNewCVSAreSame(CanvasNamesEnum.ChatCVS))
-        {
-            return;
-        }
-
         SetCurrentCanvas(CanvasNamesEnum.ChatCVS);
         OpenCurrentCanvas();
     }
 
     void ShowExit()
     {
-        if (UIManager.Instance.CheckCurrentAndNewCVSAreSame(CanvasNamesEnum.PopupExitCVS))
-        {
-            return;
-        }
-
         SetCurrentCanvas(CanvasNamesEnum.PopupExitCVS);
         OpenCurrentCanvas();
-
-        print("나가는 문을 클릭했다!");
-
-        // todo: (인혜) 종료 의사 확인 팝업 띄우기, Yes인 경우 종료화면 코루틴
     }
 
     void ShowRecord()
     {
-        print("기록 열람");
+        SetCurrentCanvas(CanvasNamesEnum.RecordCVS);
+        OpenCurrentCanvas();
     }
 
     void CloseCurrentCanvas()
-    {
-        if(UIManager.Instance.CurrentCanvas == null)
-        {
-            return;
-        }
-        else
-        {
-            UIManager.Instance.CurrentCanvas.gameObject.SetActive(false);
-        }
-
-        print("열려 있던 캔버스 닫기");
+    {       
+        UIManager.Instance.CurrentCanvas.gameObject.SetActive(false);
     }
 
     void OpenCurrentCanvas()

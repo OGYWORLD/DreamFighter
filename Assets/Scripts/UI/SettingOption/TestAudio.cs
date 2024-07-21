@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+#region ¿ìÀÎÇý
+#endregion
+
 public class TestAudio : MonoBehaviour
 {
     public AudioSource audioSource;
@@ -21,4 +24,9 @@ public class TestAudio : MonoBehaviour
         print("¿Àµð¿À ¸ØÃã");
     }
 
+    private void Update()
+    {
+        // È®ÀÎ¿ë
+        print(audioSource.volume);
+    }
 }

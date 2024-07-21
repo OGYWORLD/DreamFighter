@@ -16,7 +16,7 @@ public class StartKeyInfo : MonoBehaviour
         StartInfo = GetComponent<Graphic>();
     }
 
-    void Start()
+    void OnEnable()
     {
         StartCoroutine(BlinkInfoCoroutine());
     }

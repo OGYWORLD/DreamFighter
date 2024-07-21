@@ -2,20 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using System;
 using UnityEngine.EventSystems;
+using UnityEngine.Rendering.PostProcessing;
+using UnityEngine.SceneManagement;
 
 #region 우인혜
 #endregion
 
 public class TitleSceneCamera : MonoBehaviour
 {
-    // UI 요소
+    /// <summary>
+    /// 'Press Any Key'를 깜빡거리게 하기 위한 변수
+    /// </summary>
     public Graphic StartInfo;
 
-    // 월드 스페이스에 배치된 타이틀 오브젝트
+    /// <summary>
+    /// 월드 스페이스에 배치된 타이틀 오브젝트
+    /// </summary>
     public GameObject TitleObject;
 
+    /// <summary>
+    /// 씬 전환 시 사용
+    /// </summary>
+    PostProcessVolume postProcessVolume;
+    ColorGrading colorGradingLayer;
+
+    float targetExposure = 9f;
+    float ChangeSpeed = 0.8f;
+
+    TitleToMain TTM;
 
     /// <summary>
     /// 보간이 이루어질 시간
@@ -50,14 +65,26 @@ public class TitleSceneCamera : MonoBehaviour
 
     //========================================================================================================
 
-    private void OnEnable()
+    private void Awake()
     {
+        postProcessVolume = GetComponent<PostProcessVolume>();
+        
+        if (postProcessVolume.profile.TryGetSettings(out colorGradingLayer))
+        {
+            // do nothing
+        }
+    }
+
+    private void Start()
+    {
+        TitleObject.gameObject.SetActive(true);
         ShowTitleScreen();
     }
 
     private void OnDisable()
     {
         StopAllCoroutines();
+        TitleObject.gameObject.SetActive(false);
     }
 
     //========================================================================================================
@@ -65,26 +92,19 @@ public class TitleSceneCamera : MonoBehaviour
     void ShowTitleScreen()
     {
         // todo: (인혜) 이 지점에서 기본 BGM이 나오도록 하면 되겠다.
+        
+        InitCamTransform();
+        //StartCoroutine(ShowOnceCoroutine());
+        
 
-        if (!UIManager.Instance.isMainLoadAgain)
-        {
-            InitCamTransform();
-            StartCoroutine(ShowOnceCoroutine());
-            UIManager.Instance.isMainLoadAgain = true;
-        }
-        else
-        {
-            StartInfo.gameObject.SetActive(false);
-            TitleObject.gameObject.SetActive(false);
+        StartCoroutine(ShowOnceCoroutine());
 
-            StartCoroutine(ShowMainScreenCoroutine());
-        }
+        UIManager.Instance.isMainLoadAgain = true;
     }
 
     IEnumerator ShowOnceCoroutine()
     {
         StartInfo.gameObject.SetActive(true);
-        TitleObject.gameObject.SetActive(true);
 
         // 아무 키 입력 또는 아무 곳이나 클릭 && 입력한 곳이 UI요소에 해당하지 않을 때 실행
         yield return new WaitUntil(() => Input.anyKeyDown && !EventSystem.current.IsPointerOverGameObject());
@@ -92,8 +112,6 @@ public class TitleSceneCamera : MonoBehaviour
         // 더 사용하지 않는 오브젝트를 비활성화
         StartInfo.gameObject.SetActive(false);
 
-        //TitleObject.gameObject.SetActive(false);
-        //Invoke("FlyOutTitleCoroutine", 0.1f);
         TitleObject.SendMessage("FlyOutTitleCoroutine");
 
         StartCoroutine(ShowMainScreenCoroutine());
@@ -127,6 +145,28 @@ public class TitleSceneCamera : MonoBehaviour
 
         TitleObject.SetActive(false);
 
+        yield return new WaitForSeconds(2f);
+        StartCoroutine(LightOnCoroutine());
+
+    }
+
+    IEnumerator LightOnCoroutine()
+    {
+
+        if(colorGradingLayer == null)
+        {
+            yield break;
+        }
+
+        while (colorGradingLayer.postExposure.value < targetExposure)
+        {
+            colorGradingLayer.postExposure.value = Mathf.Lerp(colorGradingLayer.postExposure.value,
+                targetExposure, Time.deltaTime * ChangeSpeed);
+
+            yield return null;
+        }
+        
+        TitleToMain.isReadyToNextScene = true;
     }
 
     /// <summary>

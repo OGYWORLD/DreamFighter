@@ -5,15 +5,14 @@ using UnityEngine.UI;
 
 public class GameExit : MonoBehaviour
 {
-    private Button exitBtn;
+    public Button exitBtn;
 
     private void Awake()
     {
-        exitBtn = GetComponent<Button>();
         exitBtn.onClick.AddListener(ExitGame);
     }
 
-    void ExitGame()
+    public void ExitGame()
     {
 #if Unity_EDITOR
 EditorApplication.ExitPlayMode();
@@ -22,6 +21,7 @@ EditorApplication.ExitPlayMode();
         Application.Quit();
 
 #endif
+        print("게임 종료");
 
     }
 }

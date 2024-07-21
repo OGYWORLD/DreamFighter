@@ -10,14 +10,16 @@ using System;
 public enum CanvasNamesEnum
 {
     BtnCVS,
-    InfoCVS,
+    TitleInfoCVS,
 
     PopupExitCVS,
 
     SettingCVS,
     ChatCVS,
     RecordCVS,
-    ScoreCVS
+    ScoreCVS,
+
+    MainMenuInfoCVS
 
     , IndexCountCVS
    
@@ -70,18 +72,6 @@ public class UIManager : Singleton<UIManager>
 
         // 다시 쓸 거라면 clear, 다시 쓰지 않을 거라면 null
         canvasList = null;
-    }
-
-    public bool CheckCurrentAndNewCVSAreSame(CanvasNamesEnum name)
-    {
-        if(name == ReverseCVSDic[CurrentCanvas])
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
     }
 
 }
