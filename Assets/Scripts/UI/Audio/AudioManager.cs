@@ -58,6 +58,14 @@ public class AudioManager : Singleton<AudioManager>
         }
     }
 
+    public void SetSceneVolume(AudioSource[] audioSources)
+    {
+        foreach (AudioSource audioSource in audioSources)
+        {
+            audioSource.volume = masterVolume;
+        }
+    }
+
     public AudioClip GetAudioClip(string name)
     {
         return audioDic[name];

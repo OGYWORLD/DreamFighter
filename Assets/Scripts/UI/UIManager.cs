@@ -72,4 +72,8 @@ public class UIManager : Singleton<UIManager>
         canvasList = null;
     }
 
+    public Canvas GetCVSByEnum(CanvasNamesEnum cvs)
+    {
+        return canvasDic[cvs];
+    }
 }
