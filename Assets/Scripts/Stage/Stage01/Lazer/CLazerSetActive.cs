@@ -22,7 +22,7 @@ public class CLazerSetActive : MonoBehaviour
 
     protected void Start()
     {
-        perSecBPM = StageManager.instance.bpm / 60f;
+        perSecBPM = 60f / StageManager.instance.bpm;
     }
 
     protected void OnEnable()

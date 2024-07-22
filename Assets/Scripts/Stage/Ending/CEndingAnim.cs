@@ -13,8 +13,15 @@ public class CEndingAnim : MonoBehaviour
 
     public bool isAlreadyShow { get; set; } = false;
 
+    public GameObject fullCombo;
+
     private IEnumerator Start()
     {
+        if(StageManager.instance.maxCombo == 183) // full combo
+        {
+            fullCombo.SetActive(true);
+        }
+
         yield return new WaitForSeconds(0.6f);
 
         title.SetActive(true);
