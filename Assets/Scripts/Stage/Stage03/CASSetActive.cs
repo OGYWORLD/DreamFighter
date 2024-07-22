@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+#region ¿À°¡À»
+#endregion
+
 public class CASSetActive : CLazerSetActive
 {
     protected override void CheckNoteScore(float curMusicTime, float endTime, Vector3 Pos)
