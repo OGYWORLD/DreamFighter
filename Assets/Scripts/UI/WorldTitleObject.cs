@@ -17,6 +17,9 @@ public class WorldTitleObject : MonoBehaviour
     private void Awake()
     {
         animator = GetComponent<Animator>();
+
+        transform.position = initPos;
+        transform.rotation = initRotation;
     }
 
     private void Start()

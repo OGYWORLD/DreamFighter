@@ -1,24 +1,37 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using System;
 
 #region 우인혜
 #endregion
 
+[Serializable]
+public class AudioClipInfo
+{
+    public string name;
+    public AudioClip audioclip;
+}
 
 public class AudioManager : Singleton<AudioManager>
 {
     public float masterVolume = 0.5f;
+    public List<AudioClipInfo> audioList = new();
+    public Dictionary<string, AudioClip> audioDic = new();
 
     private void Awake()
     {
-        SceneManager.sceneLoaded += OnSceneLoaded;   
+        ListToDict();
     }
 
-    void Start()
+    void ListToDict()
     {
-        SetMasterVolume(masterVolume);
+        foreach (AudioClipInfo info in audioList)
+        {
+            audioDic.Add(info.name, info.audioclip);
+        }
+
+        audioList = null;
     }
 
     /// <summary>
@@ -45,11 +58,8 @@ public class AudioManager : Singleton<AudioManager>
         }
     }
 
-    /// <summary>
-    /// 새로운 씬이 로드될 때 해당 씬의 오디오 소스 볼륨을 마스터 볼륨으로 변경
-    /// </summary>
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    public AudioClip GetAudioClip(string name)
     {
-        SetSceneVolume();
+        return audioDic[name];
     }
 }

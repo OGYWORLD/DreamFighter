@@ -30,8 +30,6 @@ public class TitleSceneCamera : MonoBehaviour
     float targetExposure = 9f;
     float ChangeSpeed = 0.8f;
 
-    TitleToMain TTM;
-
     /// <summary>
     /// 보간이 이루어질 시간
     /// </summary>
@@ -84,7 +82,6 @@ public class TitleSceneCamera : MonoBehaviour
     private void OnDisable()
     {
         StopAllCoroutines();
-        TitleObject.gameObject.SetActive(false);
     }
 
     //========================================================================================================
@@ -94,9 +91,6 @@ public class TitleSceneCamera : MonoBehaviour
         // todo: (인혜) 이 지점에서 기본 BGM이 나오도록 하면 되겠다.
         
         InitCamTransform();
-        //StartCoroutine(ShowOnceCoroutine());
-        
-
         StartCoroutine(ShowOnceCoroutine());
 
         UIManager.Instance.isMainLoadAgain = true;
@@ -165,8 +159,10 @@ public class TitleSceneCamera : MonoBehaviour
 
             yield return null;
         }
-        
-        TitleToMain.isReadyToNextScene = true;
+
+
+        UIManager.Instance.isReadyTitleToMainScene = true;
+        print("isReady"); // 이 부분이 안 나온다...
     }
 
     /// <summary>

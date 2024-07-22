@@ -34,11 +34,9 @@ public class CanvasByEnumName
 
 public class UIManager : Singleton<UIManager>
 {
-    // 씬을 전환할 때 활성화/비활성화하기 위해 참조
-    public Camera UIMainCamera;
-
     // 타이틀부터 띄울지, 바로 메인 화면으로 들어갈지 결정하는 변수
     public bool isMainLoadAgain = false;
+    public bool isReadyTitleToMainScene = false;
 
     public List<CanvasByEnumName> canvasList = new();
     public Dictionary<CanvasNamesEnum, Canvas> canvasDic = new();

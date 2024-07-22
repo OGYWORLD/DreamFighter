@@ -283,7 +283,7 @@ MonoBehaviour:
   m_text: Press Any Key
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a4febb4b2f8532747a7994d257f5b40c, type: 2}
-  m_sharedMaterial: {fileID: 6698256691236052893, guid: a4febb4b2f8532747a7994d257f5b40c, type: 2}
+  m_sharedMaterial: {fileID: -7597019785331909481, guid: a4febb4b2f8532747a7994d257f5b40c, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
