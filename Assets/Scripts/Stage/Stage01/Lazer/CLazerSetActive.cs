@@ -119,7 +119,6 @@ public class CLazerSetActive : MonoBehaviour
                 {
                     StageManager.instance.combo++;
                     StageManager.instance.yesNoBar.value += StageManager.instance.mainMusic.clip.length * 0.0001f;
-                    print($"Long Perfect! combo: {StageManager.instance.combo}");
                 }
             }
 
@@ -142,8 +141,6 @@ public class CLazerSetActive : MonoBehaviour
             Input.GetKeyDown(KeyCode.Space) &&
             StageManager.instance.mainMusic.time >= StageManager.instance.notes[noteIdx].srtTime - 1f
             ));
-
-            print($"Success! noteIdx: {noteIdx}");
 
             CheckNoteScore(StageManager.instance.mainMusic.time, StageManager.instance.notes[noteIdx].endTime, gameObject.transform.position);
         }

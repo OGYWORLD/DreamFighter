@@ -113,7 +113,6 @@ public class CCutScenePlayer : MonoBehaviour
         {
             StageManager.instance.isCantMakeNote = false;
             idx++;
-            print($"idx: {idx}");
         }
     }
 

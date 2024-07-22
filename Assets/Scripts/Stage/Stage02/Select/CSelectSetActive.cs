@@ -61,7 +61,6 @@ public class CSelectSetActive : CLazerSetActive
             Mathf.Abs(gameObject.transform.position.x - checkZone) <= 2f
             ));
 
-            print($"{gameObject.transform.position.x} {checkZone} {(StageManager.instance.notes[noteIdx].endTime - StageManager.instance.notes[noteIdx].srtTime)}");
 
             CheckNoteScore(StageManager.instance.mainMusic.time, StageManager.instance.notes[noteIdx].srtTime, gameObject.transform.position);
 
