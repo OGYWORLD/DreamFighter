@@ -20,6 +20,6 @@ public class CBackMenu : MonoBehaviour
         Time.timeScale = 1f;
 
         // 메인메뉴 이동
-        //SceneManager.LoadScene(1);
+        SceneManager.LoadScene(1);
     }
 }
