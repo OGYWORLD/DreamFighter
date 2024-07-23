@@ -40,9 +40,18 @@ public class MainCanvasDictionary : MonoBehaviour
     {
         get
         {
+            instance = FindObjectOfType<MainCanvasDictionary>();
+
+            if (instance == null)
+            {
+                GameObject obj = new("MainCanvasDictionary");
+                instance = obj.AddComponent<MainCanvasDictionary>();
+            }
+            
             return instance;
         }
     }
+
 
     // 타이틀부터 띄울지, 바로 메인 화면으로 들어갈지 결정하는 변수
     public bool isMainLoadAgain = false;

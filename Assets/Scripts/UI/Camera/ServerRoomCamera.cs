@@ -67,6 +67,11 @@ public class ServerRoomCamera : MonoBehaviour
 
     void SetInfo(bool b)
     {
+        if(MainCanvasDictionary.Instance.canvasDic[CanvasNamesEnum.MainMenuInfoCVS] == null)
+        {
+            return;
+        }
+
         MainCanvasDictionary.Instance.canvasDic[CanvasNamesEnum.MainMenuInfoCVS].gameObject.SetActive(b);
     }
 
