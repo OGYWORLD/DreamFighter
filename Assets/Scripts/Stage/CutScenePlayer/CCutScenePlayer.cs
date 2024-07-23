@@ -83,6 +83,8 @@ public class CCutScenePlayer : MonoBehaviour
 
     private void GameOver()
     {
+        GameManager.instance.isCutSceneOpen[GameManager.instance.isCutSceneOpen.Count - 1] = true;
+
         StageManager.instance.isGameOver = true;
 
         StageManager.instance.mainMusic.Stop();
@@ -185,14 +187,17 @@ public class CCutScenePlayer : MonoBehaviour
         if(idx == 2) // End
         {
             cutsceneIdx = cutScenes.Length - 2;
+            GameManager.instance.isCutSceneOpen[GameManager.instance.isCutSceneOpen.Count - 2] = true;
         }
         else if(StageManager.instance.yesNoBar.value <= 0.4f) // Fail
         {
             cutsceneIdx = (idx * 2) + 2;
+            GameManager.instance.isCutSceneOpen[cutsceneIdx + 2] = true;
         }
-        else
+        else // Success
         {
             cutsceneIdx = (idx * 2) + 1;
+            GameManager.instance.isCutSceneOpen[cutsceneIdx + 1] = true;
         }
 
         cutscnenePlayer.clip = cutScenes[cutsceneIdx];
