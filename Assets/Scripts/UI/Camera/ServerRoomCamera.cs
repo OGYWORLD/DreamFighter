@@ -8,6 +8,8 @@ using UnityEngine.UI;
 
 public class ServerRoomCamera : MonoBehaviour
 {
+    MainCanvasDictionary mainCanvasDic;
+
     public GameObject WorldObjBtn;
 
     // 보간이 이루어질 시간
@@ -22,6 +24,11 @@ public class ServerRoomCamera : MonoBehaviour
     readonly Quaternion endRotation = Quaternion.Euler(new Vector3(8.114f, -16.466f, -0.027f));
 
     #endregion
+
+    private void Awake()
+    {
+        mainCanvasDic = FindObjectOfType<MainCanvasDictionary>();
+    }
 
     private void OnEnable()
     {
@@ -67,12 +74,12 @@ public class ServerRoomCamera : MonoBehaviour
 
     void SetInfo(bool b)
     {
-        //if(MainCanvasDictionary.Instance.canvasDic[CanvasNamesEnum.MainMenuInfoCVS] == null)
-        //{
-        //    return;
-        //}
+        if (mainCanvasDic.canvasDic[CanvasNamesEnum.MainMenuInfoCVS] == null)
+        {
+            return;
+        }
 
-        MainCanvasDictionary.Instance.canvasDic[CanvasNamesEnum.MainMenuInfoCVS].gameObject.SetActive(b);
+        mainCanvasDic.canvasDic[CanvasNamesEnum.MainMenuInfoCVS].gameObject.SetActive(b);
     }
 
 }

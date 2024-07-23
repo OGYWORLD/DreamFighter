@@ -33,6 +33,8 @@ public class WorldObjectButton : MonoBehaviour
     private Dictionary<ObjBtnNames, GameObject> WorldBtnDic = new();
     private Dictionary<GameObject, ObjBtnNames> ReverseWBtnDic = new();
 
+    MainCanvasDictionary mainCanvasDic;
+
     ObjBtnNames e_ClickedObjectName;
 
     int layerMaskValue;
@@ -45,6 +47,7 @@ public class WorldObjectButton : MonoBehaviour
     private void Awake()
     {
         ListToDictionary();
+        mainCanvasDic = FindObjectOfType<MainCanvasDictionary>();
 
         string[] layerNames = {"World Object Button"};
         layerMaskValue = LayerMask.GetMask(layerNames);
@@ -230,23 +233,23 @@ public class WorldObjectButton : MonoBehaviour
     }
 
     void CloseCurrentCanvas()
-    {       
-        MainCanvasDictionary.Instance.CurrentCanvas.gameObject.SetActive(false);
+    {
+        mainCanvasDic.CurrentCanvas.gameObject.SetActive(false);
     }
 
     void OpenCurrentCanvas()
     {
-        MainCanvasDictionary.Instance.CurrentCanvas.gameObject.SetActive(true);
+        mainCanvasDic.CurrentCanvas.gameObject.SetActive(true);
     }
 
     void SetCurrentCanvas(CanvasNamesEnum name)
     {
-        MainCanvasDictionary.Instance.CurrentCanvas = MainCanvasDictionary.Instance.canvasDic[name];
+        mainCanvasDic.CurrentCanvas = mainCanvasDic.canvasDic[name];
     }
 
     void SetTargetCanvas(CanvasNamesEnum name, bool b)
     {
-        MainCanvasDictionary.Instance.canvasDic[name].gameObject.SetActive(b);
+        mainCanvasDic.canvasDic[name].gameObject.SetActive(b);
     }
 
 }

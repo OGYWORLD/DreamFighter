@@ -18,6 +18,7 @@ public class AudioClipInfo
 public class AudioManager : Singleton<AudioManager>
 {
     public float masterVolume = 0.5f;
+
     public List<AudioClipInfo> audioList = new();
     public Dictionary<string, AudioClip> audioDic = new();
 

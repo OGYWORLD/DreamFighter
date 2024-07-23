@@ -34,24 +34,6 @@ public class CanvasByEnumName
 
 public class MainCanvasDictionary : MonoBehaviour
 {
-    private static MainCanvasDictionary instance;
-
-    public static MainCanvasDictionary Instance
-    {
-        get
-        {
-            instance = FindObjectOfType<MainCanvasDictionary>();
-
-            if (instance == null)
-            {
-                GameObject obj = new("MainCanvasDictionary");
-                instance = obj.AddComponent<MainCanvasDictionary>();
-            }
-            
-            return instance;
-        }
-    }
-
     public List<CanvasByEnumName> canvasList = new();
     public Dictionary<CanvasNamesEnum, Canvas> canvasDic = new();
     private Dictionary<Canvas, CanvasNamesEnum> ReverseCVSDic = new();
