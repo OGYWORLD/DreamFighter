@@ -7,14 +7,53 @@ using UnityEngine;
 
 public class CEndingAnim : MonoBehaviour
 {
+    public enum Rank
+    {
+        SRank,
+        ARank,
+        BRank,
+        CRank
+    }
+
     public GameObject title;
     public GameObject[] category;
     public GameObject nextButton;
 
     public bool isAlreadyShow { get; set; } = false;
 
+    public GameObject fullCombo;
+
+    public GameObject[] rank;
+
+    private int fullComboCnt = 183;
+
     private IEnumerator Start()
     {
+        if (StageManager.instance.maxCombo == fullComboCnt) // full combo
+        {
+            fullCombo.SetActive(true);
+        }
+
+        // ·©Å© °è»ê
+        int maxScore = 100 * fullComboCnt * (fullComboCnt / 10);
+        if(StageManager.instance.score >= maxScore * 0.9)
+        {
+            rank[(int)Rank.SRank].SetActive(true);
+        }
+        else if (StageManager.instance.score  >= maxScore * 0.5)
+        {
+            rank[(int)Rank.ARank].SetActive(true);
+        }
+        else if (StageManager.instance.score >= maxScore * 0.1)
+        {
+            rank[(int)Rank.BRank].SetActive(true);
+        }
+        else
+        {
+            rank[(int)Rank.CRank].SetActive(true);
+        }
+
+
         yield return new WaitForSeconds(0.6f);
 
         title.SetActive(true);

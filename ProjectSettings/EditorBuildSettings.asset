@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/StageScene.unity
     guid: 9fe75eb4ec4a48f4ea6672729ac7600b
+  - enabled: 1
+    path: Assets/Scenes/TimingCheckScene.unity
+    guid: 95aab20bdcd019543a02e159ee98a821
   m_configObjects: {}

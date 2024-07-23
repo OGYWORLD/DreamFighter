@@ -14,6 +14,11 @@ public class CPrintResult : MonoBehaviour
     public TextMeshProUGUI maxComboTMP;
     public TextMeshProUGUI scoreTMP;
 
+    private void Awake()
+    {
+        StageManager.instance.score = (StageManager.instance.score * (StageManager.instance.maxCombo / 10));
+    }
+
     private void Start()
     {
         perfectTMP.text = "" + StageManager.instance.perfectCnt;
