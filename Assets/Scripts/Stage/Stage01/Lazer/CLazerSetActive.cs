@@ -104,7 +104,7 @@ public class CLazerSetActive : MonoBehaviour
             StageManager.instance.mainMusic.time >= StageManager.instance.notes[noteIdx].srtTime - 1f
             ));
 
-            CheckNoteScore(StageManager.instance.mainMusic.time + GameManager.instance.beatPadding, StageManager.instance.notes[noteIdx].srtTime, gameObject.transform.position);
+            CheckNoteScore(StageManager.instance.mainMusic.time, StageManager.instance.notes[noteIdx].srtTime, gameObject.transform.position);
 
             // 중간 노트들 점수(콤보) 추가하는 과정
             for(int i = 0; i < (int)betweenSrtEndCnt; i++)
@@ -129,7 +129,7 @@ public class CLazerSetActive : MonoBehaviour
            Input.GetKeyUp(KeyCode.Space)
            ));
 
-            CheckNoteScore(StageManager.instance.mainMusic.time + GameManager.instance.beatPadding, StageManager.instance.notes[noteIdx].endTime, gameObject.transform.position);
+            CheckNoteScore(StageManager.instance.mainMusic.time, StageManager.instance.notes[noteIdx].endTime, gameObject.transform.position);
         }
         else if(!isLong) // 숏, 더블 노트 판정
         {
@@ -142,7 +142,7 @@ public class CLazerSetActive : MonoBehaviour
             StageManager.instance.mainMusic.time >= StageManager.instance.notes[noteIdx].srtTime - 1f
             ));
 
-            CheckNoteScore(StageManager.instance.mainMusic.time + GameManager.instance.beatPadding, StageManager.instance.notes[noteIdx].endTime, gameObject.transform.position);
+            CheckNoteScore(StageManager.instance.mainMusic.time, StageManager.instance.notes[noteIdx].endTime, gameObject.transform.position);
         }
 
         StageManager.instance.inputNoteIdx++;

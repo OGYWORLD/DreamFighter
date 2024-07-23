@@ -12,9 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/UI/02. Server Room.unity
     guid: 98e72267d59fe8b42a2c2ff1ca6b0d7c
   - enabled: 1
-    path: Assets/Scenes/Stage/StageScene.unity
+    path: Assets/Scenes/StageScene.unity
     guid: d2f014dd5c0cb884695eb4def9067811
   - enabled: 1
-    path: Assets/Scenes/Stage/TimingCheckScene.unity
+    path: Assets/Scenes/TimingCheckScene.unity
     guid: 95aab20bdcd019543a02e159ee98a821
   m_configObjects: {}

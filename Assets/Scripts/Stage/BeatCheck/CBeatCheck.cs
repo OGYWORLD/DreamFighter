@@ -129,6 +129,6 @@ public class CBeatCheck : MonoBehaviour
         yield return new WaitForSeconds(3f);
 
         //메뉴화면으로 돌아가기
-        SceneManager.LoadScene(1);
+        //SceneManager.LoadScene(1);
     }
 }
