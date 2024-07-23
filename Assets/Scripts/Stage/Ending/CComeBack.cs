@@ -14,7 +14,6 @@ public class CComeBack : MonoBehaviour
        if(endingAnim.isAlreadyShow && Input.GetKeyDown(KeyCode.Space))
        {
             // 홈화면으로 이동
-            SceneManager.LoadScene(1);
        }
     }
 }

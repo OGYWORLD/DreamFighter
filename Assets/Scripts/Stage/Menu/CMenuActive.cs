@@ -13,12 +13,11 @@ public class CMenuActive : MonoBehaviour
     public void OnClickReStart()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene(2); // 씬 재로드
+        SceneManager.LoadScene(0); // 씬 재로드
     }
 
     public void OnClickComebackHome()
     {
         //TODO: merge 후 로비화면으로 Load하는 거 추가
-        SceneManager.LoadScene(1);
     }
 }
