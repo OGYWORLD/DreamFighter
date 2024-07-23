@@ -6,9 +6,18 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/StageScene.unity
-    guid: 9fe75eb4ec4a48f4ea6672729ac7600b
+    path: Assets/Scenes/UI/01. Title.unity
+    guid: e6f85028f873fed45940b59afe68294b
   - enabled: 1
-    path: Assets/Scenes/TimingCheckScene.unity
-    guid: 95aab20bdcd019543a02e159ee98a821
+    path: Assets/Scenes/UI/02. Server Room.unity
+    guid: 98e72267d59fe8b42a2c2ff1ca6b0d7c
+  - enabled: 1
+    path: Assets/Scenes/UI/LoadingTest/0. Loading.unity
+    guid: 3b9af04d9d861324d9c74afd293668a7
+  - enabled: 1
+    path: Assets/Scenes/UI/LoadingTest/test1.unity
+    guid: f72d23fbe6894bf48b2eb18ae353a9cf
+  - enabled: 1
+    path: Assets/Scenes/UI/LoadingTest/test2.unity
+    guid: 9cb921c333bab61499f6a0ff099c2ac8
   m_configObjects: {}
