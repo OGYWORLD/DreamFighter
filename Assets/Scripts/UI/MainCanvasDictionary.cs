@@ -32,10 +32,22 @@ public class CanvasByEnumName
     public Canvas canvas;
 }
 
-public class UIManager : Singleton<UIManager>
+public class MainCanvasDictionary : MonoBehaviour
 {
+    private static MainCanvasDictionary instance;
+
+    public static MainCanvasDictionary Instance
+    {
+        get
+        {
+            return instance;
+        }
+    }
+
     // 타이틀부터 띄울지, 바로 메인 화면으로 들어갈지 결정하는 변수
     public bool isMainLoadAgain = false;
+
+    // 타이틀에서 메인 화면으로 전환하는 시점 결정
     public bool isReadyTitleToMainScene = false;
 
     public List<CanvasByEnumName> canvasList = new();

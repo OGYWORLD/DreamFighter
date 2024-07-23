@@ -24,7 +24,7 @@ public class TitleToMain : MonoBehaviour
         op = SceneManager.LoadSceneAsync(ServerRoom);
         op.allowSceneActivation = false;
 
-        yield return new WaitUntil(() => UIManager.Instance.isReadyTitleToMainScene);
+        yield return new WaitUntil(() => MainCanvasDictionary.Instance.isReadyTitleToMainScene);
 
         op.allowSceneActivation = true;
     }

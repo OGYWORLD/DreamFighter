@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.SceneManagement;
 
 #region ¿ìÀÎÇý
 #endregion
@@ -22,6 +23,11 @@ public class AudioManager : Singleton<AudioManager>
     private void Awake()
     {
         ListToDict();
+    }
+
+    private void Start()
+    {
+        //SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     void ListToDict()
@@ -69,5 +75,17 @@ public class AudioManager : Singleton<AudioManager>
     public AudioClip GetAudioClip(string name)
     {
         return audioDic[name];
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        SetVolumeNewScene();
+    }
+
+    private void SetVolumeNewScene()
+    {
+        AudioSource[] audioSources = FindObjectsOfType<AudioSource>();
+
+        AudioManager.Instance.SetSceneVolume(audioSources);
     }
 }

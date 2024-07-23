@@ -16,16 +16,6 @@ public class LoadSceneController : MonoBehaviour
         StartCoroutine(LoadSceneProcess());
     }
 
-    private void OnEnable()
-    {
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-
-    private void OnDisable()
-    {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
-
     public static void LoadScene(string sceneName)
     {
         nextScene = sceneName;
@@ -60,17 +50,5 @@ public class LoadSceneController : MonoBehaviour
                 }
             }
         }
-    }
-    
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        SetVolumeNewScene();
-    }
-
-    private void SetVolumeNewScene()
-    {
-        AudioSource[] audioSources = FindObjectsOfType<AudioSource>();
-
-        AudioManager.Instance.SetSceneVolume(audioSources);
     }
 }

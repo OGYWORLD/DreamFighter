@@ -94,7 +94,7 @@ public class TitleSceneCamera : MonoBehaviour
         InitCamTransform();
         StartCoroutine(ShowOnceCoroutine());
 
-        UIManager.Instance.isMainLoadAgain = true;
+        MainCanvasDictionary.Instance.isMainLoadAgain = true;
     }
 
     IEnumerator ShowOnceCoroutine()
@@ -166,7 +166,7 @@ public class TitleSceneCamera : MonoBehaviour
             yield return null;
         }
 
-        UIManager.Instance.isReadyTitleToMainScene = true;
+        MainCanvasDictionary.Instance.isReadyTitleToMainScene = true;
     }
 
     /// <summary>

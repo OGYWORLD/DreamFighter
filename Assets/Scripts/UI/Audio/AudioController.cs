@@ -10,7 +10,8 @@ using TMPro;
 public class AudioController : MonoBehaviour
 {
     public Slider slider;
-    public TMP_InputField inputField;
+    public TMP_InputField inputFieldTMP;
+    public InputField inputField;
 
     [SerializeField] float currentVolume;
     [SerializeField] float lastVolume;
@@ -19,14 +20,19 @@ public class AudioController : MonoBehaviour
 
     private void Awake()
     {
+
         slider.onValueChanged.AddListener(OnSliderValueChanged);
+        //inputFieldTMP.onValueChanged.AddListener(OnInputFieldTMPValueChanged);
+
         inputField.onValueChanged.AddListener(OnInputFieldValueChanged);
+
     }
 
     private void OnEnable()
     {
         testAudio.volume = slider.value = AudioManager.Instance.masterVolume;
-        UpdateSliderValueToTMP();
+        //UpdateSliderValueToTMP();
+        UpdateSliderValueToText();
     }
 
     void SetTestAudioVolume()
@@ -35,7 +41,7 @@ public class AudioController : MonoBehaviour
         testAudio.volume = slider.value = currentVolume;
     }
 
-    public void SetTestAudioVolume(float value)
+    void SetTestAudioVolume(float value)
     {
         print("테스트 오디오 볼륨 전달된 값으로 변경");
         testAudio.volume = value;
@@ -49,9 +55,18 @@ public class AudioController : MonoBehaviour
     }
 
     /// <summary>
-    /// <seealso cref="slider"/>의 value를 <seealso cref="inputField"/>의 text에 백분위로 반영
+    /// <seealso cref="slider"/>의 value를 <seealso cref="inputFieldTMP"/>의 text에 백분위로 반영
     /// </summary>
     void UpdateSliderValueToTMP()
+    {
+        int intValue = Mathf.RoundToInt(slider.value * 100f);
+        inputFieldTMP.text = intValue.ToString();
+    }
+
+    /// <summary>
+    /// <seealso cref="slider"/>의 value를 <seealso cref="inputField"/>의 text에 백분위로 반영
+    /// </summary>
+    void UpdateSliderValueToText()
     {
         int intValue = Mathf.RoundToInt(slider.value * 100f);
         inputField.text = intValue.ToString();
@@ -65,10 +80,36 @@ public class AudioController : MonoBehaviour
         slider.value = value;
         print($"슬라이더 값 변경: {slider.value}");
 
-        UpdateSliderValueToTMP();
+        //UpdateSliderValueToTMP();
+
+        UpdateSliderValueToText();
         SetTestAudioVolume();
     }
 
+    /// <summary>
+    /// <seealso cref="inputFieldTMP"/>에 올바른 숫자가 입력되었을 때 0에서 1로 정규화해서 적용 
+    /// </summary>
+    /// <param name="value"></param>
+    public void OnInputFieldTMPValueChanged(string value)
+    {
+        int intValue = int.Parse(value);
+
+        if (intValue > 100 || intValue < 0)
+        {
+            currentVolume = lastVolume;
+        }
+        else
+        {
+            currentVolume = lastVolume = Mathf.Clamp01(intValue / 100f);
+        }
+
+        OnSliderValueChanged(currentVolume);
+    }
+
+    /// <summary>
+    /// <seealso cref="inputField"/>에 올바른 숫자가 입력되었을 때 0에서 1로 정규화해서 적용 
+    /// </summary>
+    /// <param name="value"></param>
     public void OnInputFieldValueChanged(string value)
     {
         int intValue = int.Parse(value);
@@ -84,4 +125,5 @@ public class AudioController : MonoBehaviour
 
         OnSliderValueChanged(currentVolume);
     }
+
 }

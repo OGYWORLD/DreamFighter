@@ -231,22 +231,22 @@ public class WorldObjectButton : MonoBehaviour
 
     void CloseCurrentCanvas()
     {       
-        UIManager.Instance.CurrentCanvas.gameObject.SetActive(false);
+        MainCanvasDictionary.Instance.CurrentCanvas.gameObject.SetActive(false);
     }
 
     void OpenCurrentCanvas()
     {
-        UIManager.Instance.CurrentCanvas.gameObject.SetActive(true);
+        MainCanvasDictionary.Instance.CurrentCanvas.gameObject.SetActive(true);
     }
 
     void SetCurrentCanvas(CanvasNamesEnum name)
     {
-        UIManager.Instance.CurrentCanvas = UIManager.Instance.canvasDic[name];
+        MainCanvasDictionary.Instance.CurrentCanvas = MainCanvasDictionary.Instance.canvasDic[name];
     }
 
     void SetTargetCanvas(CanvasNamesEnum name, bool b)
     {
-        UIManager.Instance.canvasDic[name].gameObject.SetActive(b);
+        MainCanvasDictionary.Instance.canvasDic[name].gameObject.SetActive(b);
     }
 
 }
