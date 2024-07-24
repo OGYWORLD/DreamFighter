@@ -10,6 +10,7 @@ public class CloseButton : MonoBehaviour
 {
     CloseButtonSource closeBtnSource;
     AudioSource audioSource;
+    AudioClip audioClip;
 
     const string closeClip = "CloseSound";
 
@@ -20,24 +21,18 @@ public class CloseButton : MonoBehaviour
         btn = GetComponent<Button>();
 
         closeBtnSource = FindObjectOfType<CloseButtonSource>();
-        
     }
 
     private void Start()
     {
         audioSource = closeBtnSource.GetComponent<AudioSource>();
         btn.onClick.AddListener(OnCloseBtnClicked);
-        audioSource.clip = AudioManager.Instance.GetAudioClip(closeClip);
-    }
-
-    private void OnDisable()
-    {
-        btn.onClick.RemoveListener(OnCloseBtnClicked);
+        audioClip = AudioManager.Instance.GetAudioClip(closeClip);
     }
 
     void OnCloseBtnClicked()
     {
-        audioSource.Play();
+        audioSource.PlayOneShot(audioClip);
 
         print($"close button Clicked: {audioSource.volume}");
     }

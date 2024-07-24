@@ -10,25 +10,24 @@ using UnityEngine;
 public class OpenSound : MonoBehaviour
 {
     AudioSource audioSource;
+    AudioClip audioClip;
 
     const string openSound = "OpenSound";
 
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
-       
+        audioClip = AudioManager.Instance.GetAudioClip(openSound);
 
-        audioSource.playOnAwake = false;
-    }
+        audioSource.loop = false;
+        audioSource.playOnAwake = true;
 
-    private void Start()
-    {
-        audioSource.clip = AudioManager.Instance.GetAudioClip(openSound);
     }
 
     private void OnEnable()
     {
-        audioSource.Play();
+        audioSource.PlayOneShot(audioClip);
+        //audioSource.Play();
         //print("open sound played");
     }
 }

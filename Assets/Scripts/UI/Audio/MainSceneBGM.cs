@@ -19,10 +19,22 @@ public class MainSceneBGM : MonoBehaviour
         audioSource.Play();
         audioSource.loop = true;
 
-        //todo: 메인 씬 BGM 원하는 오디오클립으로 바꿔주기
-
         //print("main BGM played");
     }
+
+
+
+    void SetMainBGMVolume()
+    {
+        audioSource.volume = AudioManager.Instance.masterVolume * 2 / 3;
+    }
+
+    public void SetMainBGMVolume(float volume)
+    {
+        audioSource.volume = volume * 2 / 3;
+    }
+
+    
 
 
 }
