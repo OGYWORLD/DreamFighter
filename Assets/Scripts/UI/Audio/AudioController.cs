@@ -30,7 +30,7 @@ public class AudioController : MonoBehaviour
 
     private void OnEnable()
     {
-        testAudio.volume = slider.value = AudioManager.Instance.masterVolume;
+        testAudio.volume = slider.value = AudioManager.Instance.masterVolume * 2 / 3;
         //UpdateSliderValueToTMP();
         UpdateSliderValueToText();
     }
@@ -40,7 +40,7 @@ public class AudioController : MonoBehaviour
         print("테스트 오디오 볼륨 변경");
 
         slider.value = currentVolume;
-        testAudio.volume = currentVolume * 2 / 3;
+        testAudio.volume = currentVolume;
 
         print($"testAudio Volume : {testAudio.volume}");
     }
@@ -55,7 +55,7 @@ public class AudioController : MonoBehaviour
     {
         AudioManager.Instance.SetMasterVolume(currentVolume);
 
-        print($"마스터 볼륨: {AudioManager.Instance.masterVolume}");
+        print($"마스터 볼륨에 전달: {AudioManager.Instance.masterVolume}");
     }
 
     /// <summary>
