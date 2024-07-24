@@ -26,6 +26,8 @@ public class ServerRoomCamera : MonoBehaviour
 
     private void Start()
     {
+        Time.timeScale = 1f;
+
         WorldObjBtn.gameObject.SetActive(true);
 
         InitTransform();
