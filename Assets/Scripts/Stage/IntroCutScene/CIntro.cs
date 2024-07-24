@@ -6,28 +6,28 @@ using UnityEngine.Video;
 #region ¿À°¡À»
 #endregion
 
-public class CComebackCheck : MonoBehaviour
+public class CIntro : MonoBehaviour
 {
     public VideoPlayer player;
 
     public RenderTexture renderTexture;
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            EndCutScene();
-        }
-    }
+    public GameObject title;
 
-    private void OnEnable()
+    private void Start()
     {
         RenderTexture.active = renderTexture;
         GL.Clear(true, true, Color.black);
 
-        player.Play();
-
         StartCoroutine(CheckEnd());
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            EndCutScene();
+        }
     }
 
     private IEnumerator CheckEnd()

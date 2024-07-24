@@ -61,6 +61,8 @@ public class CCutScenePlayer : MonoBehaviour
     {
         yield return new WaitForEndOfFrame(); // 프레임 잘리는 거 때문에 한 프레임 지연 후 시작
 
+        GameManager.instance.isCutSceneOpen[1] = true;
+
         StageManager.instance.isPlayingCutScene = true;
         cutscnenePlayer.Play();
 
