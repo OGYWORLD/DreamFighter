@@ -19,6 +19,7 @@ public class LoadSceneController : MonoBehaviour
     public static void LoadScene(string sceneName)
     {
         nextScene = sceneName;
+        //SceneManager.LoadScene(2);
         SceneManager.LoadSceneAsync("0. Loading");
     }
 

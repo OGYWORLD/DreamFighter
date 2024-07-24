@@ -38,7 +38,11 @@ public class AudioController : MonoBehaviour
     void SetTestAudioVolume()
     {
         print("테스트 오디오 볼륨 변경");
-        testAudio.volume = slider.value = currentVolume;
+
+        slider.value = currentVolume;
+        testAudio.volume = currentVolume * 2 / 3;
+
+        print($"testAudio Volume : {testAudio.volume}");
     }
 
     void SetTestAudioVolume(float value)

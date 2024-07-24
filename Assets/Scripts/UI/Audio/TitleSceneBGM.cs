@@ -18,7 +18,7 @@ public class TitleSceneBGM : MonoBehaviour
 
     private void Start()
     {
-        audioSource.clip = AudioManager.Instance.GetAudioClip(titleBGM);
+        //audioSource.clip = AudioManager.Instance.GetAudioClip(titleBGM);
 
         audioSource.Play();
         audioSource.loop = true;

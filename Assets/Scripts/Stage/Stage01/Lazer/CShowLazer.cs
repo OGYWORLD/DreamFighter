@@ -56,6 +56,8 @@ public class CShowLazer : MonoBehaviour
 
     protected virtual void Start()
     {
+        Time.timeScale = 1f;
+
         // Ç® »ý¼º
         MakePool();
 

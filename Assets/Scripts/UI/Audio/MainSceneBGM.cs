@@ -15,6 +15,7 @@ public class MainSceneBGM : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         audioSource.clip = AudioManager.Instance.GetAudioClip(mainBGM);
+        SetMainBGMVolume();
 
         audioSource.Play();
         audioSource.loop = true;
