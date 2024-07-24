@@ -38,8 +38,10 @@ public class AudioManager : Singleton<AudioManager>
             audioDic.Add(info.name, info.audioclip);
         }
 
-        //audioList = null;
+        audioList = null;
+
     }
+
 
     /// <summary>
     /// masterVolume에 새 값을 받아서 해당 값으로 현재 씬의 오디오소스 볼륨 변경

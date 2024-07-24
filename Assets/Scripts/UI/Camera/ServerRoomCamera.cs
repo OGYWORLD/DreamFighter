@@ -9,6 +9,7 @@ using UnityEngine.UI;
 public class ServerRoomCamera : MonoBehaviour
 {
     public GameObject WorldObjBtn;
+    private MainCanvasDictionary mainCVSDic;
 
     // 보간이 이루어질 시간
     float duration = 3f;
@@ -23,16 +24,14 @@ public class ServerRoomCamera : MonoBehaviour
 
     #endregion
 
-    private void OnEnable()
+    private void Start()
     {
         WorldObjBtn.gameObject.SetActive(true);
 
         InitTransform();
         StartCoroutine(TransformInterpolation());
-    }
 
-    private void OnDisable()
-    {
+        mainCVSDic = FindObjectOfType<MainCanvasDictionary>();
         SetInfo(false);
     }
 
@@ -41,12 +40,12 @@ public class ServerRoomCamera : MonoBehaviour
         transform.position = startPos;
         transform.rotation = startRotation;
 
-        print("Server Room 카메라 시작 위치 초기화 완료");
+        //print("Server Room 카메라 시작 위치 초기화 완료");
     }
 
     IEnumerator TransformInterpolation()
     {
-        print("Server Room 카메라 초기 이동 시작");
+        //print("Server Room 카메라 초기 이동 시작");
 
         float delta = 0.0f;
 
@@ -60,7 +59,7 @@ public class ServerRoomCamera : MonoBehaviour
             yield return null;
         }
 
-        print("Server Room 카메라 초기 이동 종료");
+        //print("Server Room 카메라 초기 이동 종료");
 
         SetInfo(true);
     }
@@ -72,7 +71,7 @@ public class ServerRoomCamera : MonoBehaviour
         //    return;
         //}
 
-        MainCanvasDictionary.Instance.canvasDic[CanvasNamesEnum.MainMenuInfoCVS].gameObject.SetActive(b);
+        mainCVSDic.canvasDic[CanvasNamesEnum.MainMenuInfoCVS].gameObject.SetActive(b);
     }
 
 }

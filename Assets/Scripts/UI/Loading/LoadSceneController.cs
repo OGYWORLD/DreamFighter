@@ -45,8 +45,10 @@ public class LoadSceneController : MonoBehaviour
                 
                 if(progressBar.fillAmount >= 1f )
                 {
+
+                    yield return new WaitForSeconds(5f);
                     op.allowSceneActivation = true;
-                    yield break;
+                    //yield break;
                 }
             }
         }

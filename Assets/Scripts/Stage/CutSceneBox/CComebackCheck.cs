@@ -12,8 +12,19 @@ public class CComebackCheck : MonoBehaviour
 
     public RenderTexture renderTexture;
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            EndCutScene();
+        }
+    }
+
     private void OnEnable()
     {
+        RenderTexture.active = renderTexture;
+        GL.Clear(true, true, Color.black);
+
         player.Play();
 
         StartCoroutine(CheckEnd());
@@ -23,6 +34,11 @@ public class CComebackCheck : MonoBehaviour
     {
         yield return new WaitUntil(() => !player.isPlaying);
 
+        EndCutScene();
+    }
+
+    private void EndCutScene()
+    {
         RenderTexture.active = renderTexture;
         GL.Clear(true, true, Color.black);
 
