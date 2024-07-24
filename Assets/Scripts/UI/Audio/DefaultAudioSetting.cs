@@ -22,5 +22,7 @@ public class DefaultAudioSetting : MonoBehaviour
     void SetAudioVolume()
     {
         audioSource.volume = AudioManager.Instance.masterVolume;
+
+        // print($"current volume: {audioSource.volume}");
     }
 }

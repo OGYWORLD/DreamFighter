@@ -13,12 +13,14 @@ public class DefaultButtonSound : MonoBehaviour
     AudioSource audioSource;
     AudioClip audioClip;
 
-    private void Awake()
+    private void Start()
     {
         btn = GetComponent<Button>();
         audioSource = GetComponent<AudioSource>();
-        audioClip = AudioManager.Instance.GetAudioClip("BtnSound");
+        audioSource.loop = audioSource.playOnAwake = false;
 
+        audioClip = AudioManager.Instance.GetAudioClip("BtnSound");
+        
         btn.onClick.AddListener(BtnSoundPlay);
     }
 
