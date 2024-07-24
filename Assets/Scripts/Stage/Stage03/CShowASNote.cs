@@ -9,6 +9,8 @@ public class CShowASNote : CShowLazer
 {
     protected override void Start()
     {
+        Time.timeScale = 1f;
+
         noteIdx = StageManager.instance.inputNoteIdx;
         StageManager.instance.betweenDis = 58f;
 
