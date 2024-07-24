@@ -12,6 +12,8 @@ public class CComebackCheck : MonoBehaviour
 
     public RenderTexture renderTexture;
 
+    public AudioSource bgm;
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Tab))
@@ -22,6 +24,8 @@ public class CComebackCheck : MonoBehaviour
 
     private void OnEnable()
     {
+        bgm.Pause();
+
         RenderTexture.active = renderTexture;
         GL.Clear(true, true, Color.black);
 
@@ -41,6 +45,8 @@ public class CComebackCheck : MonoBehaviour
     {
         RenderTexture.active = renderTexture;
         GL.Clear(true, true, Color.black);
+
+        bgm.UnPause();
 
         gameObject.SetActive(false);
     }

@@ -26,7 +26,7 @@ public class CIntro : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            EndCutScene();
+            StartCoroutine(EndCutScene());
         }
     }
 
@@ -34,14 +34,18 @@ public class CIntro : MonoBehaviour
     {
         yield return new WaitUntil(() => !player.isPlaying);
 
-        EndCutScene();
+        StartCoroutine(EndCutScene());
     }
 
-    private void EndCutScene()
+    private IEnumerator EndCutScene()
     {
+        yield return new WaitForEndOfFrame();
+
         RenderTexture.active = renderTexture;
         GL.Clear(true, true, Color.black);
 
         gameObject.SetActive(false);
+
+        yield return new WaitForEndOfFrame();
     }
 }
