@@ -4,12 +4,15 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+#region ¿ìÀÎÇý
+#endregion
+
 public class LoadSceneController : MonoBehaviour
 {
     static string nextScene;
 
-    [SerializeField]
-    Image progressBar;
+    public Slider progressbar;
+    public Text count;
 
     private void Start()
     {
@@ -35,24 +38,40 @@ public class LoadSceneController : MonoBehaviour
         {
             yield return null;
 
-            if(op.progress < 0.9f)
+            if (op.progress < 0.9f)
             {
-                progressBar.fillAmount = op.progress;
+                progressbar.value = op.progress;
+
+                int intCount = Mathf.RoundToInt(progressbar.value * 100f);
+                count.text = intCount.ToString();
+                //count = progressbar.value
             }
             else
             {
-                timer += Time.unscaledDeltaTime;
-                progressBar.fillAmount = Mathf.Lerp(0.9f, 1f, timer);
                 
-                if(progressBar.fillAmount >= 1f )
-                {
+                timer += Time.unscaledDeltaTime;
+                progressbar.value = Mathf.Lerp(0.9f, 1f, timer);
+                
+                int intCount = Mathf.RoundToInt(progressbar.value * 100f);
+                count.text = intCount.ToString();
 
+                if (progressbar.value >= 1f)
+                {
                     yield return new WaitForSeconds(5f);
                     op.allowSceneActivation = true;
-                    //yield break;
                 }
+
             }
         }
 
     }
 }
+
+
+/*
+ Text progress;
+	
+	public  void UpdateProgress (float content) {
+		progress.text = Mathf.Round( content*100) +"%";
+	}
+ */

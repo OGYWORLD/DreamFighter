@@ -35,7 +35,7 @@ public class TitleSceneCamera : MonoBehaviour
     /// <summary>
     /// 보간이 이루어질 시간
     /// </summary>
-    public float duration = 2.5f;
+    public float duration = 1.5f;
 
     #region 카메라 보간 정보
 
