@@ -33,7 +33,5 @@ public class CloseButton : MonoBehaviour
     void OnCloseBtnClicked()
     {
         audioSource.PlayOneShot(audioClip);
-
-        print($"close button Clicked: {audioSource.volume}");
     }
 }

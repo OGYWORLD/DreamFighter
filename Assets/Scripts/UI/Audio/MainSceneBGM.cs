@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class MainSceneBGM : MonoBehaviour
 {
-    public AudioSource audioSource;
+    AudioSource audioSource;
 
     const string mainBGM = "MainSceneBGM";
 

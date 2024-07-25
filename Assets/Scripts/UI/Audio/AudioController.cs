@@ -36,8 +36,6 @@ public class AudioController : MonoBehaviour
 
     void SetTestAudioVolume()
     {
-        print("테스트 오디오 볼륨 변경");
-
         slider.value = currentVolume;
         testAudio.volume = currentVolume;
     }
@@ -50,8 +48,6 @@ public class AudioController : MonoBehaviour
     public void SendValueToAudioManager()
     {
         AudioManager.Instance.SetMasterVolume(currentVolume);
-
-        print($"마스터 볼륨에 전달: {AudioManager.Instance.masterVolume}");
     }
 
     /// <summary>
@@ -79,7 +75,6 @@ public class AudioController : MonoBehaviour
     public void OnSliderValueChanged(float value)
     {
         slider.value = value;
-        print($"슬라이더 값 변경: {slider.value}");
 
         //UpdateSliderValueToTMP();
 
