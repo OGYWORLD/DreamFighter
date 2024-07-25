@@ -14,11 +14,6 @@ public class DefaultAudioSetting : MonoBehaviour
         audioSources = GetComponents<AudioSource>();
     }
 
-    private void OnEnable()
-    {
-        SetAudioVolume();
-    }
-
     void SetAudioVolume()
     {
         foreach(AudioSource audio in audioSources)

@@ -17,7 +17,12 @@ public class DefaultVideoVolume : MonoBehaviour
 
     private void Start()
     {
-        videoPlayer.SetDirectAudioVolume(0, AudioManager.Instance.masterVolume);
+        StartCoroutine(setVideoVolumeCoroutine());
     }
 
+    IEnumerator setVideoVolumeCoroutine()
+    {
+        yield return new WaitForEndOfFrame();
+        videoPlayer.SetDirectAudioVolume(0, AudioManager.Instance.masterVolume);
+    }
 }
