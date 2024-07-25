@@ -20,7 +20,6 @@ public class AudioController : MonoBehaviour
 
     private void Awake()
     {
-
         slider.onValueChanged.AddListener(OnSliderValueChanged);
         //inputFieldTMP.onValueChanged.AddListener(OnInputFieldTMPValueChanged);
 
@@ -30,7 +29,7 @@ public class AudioController : MonoBehaviour
 
     private void OnEnable()
     {
-        testAudio.volume = slider.value = AudioManager.Instance.masterVolume * 2 / 3;
+        testAudio.volume = slider.value = AudioManager.Instance.masterVolume;
         //UpdateSliderValueToTMP();
         UpdateSliderValueToText();
     }
@@ -41,13 +40,10 @@ public class AudioController : MonoBehaviour
 
         slider.value = currentVolume;
         testAudio.volume = currentVolume;
-
-        print($"testAudio Volume : {testAudio.volume}");
     }
 
     void SetTestAudioVolume(float value)
     {
-        print("테스트 오디오 볼륨 전달된 값으로 변경");
         testAudio.volume = value;
     }
 
@@ -60,6 +56,7 @@ public class AudioController : MonoBehaviour
 
     /// <summary>
     /// <seealso cref="slider"/>의 value를 <seealso cref="inputFieldTMP"/>의 text에 백분위로 반영
+    /// 폰트 깨짐 문제로 레거시로 변경
     /// </summary>
     void UpdateSliderValueToTMP()
     {

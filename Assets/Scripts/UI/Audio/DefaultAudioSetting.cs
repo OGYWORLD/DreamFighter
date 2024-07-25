@@ -14,7 +14,7 @@ public class DefaultAudioSetting : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
-    private void Start()
+    private void OnEnable()
     {
         SetAudioVolume();
     }
@@ -23,6 +23,6 @@ public class DefaultAudioSetting : MonoBehaviour
     {
         audioSource.volume = AudioManager.Instance.masterVolume;
 
-        // print($"current volume: {audioSource.volume}");
+        //print($"current volume: {audioSource.volume}");
     }
 }
