@@ -28,11 +28,8 @@ public class ServerRoomCamera : MonoBehaviour
 
     private void Start()
     {
-<<<<<<< HEAD
-=======
         
 
->>>>>>> b4072d1790bde8808e50abc81e0fde594966f601
         Time.timeScale = 1f;
 
         WorldObjBtn.gameObject.SetActive(true);

@@ -29,7 +29,7 @@ public class AudioController : MonoBehaviour
 
     private void OnEnable()
     {
-        testAudio.volume = slider.value = AudioManager.Instance.masterVolume * 2 / 3;
+        testAudio.volume = slider.value = AudioManager.Instance.masterVolume;
         //UpdateSliderValueToTMP();
         UpdateSliderValueToText();
     }
