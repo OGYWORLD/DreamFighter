@@ -21,7 +21,6 @@ EditorApplication.ExitPlayMode();
         Application.Quit();
 
 #endif
-        print("게임 종료");
 
     }
 }

@@ -7,22 +7,18 @@ using UnityEngine;
 
 public class DefaultAudioSetting : MonoBehaviour
 {
-    AudioSource audioSource;
+    AudioSource[] audioSources;
 
     private void Awake()
     {
-        audioSource = GetComponent<AudioSource>();
-    }
-
-    private void Start()
-    {
-        SetAudioVolume();
+        audioSources = GetComponents<AudioSource>();
     }
 
     void SetAudioVolume()
     {
-        audioSource.volume = AudioManager.Instance.masterVolume * 3 / 2;
-
-        // print($"current volume: {audioSource.volume}");
+        foreach(AudioSource audio in audioSources)
+        {
+            audio.volume = AudioManager.Instance.masterVolume;
+        }
     }
 }

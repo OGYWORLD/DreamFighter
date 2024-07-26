@@ -20,13 +20,11 @@ public class CBeatCheckMenu : MonoBehaviour
                 sound.Play();
                 MenuManager.instance.isOpenMenu = true;
                 Time.timeScale = 0f;
-                print(MenuManager.instance.isOpenMenu);
             }
             else
             {
                 MenuManager.instance.isOpenMenu = false;
                 Time.timeScale = 1f;
-                print(MenuManager.instance.isOpenMenu);
             }
 
             menu.SetActive(!menu.activeSelf);
