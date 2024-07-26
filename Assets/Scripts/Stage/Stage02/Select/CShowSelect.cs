@@ -10,7 +10,10 @@ public class CShowSelect : CShowLazer
     protected override void Start()
     {
         Time.timeScale = 1f;
+<<<<<<< HEAD
 
+=======
+>>>>>>> b4072d1790bde8808e50abc81e0fde594966f601
         noteIdx = StageManager.instance.inputNoteIdx;
         StageManager.instance.betweenDis = 20f;
 

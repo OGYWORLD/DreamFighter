@@ -15,19 +15,42 @@ public class AudioClipInfo
     public AudioClip audioclip;
 }
 
-public class AudioManager : Singleton<AudioManager>
+public class AudioManager : MonoBehaviour
 {
+    private static AudioManager instance;
+
+    public static AudioManager Instance
+    {
+        get
+        {
+            if(instance == null)
+            {
+                instance = FindObjectOfType<AudioManager>();
+
+                if(instance == null)
+                {
+                    AudioManager obj = new();
+
+                    instance = FindObjectOfType<AudioManager>();                    
+                }
+            }
+            return instance;
+
+        }
+    }
+
     public float masterVolume = 0.5f;
     public List<AudioClipInfo> audioList = new();
     public Dictionary<string, AudioClip> audioDic = new();
 
     private void Awake()
     {
-        ListToDict();
+        DontDestroyOnLoad(this.gameObject);
     }
 
     private void Start()
     {
+        ListToDict();
         //SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
@@ -38,7 +61,7 @@ public class AudioManager : Singleton<AudioManager>
             audioDic.Add(info.name, info.audioclip);
         }
 
-        audioList = null;
+        //audioList = null;
 
     }
 

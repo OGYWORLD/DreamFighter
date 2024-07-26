@@ -11,6 +11,8 @@ public class ServerRoomCamera : MonoBehaviour
     public GameObject WorldObjBtn;
     private MainCanvasDictionary mainCVSDic;
 
+    public GameObject[] WorldObjInfo;
+
     // 보간이 이루어질 시간
     float duration = 3f;
 
@@ -26,6 +28,11 @@ public class ServerRoomCamera : MonoBehaviour
 
     private void Start()
     {
+<<<<<<< HEAD
+=======
+        
+
+>>>>>>> b4072d1790bde8808e50abc81e0fde594966f601
         Time.timeScale = 1f;
 
         WorldObjBtn.gameObject.SetActive(true);
@@ -73,7 +80,13 @@ public class ServerRoomCamera : MonoBehaviour
         //    return;
         //}
 
-        mainCVSDic.canvasDic[CanvasNamesEnum.MainMenuInfoCVS].gameObject.SetActive(b);
+        //mainCVSDic.canvasDic[CanvasNamesEnum.MainMenuInfoCVS].gameObject.SetActive(b);
+
+        foreach (GameObject obj in WorldObjInfo)
+        {
+            obj.gameObject.SetActive(b);
+        }
     }
+
 
 }

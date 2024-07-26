@@ -7,7 +7,6 @@ public class SliderValuePass : MonoBehaviour {
 
 	Text progress;
 
-	// Use this for initialization
 	void Start () {
 		progress = GetComponent<Text>();
 

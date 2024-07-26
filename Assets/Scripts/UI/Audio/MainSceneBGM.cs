@@ -8,33 +8,19 @@ using UnityEngine;
 public class MainSceneBGM : MonoBehaviour
 {
     AudioSource audioSource;
+
     const string mainBGM = "MainSceneBGM";
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
-        audioSource.clip = AudioManager.Instance.GetAudioClip(mainBGM);
-
-        audioSource.Play();
+        audioSource.playOnAwake = false;
         audioSource.loop = true;
-
-        //print("main BGM played");
     }
 
-
-
-    void SetMainBGMVolume()
+    private void Start()
     {
-        audioSource.volume = AudioManager.Instance.masterVolume * 2 / 3;
+        audioSource.clip = AudioManager.Instance.GetAudioClip(mainBGM);
+        audioSource.Play();
     }
-
-    public void SetMainBGMVolume(float volume)
-    {
-        audioSource.volume = volume * 2 / 3;
-    }
-
-    
-
-
 }
